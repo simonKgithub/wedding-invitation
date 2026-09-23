@@ -1,1318 +1,800 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>신랑 ♥ 신부 결혼합니다</title>
-    <meta name="description" content="저희 두 사람이 결혼합니다. 소중한 분들을 초대합니다.">
-
-    <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family:
-                "Noto Serif KR",
-                "Apple SD Gothic Neo",
-                "Malgun Gothic",
-                serif;
-            color: #333;
-            background: #f7f6f3;
-            line-height: 1.8;
-        }
-
-        img {
-            display: block;
-            width: 100%;
-        }
-
-        button {
-            font-family: inherit;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        /* 전체 모바일 카드 */
-        .container {
-            max-width: 520px;
-            margin: 0 auto;
-            background: #fff;
-            min-height: 100vh;
-        }
-
-        /* 공통 섹션 */
-        section {
-            padding: 80px 28px;
-            text-align: center;
-        }
-
-        .section-label {
-            font-family: Arial, sans-serif;
-            font-size: 10px;
-            letter-spacing: 3px;
-            color: #999;
-            margin-bottom: 18px;
-            text-transform: uppercase;
-        }
-
-        .section-title {
-            font-size: 22px;
-            font-weight: 400;
-            letter-spacing: -0.5px;
-            margin-bottom: 35px;
-        }
-
-        .divider {
-            width: 28px;
-            height: 1px;
-            background: #ccc;
-            margin: 20px auto;
-        }
-
-
-        /* ========================================
-           1. 메인 사진
-        ======================================== */
-
-        .hero {
-            position: relative;
-            padding: 0;
-            height: 100vh;
-            min-height: 650px;
-            max-height: 900px;
-            overflow: hidden;
-            background: #eee;
-        }
-
-        .hero img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(
-                to bottom,
-                rgba(0,0,0,0.02),
-                rgba(0,0,0,0.05) 50%,
-                rgba(0,0,0,0.45)
-            );
-        }
-
-        .hero-content {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 65px;
-            color: white;
-            padding: 0 25px;
-        }
-
-        .hero-date {
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            letter-spacing: 3px;
-            margin-bottom: 14px;
-        }
-
-        .hero-names {
-            font-size: 31px;
-            font-weight: 300;
-            letter-spacing: 4px;
-        }
-
-        .hero-sub {
-            font-size: 12px;
-            margin-top: 10px;
-            opacity: .9;
-        }
-
-
-        /* ========================================
-           2. 초대글
-        ======================================== */
-
-        .invitation {
-            padding-top: 90px;
-            padding-bottom: 90px;
-        }
-
-        .invitation-text {
-            font-size: 14px;
-            color: #666;
-            line-height: 2.2;
-            word-break: keep-all;
-        }
-
-
-        /* ========================================
-           3. 신랑 신부
-        ======================================== */
-
-        .couple {
-            background: #faf9f7;
-        }
-
-        .couple-list {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .person {
-            flex: 1;
-        }
-
-        .person-image {
-            width: 105px;
-            height: 105px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin: 0 auto 18px;
-        }
-
-        .person-role {
-            font-size: 11px;
-            color: #999;
-            margin-bottom: 3px;
-        }
-
-        .person-name {
-            font-size: 18px;
-        }
-
-        .person-phone {
-            font-family: Arial, sans-serif;
-            font-size: 11px;
-            color: #aaa;
-            margin-top: 5px;
-        }
-
-        .heart {
-            font-size: 16px;
-            color: #aaa;
-        }
-
-
-        /* ========================================
-           4. 혼주 정보
-        ======================================== */
-
-        .parents {
-            background: #fff;
-        }
-
-        .parents-table {
-            width: 100%;
-            border-top: 1px solid #eee;
-        }
-
-        .parent-row {
-            display: flex;
-            padding: 17px 5px;
-            border-bottom: 1px solid #eee;
-            font-size: 13px;
-        }
-
-        .parent-side {
-            width: 75px;
-            color: #999;
-            text-align: left;
-        }
-
-        .parent-info {
-            flex: 1;
-            text-align: left;
-        }
-
-        .parent-name {
-            font-weight: 500;
-            margin-right: 8px;
-        }
-
-        .parent-child {
-            color: #999;
-            font-size: 11px;
-        }
-
-
-        /* ========================================
-           5. 날짜 / 장소
-        ======================================== */
-
-        .schedule {
-            background: #faf9f7;
-        }
-
-        .calendar {
-            width: 100%;
-            max-width: 310px;
-            margin: 0 auto 35px;
-        }
-
-        .calendar-header {
-            font-family: Arial, sans-serif;
-            font-size: 17px;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
-        .calendar table {
-            width: 100%;
-            border-collapse: collapse;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-        }
-
-        .calendar th {
-            font-weight: normal;
-            color: #aaa;
-            padding-bottom: 12px;
-        }
-
-        .calendar td {
-            height: 39px;
-            position: relative;
-        }
-
-        .calendar .today {
-            position: relative;
-            font-weight: bold;
-        }
-
-        .calendar .today span {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            border: 1px solid #555;
-            border-radius: 50%;
-            left: 50%;
-            top: 4px;
-            transform: translateX(-50%);
-            z-index: 0;
-        }
-
-        .calendar .today strong {
-            position: relative;
-            z-index: 1;
-        }
-
-        .wedding-date {
-            font-size: 17px;
-            margin-bottom: 7px;
-        }
-
-        .wedding-time {
-            font-size: 13px;
-            color: #777;
-        }
-
-        .venue {
-            margin-top: 25px;
-            font-size: 14px;
-        }
-
-        .venue-address {
-            font-size: 12px;
-            color: #888;
-            margin-top: 4px;
-        }
-
-
-        /* ========================================
-           6. 웨딩 사진
-        ======================================== */
-
-        .gallery {
-            padding-left: 12px;
-            padding-right: 12px;
-        }
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6px;
-        }
-
-        .gallery-item {
-            overflow: hidden;
-            background: #eee;
-        }
-
-        .gallery-item img {
-            height: 220px;
-            object-fit: cover;
-            transition: transform .5s;
-        }
-
-        .gallery-item:first-child {
-            grid-column: span 2;
-        }
-
-        .gallery-item:first-child img {
-            height: 350px;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.03);
-        }
-
-
-        /* ========================================
-           7. 계좌번호
-        ======================================== */
-
-        .account {
-            background: #faf9f7;
-        }
-
-        .account-box {
-            text-align: left;
-            border-top: 1px solid #eee;
-        }
-
-        .account-item {
-            border-bottom: 1px solid #eee;
-        }
-
-        .account-title {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 17px 5px;
-            font-size: 13px;
-            cursor: pointer;
-        }
-
-        .account-title::after {
-            content: "+";
-            color: #999;
-            font-size: 18px;
-        }
-
-        .account-detail {
-            display: none;
-            padding: 0 5px 20px;
-            font-family: Arial, sans-serif;
-            font-size: 12px;
-            color: #777;
-        }
-
-        .account-detail button {
-            border: 0;
-            background: #333;
-            color: white;
-            padding: 7px 12px;
-            font-size: 10px;
-            margin-top: 10px;
-            cursor: pointer;
-        }
-
-        .account-item.active .account-detail {
-            display: block;
-        }
-
-
-        /* ========================================
-           8. 방명록
-        ======================================== */
-
-        .guestbook {
-            background: #fff;
-        }
-
-        .guestbook-input {
-            width: 100%;
-            border: 1px solid #eee;
-            padding: 13px;
-            font-family: inherit;
-            font-size: 12px;
-            margin-bottom: 8px;
-            outline: none;
-        }
-
-        textarea.guestbook-input {
-            height: 100px;
-            resize: none;
-        }
-
-        .guestbook-button {
-            width: 100%;
-            border: 0;
-            background: #333;
-            color: white;
-            padding: 13px;
-            cursor: pointer;
-            font-size: 12px;
-        }
-
-        .guestbook-list {
-            margin-top: 30px;
-            text-align: left;
-        }
-
-        .guestbook-message {
-            border-bottom: 1px solid #eee;
-            padding: 15px 5px;
-        }
-
-        .guestbook-message-name {
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .guestbook-message-text {
-            font-size: 12px;
-            color: #777;
-            margin-top: 3px;
-        }
-
-
-        /* ========================================
-           9. 지도 / 교통
-        ======================================== */
-
-        .location {
-            background: #faf9f7;
-        }
-
-        .map {
-            width: 100%;
-            height: 260px;
-            background: #e9e9e9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #999;
-            font-size: 12px;
-            margin-bottom: 25px;
-        }
-
-        .transport {
-            text-align: left;
-        }
-
-        .transport-item {
-            border-bottom: 1px solid #eee;
-            padding: 17px 5px;
-        }
-
-        .transport-title {
-            font-size: 13px;
-            font-weight: 500;
-            margin-bottom: 5px;
-        }
-
-        .transport-text {
-            font-size: 12px;
-            color: #777;
-            word-break: keep-all;
-        }
-
-
-        /* ========================================
-           10. 화환 보내기
-        ======================================== */
-
-        .flower {
-            background: #fff;
-        }
-
-        .flower-text {
-            color: #777;
-            font-size: 12px;
-            margin-bottom: 25px;
-        }
-
-        .flower-button {
-            display: inline-block;
-            border: 1px solid #ddd;
-            padding: 12px 30px;
-            font-size: 12px;
-        }
-
-
-        /* ========================================
-           11. 공유하기
-        ======================================== */
-
-        .share {
-            background: #faf9f7;
-            padding-bottom: 100px;
-        }
-
-        .share-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .share-button {
-            border: 1px solid #ddd;
-            background: white;
-            padding: 12px 20px;
-            font-size: 11px;
-            cursor: pointer;
-        }
-
-        .footer {
-            font-family: Arial, sans-serif;
-            font-size: 9px;
-            color: #bbb;
-            letter-spacing: 1px;
-            margin-top: 45px;
-        }
-
-
-        /* ========================================
-           반응형
-        ======================================== */
-
-        @media (min-width: 521px) {
-            body {
-                padding: 30px 0;
-            }
-
-            .container {
-                box-shadow: 0 0 30px rgba(0,0,0,.05);
-            }
-        }
-
-        @media (max-width: 360px) {
-            section {
-                padding-left: 20px;
-                padding-right: 20px;
-            }
-
-            .hero-names {
-                font-size: 27px;
-            }
-
-            .gallery-item img {
-                height: 170px;
-            }
-
-            .gallery-item:first-child img {
-                height: 270px;
-            }
-        }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#efeee8">
+<title>우리, 결혼합니다</title>
+<meta name="description" content="2027년 1월 23일, 저희 두 사람이 결혼합니다.">
+
+<!--
+  셀프 모바일 청첩장
+  -------------------------------------------------
+  1) main.jpg / groom.jpg / bride.jpg / wedding1~6.jpg를
+     같은 폴더의 images 폴더에 넣으면 사진이 표시됩니다.
+  2) 이름/혼주/계좌번호/교통안내는 아래 HTML의 해당 부분만 수정하면 됩니다.
+  3) 방명록은 현재 데모용입니다. 실제 여러 사람이 공유하는 방명록은
+     Firebase/Supabase 연결이 필요합니다.
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --paper: #eeede7;
+  --ink: #252525;
+  --muted: #77756f;
+  --line: rgba(37,37,37,.18);
+  --paper-white: rgba(255,255,255,.58);
+  --accent: #4c4a45;
+}
+
+* { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body {
+  background:#d9d8d2;
+  color:var(--ink);
+  font-family:"Nanum Gothic Coding","D2Coding","Malgun Gothic",monospace;
+  line-height:1.9;
+  letter-spacing:-.04em;
+}
+button, input, textarea { font:inherit; }
+a { color:inherit; text-decoration:none; }
+
+.page {
+  width:min(100%, 520px);
+  margin:0 auto;
+  min-height:100vh;
+  position:relative;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(255,255,255,.16),rgba(255,255,255,.16)),
+    url("data:image/png;base64,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") repeat;
+  box-shadow:0 0 45px rgba(0,0,0,.12);
+}
+
+.page::before {
+  content:"";
+  position:fixed;
+  z-index:0;
+  inset:0;
+  pointer-events:none;
+  opacity:.22;
+  background-image:url("data:image/png;base64,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");
+  background-repeat:repeat;
+  mix-blend-mode:multiply;
+}
+
+.content { position:relative; z-index:1; }
+
+.paper-rule {
+  width:100%;
+  height:24px;
+  margin:0 0 42px;
+  opacity:.55;
+  background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABMCAIAAABBHmYGAAACxUlEQVR42u2bTXITMRCF39OMPXHhsIbiDtknHCachlwoXCCsgOMAVcQe9WMhTSSP/1KpZAKubm9mZFndX/dT2+UaURJO0QJO1AKQKqbhYqf9f1Vtb2+/AA1gkpVhAkmiZNMEkmYCIZN2QmrXLfMrjaRXvk1zOJ4PQCaSTNfH8pmnbY8D/PD+HQgDN5dXWlsSA0FIYCCBhC+IJa4aaQhGg0dyMxQCCKSZabiVmVQms2TiuJkUyCr0HEX789fvlmahMZXhHAJpZg9CbWczMMC0w62q/Kq6qFuTwMAQQhMaEDFGMyMps77vTTKzQDahTLejZFKMMYSQys8hiZLYdZ0kmRmqMJQjZaDEQC0W8/v7VbQcK3PyWfvYzFpGTAnIXktBQAZlszxGBKibEeLKCNBkPCjExdlZkRqGsACQ7dXHy9VqvV6t1/069jHGvo/RokWLMjOJDIFYLLo/9yur95h2a3Bvu+GBvD/AY9YSYG/UIGZuLUYQ0HK5vP50vXyzHCpVHBjE7z++xRhjjJbUYBbNhlRKsvwxolbfEAr3bV9JKaBaBXVmS39BqWpJADf25KgeECR13fzy6mo+n7PMy5PXFmmK2ynlOIAxUmk+afeP9m4RJ4dOs7EI93W8cUfi9luqHJDUqKQaKpa6/NCLyXH73dnGHy2y/d+BB6XKA5/IYslIrPpB2cAJTHUieCTK5zLh6Y4kJbD6K0ejFem/FR3MwRzMwRzMwRzMwRzMwRzMwRzMwRzMwRzMwRzMwRzMwf4payd8IoBeMQdzMAdzMAdzMAdzMAdzMAdzMAdzMAdzMAdzsJeySZ/RbSf8u0+POIbzfGATPezMqaXYTuOSkx9Ba28+35xkxXj+9nxSh1MVjuSJET1IhCdYLgDtxcXFVCmcdMPx7uvdK4C9PNrJHtpp9UpnnF+6Zi00QWfcoYrHHCB7csot2l/Oto0JWlWBHgAAAABJRU5ErkJggg==");
+  background-repeat:repeat-x;
+  background-size:100% 24px;
+  background-position:center;
+}
+
+.star {
+  position:absolute;
+  width:27px;
+  height:30px;
+  background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAeCAYAAADdGWXmAAADa0lEQVR42q3Xy2ucZRQG8N9kkkkz2ljTMb1ovJViq9VivbcKIq3iZaGIiC5cuNCNCII7/wBx79ZSN4ILFYrgwqpRsFjqrXipxsaitbZVk2i05mIm4+YZ+Jgm48T0hZd3Pr7vfc85z3nO854p1Wo1SxgrMJe55NG1hG8vxYPYjvL/Mdbd4Xdl3I5n8R0+Qn2Rs+aWawxmUcLVWINjhXeDuAOrMYyvlgvjKYyjH9sKUPbH0JN4Bo+ibznG6jiBiey5sQDvZjyQiAfRu9i5S4lsHJMxcGXWQdwV4304jncC+X/mrJR8rEg0k/grv3/PbGAo+bkWO1GLM6/hU/zTibFL8Bwui3df420ciuGxHHQetuJ+bMKv2ItXk9sii7vC0Ea5Wq0WjQ3gBuzAxsB1Ey7ETCLYhnMzd8apvXgJI4UghgLvFlQx0WpsAvvRg7VYn/WaAuUvT2Qb4vkwdmMU56fo7wsrn8LdCeLwQnX2B17ET3giRvqSn/nA0ohD83Hg4eR1ENclHXPhwOlEVim10cYB3IPHA23vIt81FaNRYPgUTgbWd/ExPu9eRJoqKdaxsGsoc6FS6ck6hR9Tj6N4E4dDmCnUu1uY2WTZVcnTlsBUCyTF+pzP7/lE9xn24P2kYrK1BJrGLsadMbQjz92BZi75aLQYbELXnPOJ4kQiOROyarVaDr2fxq6wbzyb9uO9QLs2a6lw+HS87w0T+wPlyULkZ0Q2E69KgeAtHMBvqbGNia6rQIRpfBK4rscFEeQqnsfBVhjL1Wq1kUOPRy325L46Fji24t7QehQrQ4rT2JfvZ/J+dZzbFCaeKt57zaKezeHHColtYB0eSaGO4GVcgVXZ8yXeiJxVkutVEYMNOIKfm2gUFaRRgKjZb9yKh/K8O4q+Kwxt4Cg+jJOj0cg1yd/6oPBNkGt7Uw+EmbXAtS+q0sxtKcrSF6h+wCv4Ao/h5tx12/Pu7+42Pcdm3BZYP8iGuUTTRKDSoix/hlhHkrdbQrhqO2MVXBRlP4Bvw75y8jPbYqxcIEIdv0R9DqYEZtrBOBs4XsD36aiaY6TQf6zEOW1aialOuqt65OdQ4bm5jgXOnuyvnI0mtZHD6wtcQUcLCtFxH9N6eXYyplPQ68LM4QhC42x1xK0Qv566KgXqeicbS0v8Y9FaHjo1BP8CUXHw+rrEm/gAAAAASUVORK5CYII=") center/contain no-repeat;
+  opacity:.72;
+  pointer-events:none;
+}
+.star.s1 { top:34px; left:28px; transform:rotate(-8deg); }
+.star.s2 { top:56px; right:32px; transform:rotate(14deg) scale(.75); }
+.star.s3 { bottom:50px; left:34px; transform:rotate(7deg) scale(.62); }
+.star.s4 { bottom:28px; right:35px; transform:rotate(-15deg) scale(.85); }
+
+section {
+  position:relative;
+  padding:92px 28px;
+  text-align:center;
+}
+
+.reveal {
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 1.15s ease, transform 1.15s cubic-bezier(.2,.75,.2,1);
+}
+.reveal.show { opacity:1; transform:translateY(0); }
+
+.kicker {
+  font-size:10px;
+  letter-spacing:3px;
+  color:var(--muted);
+  margin-bottom:20px;
+}
+.title {
+  font-size:20px;
+  font-weight:400;
+  letter-spacing:-1px;
+  margin-bottom:26px;
+}
+.copy {
+  font-size:13px;
+  color:#595852;
+  line-height:2.25;
+  word-break:keep-all;
+}
+
+.hero {
+  min-height:100svh;
+  padding:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:rgba(255,255,255,.25);
+}
+.hero-inner {
+  width:100%;
+  padding:48px 25px 55px;
+}
+.photo-frame {
+  width:100%;
+  aspect-ratio:4/5;
+  overflow:hidden;
+  position:relative;
+  background:#d9d8d1;
+  border:1px solid rgba(0,0,0,.1);
+}
+.photo-frame img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.photo-placeholder {
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#77756f;
+  font-size:11px;
+  letter-spacing:1px;
+}
+.hero-text {
+  margin-top:38px;
+  text-align:center;
+}
+.hero-date {
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:15px;
+}
+.hero-names {
+  font-size:28px;
+  letter-spacing:-1px;
+  line-height:1.5;
+}
+.hero-sub {
+  margin-top:14px;
+  color:var(--muted);
+  font-size:11px;
+}
+
+.invitation { padding-top:110px; }
+.invitation .paper-rule { margin-bottom:50px; }
+
+.couple {
+  background:rgba(255,255,255,.22);
+}
+.couple-grid {
+  display:grid;
+  grid-template-columns:1fr 42px 1fr;
+  align-items:center;
+  gap:4px;
+}
+.person img {
+  width:106px;
+  height:106px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  object-fit:cover;
+  border:1px solid rgba(0,0,0,.1);
+}
+.person-placeholder {
+  width:106px;
+  height:106px;
+  margin:0 auto 18px;
+  border-radius:50%;
+  background:rgba(255,255,255,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#888;
+  font-size:9px;
+}
+.person-role { font-size:9px; letter-spacing:2px; color:#999; }
+.person-name { font-size:17px; margin-top:5px; }
+.heart { font-size:17px; color:#555; }
+
+.parents .parent-list {
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.parent {
+  display:grid;
+  grid-template-columns:70px 1fr;
+  padding:17px 5px;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  text-align:left;
+  font-size:12px;
+}
+.parent:last-child { border-bottom:0; }
+.parent-side { color:#999; }
+.parent-name { font-weight:bold; }
+.parent-child { color:#888; margin-left:8px; font-size:10px; }
+
+.schedule {
+  background:rgba(255,255,255,.28);
+}
+.calendar {
+  width:min(100%,310px);
+  margin:0 auto 35px;
+}
+.month {
+  font-size:15px;
+  letter-spacing:2px;
+  margin-bottom:18px;
+}
+.calendar table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:11px;
+}
+.calendar th {
+  font-weight:400;
+  color:#999;
+  padding-bottom:10px;
+}
+.calendar td { height:38px; position:relative; }
+.calendar .wedding-day strong {
+  position:relative;
+  z-index:2;
+  font-weight:700;
+}
+.calendar .wedding-day::before {
+  content:"";
+  position:absolute;
+  width:30px;
+  height:30px;
+  left:50%;
+  top:4px;
+  transform:translateX(-50%);
+  border:1px solid #333;
+  border-radius:50%;
+}
+.date-big { font-size:17px; margin-bottom:5px; }
+.date-small { color:#777; font-size:12px; }
+.venue {
+  margin-top:28px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+}
+.venue-name { font-size:14px; }
+.venue-address { font-size:11px; color:#777; margin-top:5px; }
+.map-link {
+  display:inline-block;
+  margin-top:18px;
+  padding:9px 18px;
+  border:1px solid rgba(0,0,0,.25);
+  font-size:10px;
+}
+
+.gallery {
+  padding-left:12px;
+  padding-right:12px;
+}
+.gallery .title, .gallery .kicker { margin-left:16px; margin-right:16px; }
+.gallery-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+}
+.gallery-item {
+  aspect-ratio:1/1.2;
+  overflow:hidden;
+  background:#dad9d3;
+}
+.gallery-item:first-child {
+  grid-column:1 / -1;
+  aspect-ratio:4/3;
+}
+.gallery-item img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.gallery-placeholder {
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#777;
+  font-size:9px;
+}
+
+.account {
+  background:rgba(255,255,255,.28);
+}
+.account-list { border-top:1px solid var(--line); }
+.account-item {
+  border-bottom:1px solid var(--line);
+  text-align:left;
+}
+.account-title {
+  width:100%;
+  padding:17px 5px;
+  background:transparent;
+  border:0;
+  display:flex;
+  justify-content:space-between;
+  cursor:pointer;
+  font-size:12px;
+}
+.account-title::after { content:"+"; color:#888; font-size:16px; }
+.account-item.open .account-title::after { content:"−"; }
+.account-detail {
+  display:none;
+  padding:0 5px 19px;
+  color:#666;
+  font-size:11px;
+}
+.account-item.open .account-detail { display:block; }
+.copy-btn {
+  border:1px solid rgba(0,0,0,.25);
+  background:transparent;
+  padding:7px 12px;
+  margin-top:9px;
+  cursor:pointer;
+  font-size:9px;
+}
+
+.guestbook-form {
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+.guestbook-form input,
+.guestbook-form textarea {
+  width:100%;
+  border:1px solid rgba(0,0,0,.16);
+  background:rgba(255,255,255,.5);
+  padding:11px;
+  outline:none;
+  font-size:11px;
+}
+.guestbook-form textarea { min-height:95px; resize:vertical; }
+.submit {
+  border:1px solid #333;
+  background:#333;
+  color:#fff;
+  padding:11px;
+  font-size:10px;
+  cursor:pointer;
+}
+.guest-list { margin-top:28px; text-align:left; }
+.guest {
+  padding:14px 5px;
+  border-bottom:1px solid rgba(0,0,0,.1);
+}
+.guest-name { font-size:10px; font-weight:bold; }
+.guest-msg { color:#666; font-size:10px; margin-top:3px; }
+
+.location {
+  background:rgba(255,255,255,.28);
+}
+.map-box {
+  width:100%;
+  aspect-ratio:16/10;
+  border:1px solid rgba(0,0,0,.12);
+  background:
+    linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,.35)),
+    url("data:image/png;base64,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") repeat;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:5px;
+  color:#777;
+}
+.map-box strong { font-size:13px; color:#444; }
+.map-box span { font-size:9px; }
+.transport {
+  margin-top:25px;
+  text-align:left;
+  border-top:1px solid var(--line);
+}
+.transport-item {
+  padding:16px 5px;
+  border-bottom:1px solid rgba(0,0,0,.08);
+}
+.transport-title { font-size:11px; font-weight:bold; }
+.transport-text { font-size:10px; color:#777; margin-top:4px; word-break:keep-all; }
+
+.flower .flower-button {
+  display:inline-block;
+  border:1px solid rgba(0,0,0,.25);
+  padding:11px 22px;
+  margin-top:22px;
+  font-size:10px;
+}
+
+.share {
+  padding-bottom:100px;
+}
+.share-buttons {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+}
+.share-buttons button {
+  border:1px solid rgba(0,0,0,.22);
+  background:rgba(255,255,255,.48);
+  padding:11px 17px;
+  cursor:pointer;
+  font-size:10px;
+}
+.footer {
+  margin-top:55px;
+  color:#aaa;
+  font-size:8px;
+  letter-spacing:1px;
+}
+
+@media (min-width:521px) {
+  body { padding:30px 0; }
+}
+
+@media (prefers-reduced-motion:reduce) {
+  html { scroll-behavior:auto; }
+  .reveal { opacity:1; transform:none; transition:none; }
+}
+</style>
 </head>
 
 <body>
+<main class="page">
+<div class="content">
 
-<div class="container">
+  <!-- 1. 메인 사진 -->
+  <section class="hero">
+    <div class="star s1"></div>
+    <div class="star s2"></div>
 
-    <!-- ======================================
-         1. 메인 사진
-    ======================================= -->
-    <section class="hero">
+    <div class="hero-inner reveal">
+      <div class="photo-frame">
+        <!-- images/main.jpg 교체 -->
+        <img src="images/main.jpg" alt="웨딩 메인 사진"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="photo-placeholder" style="display:none;">MAIN PHOTO</div>
+      </div>
 
-        <!-- 메인 사진 변경 -->
-        <img src="images/main.jpg" alt="신랑 신부">
+      <div class="hero-text">
+        <div class="hero-date">2027. 01. 23 SAT</div>
+        <div class="hero-names">신랑 ○○○ &nbsp;·&nbsp; 신부 ○○○</div>
+        <div class="hero-sub">우리, 결혼합니다.</div>
+      </div>
+    </div>
+  </section>
 
-        <div class="hero-overlay"></div>
+  <!-- 2. 초대글 -->
+  <section class="invitation reveal">
+    <div class="star s3"></div>
+    <div class="kicker">INVITATION</div>
+    <h2 class="title">소중한 분들을 초대합니다</h2>
+    <div class="paper-rule"></div>
+    <p class="copy">
+      서로 다른 두 사람이 만나<br>
+      이제는 하나의 길을 함께 걸어가려 합니다.<br><br>
+      저희의 새로운 시작을<br>
+      소중한 분들과 함께하고 싶습니다.<br><br>
+      귀한 걸음으로 축복해 주시면<br>
+      감사한 마음 오래 간직하겠습니다.
+    </p>
+  </section>
 
-        <div class="hero-content">
-            <div class="hero-date">
-                2027. 01. 23 SAT
-            </div>
+  <!-- 3. 신랑 신부 정보 -->
+  <section class="couple reveal">
+    <div class="kicker">THE COUPLE</div>
+    <h2 class="title">신랑 · 신부</h2>
 
-            <div class="hero-names">
-                김연세 &nbsp;♥&nbsp; 김승희
-            </div>
+    <div class="couple-grid">
+      <div class="person">
+        <div class="person-placeholder">GROOM PHOTO</div>
+        <div class="person-role">GROOM</div>
+        <div class="person-name">○○○</div>
+      </div>
 
-            <div class="hero-sub">
-                저희 결혼합니다
-            </div>
+      <div class="heart">＊</div>
+
+      <div class="person">
+        <div class="person-placeholder">BRIDE PHOTO</div>
+        <div class="person-role">BRIDE</div>
+        <div class="person-name">○○○</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. 혼주 정보 -->
+  <section class="parents reveal">
+    <div class="kicker">FAMILY</div>
+    <h2 class="title">혼주</h2>
+
+    <div class="parent-list">
+      <div class="parent">
+        <div class="parent-side">신랑측</div>
+        <div>
+          <span class="parent-name">아버지 ○○○ · 어머니 ○○○</span>
+          <span class="parent-child">아들 ○○○</span>
         </div>
-
-    </section>
-
-
-    <!-- ======================================
-         2. 초대글
-    ======================================= -->
-    <section class="invitation">
-
-        <div class="section-label">INVITATION</div>
-
-        <h2 class="section-title">
-            소중한 분들을 초대합니다
-        </h2>
-
-        <div class="divider"></div>
-
-        <p class="invitation-text">
-            새해의 첫 달,<br>
-            차분한 빛 속에서 저희 두 사람은<br>
-            서로의 삶을 하나로 모으려 합니다.<br><br>
-
-            추운 겨울이지만 마음만큼은 따뜻한 이 날,<br>
-            저희의 소중한 시작을 따뜻하게 축복해 주신다면.<br>
-            더없는 기쁨으로 간직하겠습니다.<br><br>
-        </p>
-
-    </section>
-
-
-    <!-- ======================================
-         3. 신랑 신부 정보
-    ======================================= -->
-    <section class="couple">
-
-        <div class="section-label">THE COUPLE</div>
-
-        <h2 class="section-title">
-            저희 두 사람을 소개합니다
-        </h2>
-
-        <div class="couple-list">
-
-            <div class="person">
-
-                <img
-                    class="person-image"
-                    src="images/groom.jpg"
-                    alt="신랑">
-
-                <div class="person-role">GROOM</div>
-
-                <div class="person-name">
-                    김연세
-                </div>
-
-                <div class="person-phone">
-                    010-0000-0000
-                </div>
-
-            </div>
-
-            <div class="heart">♥</div>
-
-            <div class="person">
-
-                <img
-                    class="person-image"
-                    src="images/bride.jpg"
-                    alt="신부">
-
-                <div class="person-role">BRIDE</div>
-
-                <div class="person-name">
-                    김승희
-                </div>
-
-                <div class="person-phone">
-                    010-0000-0000
-                </div>
-
-            </div>
-
+      </div>
+      <div class="parent">
+        <div class="parent-side">신부측</div>
+        <div>
+          <span class="parent-name">아버지 ○○○ · 어머니 ○○○</span>
+          <span class="parent-child">딸 ○○○</span>
         </div>
+      </div>
+    </div>
+  </section>
 
-    </section>
+  <!-- 5. 날짜 / 시간 / 장소 -->
+  <section class="schedule reveal">
+    <div class="kicker">WEDDING DAY</div>
+    <h2 class="title">우리의 결혼식</h2>
 
+    <div class="calendar">
+      <div class="month">JANUARY 2027</div>
+      <table>
+        <thead>
+          <tr>
+            <th>SU</th><th>MO</th><th>TU</th><th>WE</th>
+            <th>TH</th><th>FR</th><th>SA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td></td><td></td><td></td><td></td><td></td><td>1</td><td>2</td></tr>
+          <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
+          <tr><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr>
+          <tr><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td>
+              <td class="wedding-day"><strong>23</strong></td></tr>
+          <tr><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td></tr>
+          <tr><td>31</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
 
-    <!-- ======================================
-         4. 혼주 정보
-    ======================================= -->
-    <section class="parents">
+    <div class="date-big">2027년 1월 23일 토요일</div>
+    <div class="date-small">오전 10시 30분</div>
 
-        <div class="section-label">FAMILY</div>
+    <div class="venue">
+      <div class="venue-name">라도무스아트센터웨딩홀</div>
+      <div class="venue-address">대전 유성구 동서대로 639 · 8층 루미니스홀</div>
+      <a class="map-link"
+         href="https://map.kakao.com/?q=라도무스아트센터웨딩홀"
+         target="_blank" rel="noopener">
+        지도에서 보기
+      </a>
+    </div>
+  </section>
 
-        <h2 class="section-title">
-            혼주
-        </h2>
+  <!-- 6. 웨딩 사진 -->
+  <section class="gallery reveal">
+    <div class="kicker">OUR MOMENTS</div>
+    <h2 class="title">우리의 순간</h2>
 
-        <div class="parents-table">
+    <div class="gallery-grid">
+      <div class="gallery-item">
+        <img src="images/wedding1.jpg" alt="웨딩사진"
+             onerror="this.style.display='none';">
+        <div class="gallery-placeholder">PHOTO 01</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/wedding2.jpg" alt="웨딩사진"
+             onerror="this.style.display='none';">
+        <div class="gallery-placeholder">PHOTO 02</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/wedding3.jpg" alt="웨딩사진"
+             onerror="this.style.display='none';">
+        <div class="gallery-placeholder">PHOTO 03</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/wedding4.jpg" alt="웨딩사진"
+             onerror="this.style.display='none';">
+        <div class="gallery-placeholder">PHOTO 04</div>
+      </div>
+      <div class="gallery-item">
+        <img src="images/wedding5.jpg" alt="웨딩사진"
+             onerror="this.style.display='none';">
+        <div class="gallery-placeholder">PHOTO 05</div>
+      </div>
+    </div>
+  </section>
 
-            <div class="parent-row">
-                <div class="parent-side">
-                    신랑측
-                </div>
+  <!-- 7. 계좌번호 -->
+  <section class="account reveal">
+    <div class="kicker">ACCOUNT</div>
+    <h2 class="title">마음 전하실 곳</h2>
+    <p class="copy" style="font-size:11px; margin-bottom:25px;">
+      참석이 어려우신 분들을 위해<br>
+      계좌번호를 안내드립니다.
+    </p>
 
-                <div class="parent-info">
-                    <span class="parent-name">김권주 · 신춘란</span>
-                    <span class="parent-child">아들 연세</span>
-                </div>
-            </div>
-
-            <div class="parent-row">
-                <div class="parent-side">
-                    신부측
-                </div>
-
-                <div class="parent-info">
-                    <span class="parent-name">김창기 · 박경아</span>
-                    <span class="parent-child">딸 승희</span>
-                </div>
-            </div>
-
+    <div class="account-list">
+      <div class="account-item">
+        <button class="account-title" type="button">신랑측 계좌번호</button>
+        <div class="account-detail">
+          ○○은행 · ○○○<br>
+          000-000-000000
+          <br>
+          <button class="copy-btn" type="button" onclick="copyText('000000000000')">
+            계좌번호 복사
+          </button>
         </div>
+      </div>
 
-    </section>
-
-
-    <!-- ======================================
-         5. 날짜 / 달력 / 시간 / 장소
-    ======================================= -->
-    <section class="schedule">
-
-        <div class="section-label">WEDDING DAY</div>
-
-        <h2 class="section-title">
-            우리의 결혼식
-        </h2>
-
-        <div class="calendar">
-
-            <div class="calendar-header">
-                January 2027
-            </div>
-
-            <table>
-
-                <thead>
-                    <tr>
-                        <th>SU</th>
-                        <th>MO</th>
-                        <th>TU</th>
-                        <th>WE</th>
-                        <th>TH</th>
-                        <th>FR</th>
-                        <th>SA</th>
-                    </tr>
-                </thead>
-
-                <tbody>
-
-                    <tr>
-                        <td>25</td>
-                        <td>26</td>
-                        <td>27</td>
-                        <td>28</td>
-                        <td>29</td>
-                        <td>30</td>
-                        <td>1</td>
-                    </tr>
-
-                    <tr>
-                        <td>2</td>
-                        <td>3</td>
-                        <td>4</td>
-                        <td>5</td>
-                        <td>6</td>
-                        <td>7</td>
-                        <td>8</td>
-                    </tr>
-
-                    <tr>
-                        <td>9</td>
-                        <td>10</td>
-                        <td>11</td>
-                        <td>12</td>
-                        <td>13</td>
-                        <td>14</td>
-
-                        <td class="today">
-                            <span></span>
-                            <strong>15</strong>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>16</td>
-                        <td>17</td>
-                        <td>18</td>
-                        <td>19</td>
-                        <td>20</td>
-                        <td>21</td>
-                        <td>22</td>
-                    </tr>
-
-                    <tr>
-                        <td>23</td>
-                        <td>24</td>
-                        <td>25</td>
-                        <td>26</td>
-                        <td>27</td>
-                        <td>28</td>
-                        <td>29</td>
-                    </tr>
-
-                    <tr>
-                        <td>30</td>
-                        <td>31</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-
-                </tbody>
-
-            </table>
-
+      <div class="account-item">
+        <button class="account-title" type="button">신부측 계좌번호</button>
+        <div class="account-detail">
+          ○○은행 · ○○○<br>
+          000-000-000000
+          <br>
+          <button class="copy-btn" type="button" onclick="copyText('000000000000')">
+            계좌번호 복사
+          </button>
         </div>
-
-        <div class="wedding-date">
-            2027년 1월 23일 토요일
-        </div>
-
-        <div class="wedding-time">
-            오전 10시 30분
-        </div>
-
-        <div class="venue">
-            ○○웨딩홀 3층 ○○홀
-        </div>
-
-        <div class="venue-address">
-            대전광역시 ○○구 ○○로 123
-        </div>
-
-    </section>
-
-
-    <!-- ======================================
-         6. 웨딩 사진
-    ======================================= -->
-    <section class="gallery">
-
-        <div class="section-label">OUR MOMENTS</div>
-
-        <h2 class="section-title">
-            우리의 순간
-        </h2>
-
-        <div class="gallery-grid">
-
-            <div class="gallery-item">
-                <img src="images/wedding1.jpg" alt="웨딩사진">
-            </div>
-
-            <div class="gallery-item">
-                <img src="images/wedding2.jpg" alt="웨딩사진">
-            </div>
-
-            <div class="gallery-item">
-                <img src="images/wedding3.jpg" alt="웨딩사진">
-            </div>
-
-            <div class="gallery-item">
-                <img src="images/wedding4.jpg" alt="웨딩사진">
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ======================================
-         7. 계좌번호
-    ======================================= -->
-    <section class="account">
-
-        <div class="section-label">ACCOUNT</div>
-
-        <h2 class="section-title">
-            마음 전하실 곳
-        </h2>
-
-        <p style="font-size:12px; color:#888; margin-bottom:25px;">
-            참석이 어려우신 분들을 위해<br>
-            계좌번호를 안내드립니다.
-        </p>
-
-        <div class="account-box">
-
-            <!-- 신랑측 -->
-            <div class="account-item">
-
-                <div class="account-title">
-                    신랑측 계좌번호
-                </div>
-
-                <div class="account-detail">
-
-                    국민은행<br>
-                    김민수<br>
-                    123456-78-901234
-
-                    <br>
-
-                    <button onclick="copyAccount('12345678901234')">
-                        계좌번호 복사
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            <!-- 신부측 -->
-            <div class="account-item">
-
-                <div class="account-title">
-                    신부측 계좌번호
-                </div>
-
-                <div class="account-detail">
-
-                    신한은행<br>
-                    이지은<br>
-                    110-123-456789
-
-                    <br>
-
-                    <button onclick="copyAccount('110123456789')">
-                        계좌번호 복사
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ======================================
-         8. 방명록
-    ======================================= -->
-    <section class="guestbook">
-
-        <div class="section-label">GUESTBOOK</div>
-
-        <h2 class="section-title">
-            축하의 마음을 남겨주세요
-        </h2>
-
-        <input
-            id="guestName"
-            class="guestbook-input"
-            type="text"
-            placeholder="이름">
-
-        <textarea
-            id="guestMessage"
-            class="guestbook-input"
-            placeholder="축하 메시지를 남겨주세요"></textarea>
-
-        <button
-            class="guestbook-button"
-            onclick="addGuestbook()">
-            축하 메시지 남기기
-        </button>
-
-        <div
-            id="guestbookList"
-            class="guestbook-list">
-        </div>
-
-    </section>
-
-
-    <!-- ======================================
-         9. 지도 / 교통
-    ======================================= -->
-    <section class="location">
-
-        <div class="section-label">LOCATION</div>
-
-        <h2 class="section-title">
-            오시는 길
-        </h2>
-
-        <!-- 나중에 카카오맵 / 네이버지도 삽입 -->
-        <div class="map">
-            지도 영역<br>
-            Kakao Map 또는 Naver Map 삽입
-        </div>
-
-        <div class="transport">
-
-            <div class="transport-item">
-
-                <div class="transport-title">
-                    🚇 지하철
-                </div>
-
-                <div class="transport-text">
-                    ○호선 ○○역 ○번 출구에서 도보 약 5분
-                </div>
-
-            </div>
-
-
-            <div class="transport-item">
-
-                <div class="transport-title">
-                    🚌 버스
-                </div>
-
-                <div class="transport-text">
-                    ○○정류장 하차 후 도보 약 3분
-                </div>
-
-            </div>
-
-
-            <div class="transport-item">
-
-                <div class="transport-title">
-                    🚗 자가용
-                </div>
-
-                <div class="transport-text">
-                    웨딩홀 지하 주차장 이용 가능합니다.
-                    주차는 예식 당일 무료입니다.
-                </div>
-
-            </div>
-
-
-            <div class="transport-item">
-
-                <div class="transport-title">
-                    🅿 주차 안내
-                </div>
-
-                <div class="transport-text">
-                    건물 지하 1~3층 주차장을 이용해주세요.
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ======================================
-         10. 화환 보내기
-    ======================================= -->
-    <section class="flower">
-
-        <div class="section-label">FLOWER</div>
-
-        <h2 class="section-title">
-            화환 보내기
-        </h2>
-
-        <p class="flower-text">
-            축하의 마음을 담아 보내주시는<br>
-            화환은 감사히 받겠습니다.
-        </p>
-
-        <a
-            href="tel:01000000000"
-            class="flower-button">
-            화환 보내기
-        </a>
-
-    </section>
-
-
-    <!-- ======================================
-         11. 공유하기
-    ======================================= -->
-    <section class="share">
-
-        <div class="section-label">SHARE</div>
-
-        <h2 class="section-title">
-            소중한 분들과 함께해주세요
-        </h2>
-
-        <div class="share-buttons">
-
-            <button
-                class="share-button"
-                onclick="sharePage()">
-                🔗 청첩장 공유
-            </button>
-
-            <button
-                class="share-button"
-                onclick="copyUrl()">
-                URL 복사
-            </button>
-
-        </div>
-
-        <div class="footer">
-            THANK YOU FOR CELEBRATING WITH US
-        </div>
-
-    </section>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. 방명록 -->
+  <section class="guestbook reveal">
+    <div class="kicker">GUESTBOOK</div>
+    <h2 class="title">축하의 마음을 남겨주세요</h2>
+
+    <div class="guestbook-form">
+      <input id="guestName" type="text" placeholder="이름">
+      <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요"></textarea>
+      <button class="submit" type="button" onclick="addGuest()">메시지 남기기</button>
+    </div>
+
+    <div id="guestList" class="guest-list"></div>
+  </section>
+
+  <!-- 9. 지도 / 교통 -->
+  <section class="location reveal">
+    <div class="kicker">LOCATION</div>
+    <h2 class="title">오시는 길</h2>
+
+    <div class="map-box">
+      <strong>라도무스아트센터웨딩홀</strong>
+      <span>대전 유성구 동서대로 639 · 8층 루미니스홀</span>
+    </div>
+
+    <div class="transport">
+      <div class="transport-item">
+        <div class="transport-title">지하철</div>
+        <div class="transport-text">예식장에 맞는 실제 지하철 안내 문구를 입력해주세요.</div>
+      </div>
+      <div class="transport-item">
+        <div class="transport-title">버스</div>
+        <div class="transport-text">예식장에 맞는 실제 버스 노선 및 하차 정류장을 입력해주세요.</div>
+      </div>
+      <div class="transport-item">
+        <div class="transport-title">자가용</div>
+        <div class="transport-text">주차장 위치와 무료 주차 시간 등 실제 안내 내용을 입력해주세요.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. 화환 보내기 -->
+  <section class="flower reveal">
+    <div class="kicker">FLOWER</div>
+    <h2 class="title">화환 보내기</h2>
+    <p class="copy">
+      축하의 마음을 담아 보내주시는<br>
+      화환은 감사히 받겠습니다.
+    </p>
+    <a class="flower-button" href="tel:0000000000">화환 보내기</a>
+  </section>
+
+  <!-- 11. 공유하기 -->
+  <section class="share reveal">
+    <div class="star s4"></div>
+    <div class="kicker">SHARE</div>
+    <h2 class="title">소중한 분들과 함께해주세요</h2>
+
+    <div class="share-buttons">
+      <button type="button" onclick="sharePage()">청첩장 공유</button>
+      <button type="button" onclick="copyText(location.href)">URL 복사</button>
+    </div>
+
+    <div class="footer">THANK YOU FOR CELEBRATING WITH US</div>
+  </section>
 
 </div>
-
+</main>
 
 <script>
-
-    /* ======================================
-       계좌번호 복사
-    ====================================== */
-
-    function copyAccount(account) {
-
-        navigator.clipboard.writeText(account)
-            .then(function() {
-
-                alert("계좌번호가 복사되었습니다.");
-
-            })
-            .catch(function() {
-
-                alert("계좌번호 복사에 실패했습니다.");
-
-            });
-
+/* 스크롤할 때 천천히 올라오는 효과 */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+      observer.unobserve(entry.target);
     }
+  });
+}, {
+  threshold: 0.12,
+  rootMargin: "0px 0px -40px 0px"
+});
 
+document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
 
-    /* ======================================
-       계좌번호 아코디언
-    ====================================== */
+/* 계좌번호 아코디언 */
+document.querySelectorAll(".account-title").forEach(button => {
+  button.addEventListener("click", () => {
+    button.parentElement.classList.toggle("open");
+  });
+});
 
-    document.querySelectorAll(".account-title")
-        .forEach(function(title) {
+/* 복사 */
+async function copyText(text) {
+  try {
+    await navigator.clipboard.writeText(text);
+    alert("복사되었습니다.");
+  } catch(e) {
+    alert("복사에 실패했습니다.");
+  }
+}
 
-            title.addEventListener("click", function() {
+/* 데모 방명록 - 현재 브라우저에만 저장 */
+function addGuest() {
+  const name = document.getElementById("guestName").value.trim();
+  const message = document.getElementById("guestMessage").value.trim();
 
-                const item = this.parentElement;
+  if (!name || !message) {
+    alert("이름과 메시지를 입력해주세요.");
+    return;
+  }
 
-                item.classList.toggle("active");
+  const item = document.createElement("div");
+  item.className = "guest";
 
-            });
+  const safeName = name.replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+  const safeMessage = message.replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 
-        });
+  item.innerHTML = `<div class="guest-name">${safeName}</div><div class="guest-msg">${safeMessage}</div>`;
+  document.getElementById("guestList").prepend(item);
 
+  document.getElementById("guestName").value = "";
+  document.getElementById("guestMessage").value = "";
+}
 
-    /* ======================================
-       방명록
-       
-       현재는 임시 로컬 저장 방식입니다.
-       실제 배포 시 Firebase / Supabase 등을
-       연결하면 여러 사람이 사용할 수 있습니다.
-    ====================================== */
-
-    function addGuestbook() {
-
-        const name =
-            document.getElementById("guestName").value.trim();
-
-        const message =
-            document.getElementById("guestMessage").value.trim();
-
-        if (!name || !message) {
-
-            alert("이름과 메시지를 입력해주세요.");
-
-            return;
-        }
-
-        const list =
-            document.getElementById("guestbookList");
-
-        const item =
-            document.createElement("div");
-
-        item.className = "guestbook-message";
-
-        item.innerHTML = `
-            <div class="guestbook-message-name">
-                ${escapeHtml(name)}
-            </div>
-
-            <div class="guestbook-message-text">
-                ${escapeHtml(message)}
-            </div>
-        `;
-
-        list.prepend(item);
-
-        document.getElementById("guestName").value = "";
-        document.getElementById("guestMessage").value = "";
-
-    }
-
-
-    function escapeHtml(text) {
-
-        const div = document.createElement("div");
-
-        div.textContent = text;
-
-        return div.innerHTML;
-
-    }
-
-
-    /* ======================================
-       공유하기
-    ====================================== */
-
-    function sharePage() {
-
-        if (navigator.share) {
-
-            navigator.share({
-
-                title: "저희 결혼합니다",
-
-                text: "소중한 분들을 초대합니다.",
-
-                url: window.location.href
-
-            });
-
-        } else {
-
-            copyUrl();
-
-        }
-
-    }
-
-
-    /* ======================================
-       URL 복사
-    ====================================== */
-
-    function copyUrl() {
-
-        navigator.clipboard.writeText(
-            window.location.href
-        )
-        .then(function() {
-
-            alert("청첩장 주소가 복사되었습니다.");
-
-        });
-
-    }
-
+/* 모바일 공유 */
+async function sharePage() {
+  if (navigator.share) {
+    await navigator.share({
+      title: "우리, 결혼합니다",
+      text: "2027년 1월 23일, 저희 두 사람이 결혼합니다.",
+      url: location.href
+    });
+  } else {
+    await copyText(location.href);
+  }
+}
 </script>
-
 </body>
 </html>
