@@ -1,800 +1,3278 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#efeee8">
-<title>우리, 결혼합니다</title>
-<meta name="description" content="2027년 1월 23일, 저희 두 사람이 결혼합니다.">
 
-<!--
-  셀프 모바일 청첩장
-  -------------------------------------------------
-  1) main.jpg / groom.jpg / bride.jpg / wedding1~6.jpg를
-     같은 폴더의 images 폴더에 넣으면 사진이 표시됩니다.
-  2) 이름/혼주/계좌번호/교통안내는 아래 HTML의 해당 부분만 수정하면 됩니다.
-  3) 방명록은 현재 데모용입니다. 실제 여러 사람이 공유하는 방명록은
-     Firebase/Supabase 연결이 필요합니다.
--->
+<meta charset="UTF-8">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&display=swap" rel="stylesheet">
+<meta
+  name="viewport"
+  content="width=device-width,
+           initial-scale=1.0,
+           maximum-scale=1.0,
+           user-scalable=no"
+>
+
+<meta
+  name="theme-color"
+  content="#eee7dc"
+>
+
+<meta
+  name="description"
+  content="김연세 ♥ 김승희 결혼식에 초대합니다"
+>
+
+<title>김연세 ♥ 김승희</title>
+
+
+<!-- =====================================================
+     FONT
+===================================================== -->
+
+<link
+  rel="preconnect"
+  href="https://fonts.googleapis.com"
+>
+
+<link
+  rel="preconnect"
+  href="https://fonts.gstatic.com"
+  crossorigin
+>
+
+<link
+  href="https://fonts.googleapis.com/css2?family=Special+Elite&display=swap"
+  rel="stylesheet"
+>
+
 
 <style>
-:root {
-  --paper: #eeede7;
-  --ink: #252525;
-  --muted: #77756f;
-  --line: rgba(37,37,37,.18);
-  --paper-white: rgba(255,255,255,.58);
-  --accent: #4c4a45;
+
+/* =========================================================
+   BASIC
+========================================================= */
+
+* {
+  box-sizing: border-box;
 }
 
-* { box-sizing:border-box; margin:0; padding:0; }
-html { scroll-behavior:smooth; }
-body {
-  background:#d9d8d2;
-  color:var(--ink);
-  font-family:"Nanum Gothic Coding","D2Coding","Malgun Gothic",monospace;
-  line-height:1.9;
-  letter-spacing:-.04em;
+html {
+  scroll-behavior: smooth;
 }
-button, input, textarea { font:inherit; }
-a { color:inherit; text-decoration:none; }
+
+body {
+
+  margin: 0;
+
+  padding: 0;
+
+  background: #d8cbbd;
+
+  color: #5c5047;
+
+  font-family:
+    "Pretendard",
+    "Noto Sans KR",
+    "Apple SD Gothic Neo",
+    "Malgun Gothic",
+    sans-serif;
+
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* =========================================================
+   TYPEWRITER
+========================================================= */
+
+.typewriter {
+
+  font-family:
+    "Special Elite",
+    "Courier New",
+    monospace;
+}
+
+
+/* =========================================================
+   HANJI PAPER
+   은은하고 자연스러운 한지 질감
+========================================================= */
 
 .page {
-  width:min(100%, 520px);
-  margin:0 auto;
-  min-height:100vh;
-  position:relative;
-  overflow:hidden;
-  background:
-    linear-gradient(rgba(255,255,255,.16),rgba(255,255,255,.16)),
-    url("data:image/png;base64,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") repeat;
-  box-shadow:0 0 45px rgba(0,0,0,.12);
+
+  width: 100%;
+
+  max-width: 520px;
+
+  min-height: 100vh;
+
+  margin: 0 auto;
+
+  position: relative;
+
+  overflow: hidden;
+
+  background-color: #f1ebe1;
+
+  /*
+    한지 기본 섬유층
+
+    아주 낮은 투명도로 구성해서
+    화면에서 패턴이 먼저 보이지 않도록 함.
+  */
+
+  background-image:
+
+    /* 가늘고 긴 섬유 */
+
+    radial-gradient(
+      ellipse 150px 1.2px at 12% 18%,
+      rgba(113, 94, 73, 0.055),
+      transparent 70%
+    ),
+
+    radial-gradient(
+      ellipse 210px 1px at 74% 13%,
+      rgba(113, 94, 73, 0.045),
+      transparent 70%
+    ),
+
+    radial-gradient(
+      ellipse 170px 1.2px at 42% 34%,
+      rgba(113, 94, 73, 0.04),
+      transparent 70%
+    ),
+
+    radial-gradient(
+      ellipse 230px 1px at 88% 45%,
+      rgba(113, 94, 73, 0.045),
+      transparent 70%
+    ),
+
+    radial-gradient(
+      ellipse 190px 1.2px at 17% 63%,
+      rgba(113, 94, 73, 0.04),
+      transparent 70%
+    ),
+
+    radial-gradient(
+      ellipse 250px 1px at 67% 74%,
+      rgba(113, 94, 73, 0.045),
+      transparent 70%
+    ),
+
+    radial-gradient(
+      ellipse 170px 1.2px at 35% 91%,
+      rgba(113, 94, 73, 0.04),
+      transparent 70%
+    ),
+
+    /* 밝은 한지 섬유 */
+
+    radial-gradient(
+      ellipse 180px 1.5px at 27% 25%,
+      rgba(255,255,255,0.18),
+      transparent 72%
+    ),
+
+    radial-gradient(
+      ellipse 220px 1.2px at 82% 32%,
+      rgba(255,255,255,0.15),
+      transparent 72%
+    ),
+
+    radial-gradient(
+      ellipse 190px 1.5px at 55% 57%,
+      rgba(255,255,255,0.16),
+      transparent 72%
+    ),
+
+    radial-gradient(
+      ellipse 240px 1.2px at 18% 82%,
+      rgba(255,255,255,0.15),
+      transparent 72%
+    ),
+
+    /* 아주 은은한 종이 얼룩 */
+
+    radial-gradient(
+      ellipse at 16% 31%,
+      rgba(133,108,84,0.035),
+      transparent 35%
+    ),
+
+    radial-gradient(
+      ellipse at 82% 21%,
+      rgba(133,108,84,0.028),
+      transparent 38%
+    ),
+
+    radial-gradient(
+      ellipse at 63% 67%,
+      rgba(133,108,84,0.03),
+      transparent 40%
+    ),
+
+    radial-gradient(
+      ellipse at 27% 88%,
+      rgba(133,108,84,0.025),
+      transparent 38%
+    );
+
+  background-size:
+
+    370px 210px,
+    420px 250px,
+    390px 230px,
+    450px 280px,
+    400px 250px,
+    470px 290px,
+    360px 230px,
+
+    390px 260px,
+    440px 280px,
+    410px 250px,
+    450px 300px,
+
+    300px 330px,
+    350px 310px,
+    330px 350px,
+    310px 340px;
+
+  box-shadow:
+    0 0 40px
+    rgba(60, 40, 25, 0.10);
 }
+
+
+/* =========================================================
+   HANJI FIBER OVERLAY
+   길게 찢어진 닥섬유 느낌
+========================================================= */
 
 .page::before {
-  content:"";
-  position:fixed;
-  z-index:0;
-  inset:0;
-  pointer-events:none;
-  opacity:.22;
-  background-image:url("data:image/png;base64,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");
-  background-repeat:repeat;
-  mix-blend-mode:multiply;
+
+  content: "";
+
+  position: absolute;
+
+  inset: -40px;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  opacity: 0.42;
+
+  background:
+
+    /*
+      긴 섬유 1
+    */
+
+    repeating-linear-gradient(
+      103deg,
+
+      transparent 0px,
+
+      transparent 19px,
+
+      rgba(119, 98, 77, 0.025) 19.5px,
+
+      rgba(119, 98, 77, 0.025) 20.5px,
+
+      transparent 21px,
+
+      transparent 47px
+    ),
+
+    /*
+      긴 섬유 2
+    */
+
+    repeating-linear-gradient(
+      76deg,
+
+      transparent 0px,
+
+      transparent 31px,
+
+      rgba(255,255,255,0.065) 31.5px,
+
+      rgba(255,255,255,0.065) 32.5px,
+
+      transparent 33px,
+
+      transparent 64px
+    ),
+
+    /*
+      가로 방향의 아주 약한 섬유
+    */
+
+    repeating-linear-gradient(
+      4deg,
+
+      transparent 0px,
+
+      transparent 42px,
+
+      rgba(125,104,83,0.018) 42px,
+
+      rgba(125,104,83,0.018) 43px,
+
+      transparent 44px,
+
+      transparent 83px
+    );
+
+  mix-blend-mode: multiply;
+
+  transform:
+    rotate(-0.7deg)
+    scale(1.04);
 }
 
-.content { position:relative; z-index:1; }
 
-.paper-rule {
-  width:100%;
-  height:24px;
-  margin:0 0 42px;
-  opacity:.55;
-  background-image:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABMCAIAAABBHmYGAAACxUlEQVR42u2bTXITMRCF39OMPXHhsIbiDtknHCachlwoXCCsgOMAVcQe9WMhTSSP/1KpZAKubm9mZFndX/dT2+UaURJO0QJO1AKQKqbhYqf9f1Vtb2+/AA1gkpVhAkmiZNMEkmYCIZN2QmrXLfMrjaRXvk1zOJ4PQCaSTNfH8pmnbY8D/PD+HQgDN5dXWlsSA0FIYCCBhC+IJa4aaQhGg0dyMxQCCKSZabiVmVQms2TiuJkUyCr0HEX789fvlmahMZXhHAJpZg9CbWczMMC0w62q/Kq6qFuTwMAQQhMaEDFGMyMps77vTTKzQDahTLejZFKMMYSQys8hiZLYdZ0kmRmqMJQjZaDEQC0W8/v7VbQcK3PyWfvYzFpGTAnIXktBQAZlszxGBKibEeLKCNBkPCjExdlZkRqGsACQ7dXHy9VqvV6t1/069jHGvo/RokWLMjOJDIFYLLo/9yur95h2a3Bvu+GBvD/AY9YSYG/UIGZuLUYQ0HK5vP50vXyzHCpVHBjE7z++xRhjjJbUYBbNhlRKsvwxolbfEAr3bV9JKaBaBXVmS39BqWpJADf25KgeECR13fzy6mo+n7PMy5PXFmmK2ynlOIAxUmk+afeP9m4RJ4dOs7EI93W8cUfi9luqHJDUqKQaKpa6/NCLyXH73dnGHy2y/d+BB6XKA5/IYslIrPpB2cAJTHUieCTK5zLh6Y4kJbD6K0ejFem/FR3MwRzMwRzMwRzMwRzMwRzMwRzMwRzMwRzMwRzMwRzMwf4payd8IoBeMQdzMAdzMAdzMAdzMAdzMAdzMAdzMAdzMAdzsJeySZ/RbSf8u0+POIbzfGATPezMqaXYTuOSkx9Ba28+35xkxXj+9nxSh1MVjuSJET1IhCdYLgDtxcXFVCmcdMPx7uvdK4C9PNrJHtpp9UpnnF+6Zi00QWfcoYrHHCB7csot2l/Oto0JWlWBHgAAAABJRU5ErkJggg==");
-  background-repeat:repeat-x;
-  background-size:100% 24px;
-  background-position:center;
+/* =========================================================
+   HANJI EDGE
+========================================================= */
+
+.page::after {
+
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  /*
+    가장자리만 살짝 누렇게 보이게
+  */
+
+  background:
+
+    radial-gradient(
+      ellipse at center,
+      transparent 60%,
+      rgba(108, 84, 62, 0.025) 80%,
+      rgba(108, 84, 62, 0.055) 100%
+    );
+
 }
 
-.star {
-  position:absolute;
-  width:27px;
-  height:30px;
-  background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAeCAYAAADdGWXmAAADa0lEQVR42q3Xy2ucZRQG8N9kkkkz2ljTMb1ovJViq9VivbcKIq3iZaGIiC5cuNCNCII7/wBx79ZSN4ILFYrgwqpRsFjqrXipxsaitbZVk2i05mIm4+YZ+Jgm48T0hZd3Pr7vfc85z3nO854p1Wo1SxgrMJe55NG1hG8vxYPYjvL/Mdbd4Xdl3I5n8R0+Qn2Rs+aWawxmUcLVWINjhXeDuAOrMYyvlgvjKYyjH9sKUPbH0JN4Bo+ibznG6jiBiey5sQDvZjyQiAfRu9i5S4lsHJMxcGXWQdwV4304jncC+X/mrJR8rEg0k/grv3/PbGAo+bkWO1GLM6/hU/zTibFL8Bwui3df420ciuGxHHQetuJ+bMKv2ItXk9sii7vC0Ea5Wq0WjQ3gBuzAxsB1Ey7ETCLYhnMzd8apvXgJI4UghgLvFlQx0WpsAvvRg7VYn/WaAuUvT2Qb4vkwdmMU56fo7wsrn8LdCeLwQnX2B17ET3giRvqSn/nA0ohD83Hg4eR1ENclHXPhwOlEVim10cYB3IPHA23vIt81FaNRYPgUTgbWd/ExPu9eRJoqKdaxsGsoc6FS6ck6hR9Tj6N4E4dDmCnUu1uY2WTZVcnTlsBUCyTF+pzP7/lE9xn24P2kYrK1BJrGLsadMbQjz92BZi75aLQYbELXnPOJ4kQiOROyarVaDr2fxq6wbzyb9uO9QLs2a6lw+HS87w0T+wPlyULkZ0Q2E69KgeAtHMBvqbGNia6rQIRpfBK4rscFEeQqnsfBVhjL1Wq1kUOPRy325L46Fji24t7QehQrQ4rT2JfvZ/J+dZzbFCaeKt57zaKezeHHColtYB0eSaGO4GVcgVXZ8yXeiJxVkutVEYMNOIKfm2gUFaRRgKjZb9yKh/K8O4q+Kwxt4Cg+jJOj0cg1yd/6oPBNkGt7Uw+EmbXAtS+q0sxtKcrSF6h+wCv4Ao/h5tx12/Pu7+42Pcdm3BZYP8iGuUTTRKDSoix/hlhHkrdbQrhqO2MVXBRlP4Bvw75y8jPbYqxcIEIdv0R9DqYEZtrBOBs4XsD36aiaY6TQf6zEOW1aialOuqt65OdQ4bm5jgXOnuyvnI0mtZHD6wtcQUcLCtFxH9N6eXYyplPQ68LM4QhC42x1xK0Qv566KgXqeicbS0v8Y9FaHjo1BP8CUXHw+rrEm/gAAAAASUVORK5CYII=") center/contain no-repeat;
-  opacity:.72;
-  pointer-events:none;
+
+.content {
+
+  position: relative;
+
+  z-index: 1;
 }
-.star.s1 { top:34px; left:28px; transform:rotate(-8deg); }
-.star.s2 { top:56px; right:32px; transform:rotate(14deg) scale(.75); }
-.star.s3 { bottom:50px; left:34px; transform:rotate(7deg) scale(.62); }
-.star.s4 { bottom:28px; right:35px; transform:rotate(-15deg) scale(.85); }
+
+
+/* =========================================================
+   SECTION
+========================================================= */
 
 section {
-  position:relative;
-  padding:92px 28px;
-  text-align:center;
+
+  position: relative;
+
+  padding: 80px 28px;
 }
+
+
+.section-title {
+
+  text-align: center;
+
+  font-size: 14px;
+
+  letter-spacing: 3px;
+
+  color: #947b65;
+
+  margin-bottom: 30px;
+}
+
+
+.section-title::after {
+
+  content: "";
+
+  display: block;
+
+  width: 35px;
+
+  height: 1px;
+
+  background: #b69c84;
+
+  margin:
+    14px auto 0;
+}
+
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
 
 .reveal {
-  opacity:0;
-  transform:translateY(30px);
-  transition:opacity 1.15s ease, transform 1.15s cubic-bezier(.2,.75,.2,1);
-}
-.reveal.show { opacity:1; transform:translateY(0); }
 
-.kicker {
-  font-size:10px;
-  letter-spacing:3px;
-  color:var(--muted);
-  margin-bottom:20px;
+  opacity: 0;
+
+  transform:
+    translateY(35px);
+
+  transition:
+
+    opacity 1.1s ease,
+
+    transform
+    1.1s cubic-bezier(.2,.75,.2,1);
 }
-.title {
-  font-size:20px;
-  font-weight:400;
-  letter-spacing:-1px;
-  margin-bottom:26px;
+
+
+.reveal.show {
+
+  opacity: 1;
+
+  transform:
+    translateY(0);
 }
-.copy {
-  font-size:13px;
-  color:#595852;
-  line-height:2.25;
-  word-break:keep-all;
+
+
+/* =========================================================
+   PHOTO
+========================================================= */
+
+.photo {
+
+  position: relative;
+
+  width: 100%;
+
+  overflow: hidden;
+
+  background: #e7dbce;
+
+  border:
+    1px solid rgba(110,80,55,.15);
 }
+
+
+.photo img {
+
+  width: 100%;
+
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   1. MAIN
+========================================================= */
 
 .hero {
-  min-height:100svh;
-  padding:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow:hidden;
-  background:rgba(255,255,255,.25);
-}
-.hero-inner {
-  width:100%;
-  padding:48px 25px 55px;
-}
-.photo-frame {
-  width:100%;
-  aspect-ratio:4/5;
-  overflow:hidden;
-  position:relative;
-  background:#d9d8d1;
-  border:1px solid rgba(0,0,0,.1);
-}
-.photo-frame img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-.photo-placeholder {
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#77756f;
-  font-size:11px;
-  letter-spacing:1px;
-}
-.hero-text {
-  margin-top:38px;
-  text-align:center;
-}
-.hero-date {
-  font-size:11px;
-  letter-spacing:2px;
-  margin-bottom:15px;
-}
-.hero-names {
-  font-size:28px;
-  letter-spacing:-1px;
-  line-height:1.5;
-}
-.hero-sub {
-  margin-top:14px;
-  color:var(--muted);
-  font-size:11px;
+
+  min-height: 100vh;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  text-align: center;
+
+  padding:
+    45px 25px;
 }
 
-.invitation { padding-top:110px; }
-.invitation .paper-rule { margin-bottom:50px; }
+
+.hero-inner {
+
+  width: 100%;
+}
+
+
+.hero-photo {
+
+  width: 100%;
+
+  aspect-ratio: 4 / 5;
+
+  margin-bottom: 38px;
+
+  padding: 8px;
+
+  background:
+    rgba(255,255,255,.65);
+
+  box-shadow:
+    0 12px 30px
+    rgba(65,45,30,.10);
+}
+
+
+.hero-photo img {
+
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+.hero-subtitle {
+
+  font-size: 10px;
+
+  letter-spacing: 3px;
+
+  color: #9d836c;
+
+  margin-bottom: 18px;
+}
+
+
+.names {
+
+  margin: 0;
+
+  font-size: 30px;
+
+  font-weight: normal;
+
+  letter-spacing: 2px;
+
+  color: #55483f;
+}
+
+
+.names span {
+
+  color: #aa8d70;
+
+  margin:
+    0 8px;
+}
+
+
+.hero-date {
+
+  margin-top: 20px;
+
+  font-size: 12px;
+
+  line-height: 2;
+
+  letter-spacing: 1px;
+
+  color: #6f6055;
+}
+
+
+/* =========================================================
+   2. INVITATION
+========================================================= */
+
+.letter {
+
+  padding:
+    34px 22px;
+
+  border:
+    1px solid rgba(115,88,66,.15);
+
+  background:
+    rgba(255,252,247,.30);
+
+  text-align: center;
+
+  font-size: 13px;
+
+  line-height: 2.25;
+
+  color: #65584e;
+}
+
+
+.quote {
+
+  font-family:
+    "Special Elite",
+    "Courier New",
+    monospace;
+
+  font-size: 25px;
+
+  color: #a1856b;
+
+  margin-bottom: 18px;
+}
+
+
+.invitation-photo {
+
+  margin-top: 20px;
+
+  aspect-ratio: 16 / 8;
+}
+
+
+/* =========================================================
+   3. FAMILY
+========================================================= */
 
 .couple {
-  background:rgba(255,255,255,.22);
-}
-.couple-grid {
-  display:grid;
-  grid-template-columns:1fr 42px 1fr;
-  align-items:center;
-  gap:4px;
-}
-.person img {
-  width:106px;
-  height:106px;
-  margin:0 auto 18px;
-  border-radius:50%;
-  object-fit:cover;
-  border:1px solid rgba(0,0,0,.1);
-}
-.person-placeholder {
-  width:106px;
-  height:106px;
-  margin:0 auto 18px;
-  border-radius:50%;
-  background:rgba(255,255,255,.55);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#888;
-  font-size:9px;
-}
-.person-role { font-size:9px; letter-spacing:2px; color:#999; }
-.person-name { font-size:17px; margin-top:5px; }
-.heart { font-size:17px; color:#555; }
 
-.parents .parent-list {
-  border-top:1px solid var(--line);
-  border-bottom:1px solid var(--line);
-}
-.parent {
-  display:grid;
-  grid-template-columns:70px 1fr;
-  padding:17px 5px;
-  border-bottom:1px solid rgba(0,0,0,.08);
-  text-align:left;
-  font-size:12px;
-}
-.parent:last-child { border-bottom:0; }
-.parent-side { color:#999; }
-.parent-name { font-weight:bold; }
-.parent-child { color:#888; margin-left:8px; font-size:10px; }
+  display: grid;
 
-.schedule {
-  background:rgba(255,255,255,.28);
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 15px;
 }
+
+
+.person {
+
+  text-align: center;
+}
+
+
+.person-photo {
+
+  aspect-ratio: 1 / 1.2;
+
+  margin-bottom: 15px;
+}
+
+
+.person-role {
+
+  font-family:
+    "Special Elite",
+    "Courier New",
+    monospace;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  color: #a08872;
+}
+
+
+.person-name {
+
+  font-size: 17px;
+
+  margin-top: 8px;
+
+  color: #5c5047;
+}
+
+
+.parents {
+
+  margin-top: 35px;
+
+  padding-top: 28px;
+
+  border-top:
+    1px solid rgba(115,88,66,.13);
+}
+
+
+.parents-title {
+
+  text-align: center;
+
+  font-family:
+    "Special Elite",
+    "Courier New",
+    monospace;
+
+  font-size: 11px;
+
+  letter-spacing: 2px;
+
+  color: #947b65;
+
+  margin-bottom: 18px;
+}
+
+
+.parents-grid {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 12px;
+
+  text-align: center;
+}
+
+
+.parent-box {
+
+  padding:
+    13px 5px;
+
+  font-size: 11px;
+
+  line-height: 1.9;
+
+  background:
+    rgba(255,252,247,.26);
+}
+
+
+.parent-box small {
+
+  display: block;
+
+  color: #a08770;
+
+  margin-bottom: 4px;
+}
+
+
+.family-photo {
+
+  margin-top: 20px;
+
+  aspect-ratio: 16 / 8;
+}
+
+
+/* =========================================================
+   4. DATE
+========================================================= */
+
+.date-card {
+
+  text-align: center;
+
+  padding:
+    30px 18px;
+
+  border:
+    1px solid rgba(115,88,66,.14);
+
+  background:
+    rgba(255,252,247,.28);
+}
+
+
+.date-main {
+
+  font-family:
+    "Special Elite",
+    "Courier New",
+    monospace;
+
+  font-size: 22px;
+
+  letter-spacing: 2px;
+
+  color: #594b41;
+}
+
+
+.date-info {
+
+  margin-top: 13px;
+
+  font-size: 11px;
+
+  line-height: 1.9;
+
+  color: #806b59;
+}
+
+
 .calendar {
-  width:min(100%,310px);
-  margin:0 auto 35px;
+
+  width: 100%;
+
+  max-width: 350px;
+
+  margin:
+    28px auto 0;
+
+  padding-top: 20px;
+
+  border-top:
+    1px solid rgba(115,88,66,.13);
 }
-.month {
-  font-size:15px;
-  letter-spacing:2px;
-  margin-bottom:18px;
+
+
+.calendar-title {
+
+  text-align: center;
+
+  font-family:
+    "Special Elite",
+    "Courier New",
+    monospace;
+
+  font-size: 15px;
+
+  letter-spacing: 1px;
+
+  margin-bottom: 15px;
 }
+
+
 .calendar table {
-  width:100%;
-  border-collapse:collapse;
-  font-size:11px;
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  table-layout: fixed;
 }
+
+
+.calendar th,
+.calendar td {
+
+  height: 38px;
+
+  text-align: center;
+
+  font-size: 10px;
+
+  font-weight: normal;
+}
+
+
 .calendar th {
-  font-weight:400;
-  color:#999;
-  padding-bottom:10px;
+
+  color: #9b8068;
 }
-.calendar td { height:38px; position:relative; }
-.calendar .wedding-day strong {
-  position:relative;
-  z-index:2;
-  font-weight:700;
+
+
+.wedding-day {
+
+  position: relative;
+
+  color: white;
 }
-.calendar .wedding-day::before {
-  content:"";
-  position:absolute;
-  width:30px;
-  height:30px;
-  left:50%;
-  top:4px;
-  transform:translateX(-50%);
-  border:1px solid #333;
-  border-radius:50%;
+
+
+.wedding-day::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 29px;
+
+  height: 29px;
+
+  border-radius: 50%;
+
+  background: #9c8065;
+
+  left: 50%;
+
+  top: 50%;
+
+  transform:
+    translate(-50%,-50%);
+
+  z-index: -1;
 }
-.date-big { font-size:17px; margin-bottom:5px; }
-.date-small { color:#777; font-size:12px; }
-.venue {
-  margin-top:28px;
-  padding-top:24px;
-  border-top:1px solid var(--line);
+
+
+.date-photo {
+
+  aspect-ratio: 16 / 8;
+
+  margin-top: 20px;
 }
-.venue-name { font-size:14px; }
-.venue-address { font-size:11px; color:#777; margin-top:5px; }
-.map-link {
-  display:inline-block;
-  margin-top:18px;
-  padding:9px 18px;
-  border:1px solid rgba(0,0,0,.25);
-  font-size:10px;
-}
+
+
+/* =========================================================
+   5. GALLERY
+========================================================= */
 
 .gallery {
-  padding-left:12px;
-  padding-right:12px;
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 7px;
 }
-.gallery .title, .gallery .kicker { margin-left:16px; margin-right:16px; }
-.gallery-grid {
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:6px;
+
+
+.gallery .photo {
+
+  cursor: pointer;
+
+  aspect-ratio: 1 / 1;
+
+  transition:
+    transform .25s ease;
 }
-.gallery-item {
-  aspect-ratio:1/1.2;
-  overflow:hidden;
-  background:#dad9d3;
+
+
+.gallery .photo:active {
+
+  transform:
+    scale(.98);
 }
-.gallery-item:first-child {
-  grid-column:1 / -1;
-  aspect-ratio:4/3;
+
+
+.gallery .wide {
+
+  grid-column:
+    span 2;
+
+  aspect-ratio: 16 / 9;
 }
-.gallery-item img {
-  width:100%;
-  height:100%;
-  object-fit:cover;
+
+
+/* =========================================================
+   GALLERY LIGHTBOX
+========================================================= */
+
+.gallery-modal {
+
+  position: fixed;
+
+  inset: 0;
+
+  z-index: 9999;
+
+  background:
+    rgba(30,23,18,.94);
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  transition:
+    opacity .3s ease,
+    visibility .3s ease;
+
+  touch-action: none;
 }
-.gallery-placeholder {
-  width:100%;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:#777;
-  font-size:9px;
+
+
+.gallery-modal.show {
+
+  opacity: 1;
+
+  visibility: visible;
 }
+
+
+.gallery-slider {
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  overflow: hidden;
+
+  touch-action: pan-y;
+}
+
+
+.gallery-track {
+
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  transition:
+    transform .42s
+    cubic-bezier(.22,.61,.36,1);
+}
+
+
+.gallery-slide {
+
+  flex:
+    0 0 100%;
+
+  width: 100%;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding:
+    60px 45px 80px;
+
+  user-select: none;
+
+  -webkit-user-select: none;
+}
+
+
+.gallery-slide img {
+
+  width: 100%;
+
+  max-width: 520px;
+
+  max-height: 82vh;
+
+  object-fit: contain;
+
+  display: block;
+
+  user-select: none;
+
+  -webkit-user-drag: none;
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   GALLERY BUTTON
+========================================================= */
+
+.gallery-close {
+
+  position: absolute;
+
+  top: 18px;
+
+  right: 18px;
+
+  z-index: 20;
+
+  width: 40px;
+
+  height: 40px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.45);
+
+  border-radius: 50%;
+
+  background:
+    rgba(0,0,0,.18);
+
+  color: white;
+
+  font-size: 24px;
+
+  font-weight: 300;
+
+  line-height: 36px;
+
+  cursor: pointer;
+
+  padding: 0;
+}
+
+
+.gallery-prev,
+.gallery-next {
+
+  position: absolute;
+
+  top: 50%;
+
+  transform:
+    translateY(-50%);
+
+  z-index: 20;
+
+  width: 48px;
+
+  height: 70px;
+
+  border: none;
+
+  background:
+    rgba(0,0,0,.18);
+
+  color: white;
+
+  font-size: 36px;
+
+  font-weight: 300;
+
+  cursor: pointer;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  transition:
+    background .2s ease;
+}
+
+
+.gallery-prev:hover,
+.gallery-next:hover {
+
+  background:
+    rgba(0,0,0,.35);
+}
+
+
+.gallery-prev {
+
+  left: 4px;
+}
+
+
+.gallery-next {
+
+  right: 4px;
+}
+
+
+/* =========================================================
+   GALLERY COUNTER
+========================================================= */
+
+.gallery-counter {
+
+  position: absolute;
+
+  left: 50%;
+
+  bottom: 25px;
+
+  transform:
+    translateX(-50%);
+
+  z-index: 20;
+
+  color: white;
+
+  font-family:
+    "Special Elite",
+    "Courier New",
+    monospace;
+
+  font-size: 12px;
+
+  letter-spacing: 2px;
+
+  padding:
+    6px 13px;
+
+  border-radius: 20px;
+
+  background:
+    rgba(0,0,0,.28);
+}
+
+
+/* =========================================================
+   6. ACCOUNT
+========================================================= */
 
 .account {
-  background:rgba(255,255,255,.28);
-}
-.account-list { border-top:1px solid var(--line); }
-.account-item {
-  border-bottom:1px solid var(--line);
-  text-align:left;
-}
-.account-title {
-  width:100%;
-  padding:17px 5px;
-  background:transparent;
-  border:0;
-  display:flex;
-  justify-content:space-between;
-  cursor:pointer;
-  font-size:12px;
-}
-.account-title::after { content:"+"; color:#888; font-size:16px; }
-.account-item.open .account-title::after { content:"−"; }
-.account-detail {
-  display:none;
-  padding:0 5px 19px;
-  color:#666;
-  font-size:11px;
-}
-.account-item.open .account-detail { display:block; }
-.copy-btn {
-  border:1px solid rgba(0,0,0,.25);
-  background:transparent;
-  padding:7px 12px;
-  margin-top:9px;
-  cursor:pointer;
-  font-size:9px;
-}
 
-.guestbook-form {
-  display:flex;
-  flex-direction:column;
-  gap:7px;
-}
-.guestbook-form input,
-.guestbook-form textarea {
-  width:100%;
-  border:1px solid rgba(0,0,0,.16);
-  background:rgba(255,255,255,.5);
-  padding:11px;
-  outline:none;
-  font-size:11px;
-}
-.guestbook-form textarea { min-height:95px; resize:vertical; }
-.submit {
-  border:1px solid #333;
-  background:#333;
-  color:#fff;
-  padding:11px;
-  font-size:10px;
-  cursor:pointer;
-}
-.guest-list { margin-top:28px; text-align:left; }
-.guest {
-  padding:14px 5px;
-  border-bottom:1px solid rgba(0,0,0,.1);
-}
-.guest-name { font-size:10px; font-weight:bold; }
-.guest-msg { color:#666; font-size:10px; margin-top:3px; }
+  margin-bottom: 14px;
 
-.location {
-  background:rgba(255,255,255,.28);
-}
-.map-box {
-  width:100%;
-  aspect-ratio:16/10;
-  border:1px solid rgba(0,0,0,.12);
+  border:
+    1px solid rgba(115,88,66,.14);
+
   background:
-    linear-gradient(rgba(255,255,255,.35),rgba(255,255,255,.35)),
-    url("data:image/png;base64,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") repeat;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  gap:5px;
-  color:#777;
+    rgba(255,252,247,.25);
 }
-.map-box strong { font-size:13px; color:#444; }
-.map-box span { font-size:9px; }
-.transport {
-  margin-top:25px;
-  text-align:left;
-  border-top:1px solid var(--line);
-}
-.transport-item {
-  padding:16px 5px;
-  border-bottom:1px solid rgba(0,0,0,.08);
-}
-.transport-title { font-size:11px; font-weight:bold; }
-.transport-text { font-size:10px; color:#777; margin-top:4px; word-break:keep-all; }
 
-.flower .flower-button {
-  display:inline-block;
-  border:1px solid rgba(0,0,0,.25);
-  padding:11px 22px;
-  margin-top:22px;
-  font-size:10px;
+
+.account-header {
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding:
+    14px 15px;
+
+  border-bottom:
+    1px solid rgba(115,88,66,.10);
+
+  font-size: 12px;
 }
+
+
+.account-body {
+
+  padding:
+    14px 15px;
+
+  font-size: 11px;
+
+  line-height: 1.8;
+}
+
+
+.copy-button {
+
+  border:
+    1px solid #b49a82;
+
+  background: transparent;
+
+  color: #735f4e;
+
+  padding:
+    7px 10px;
+
+  font-size: 9px;
+
+  cursor: pointer;
+}
+
+
+.copy-button:active {
+
+  background:
+    #eee2d5;
+}
+
+
+/* =========================================================
+   7. LOCATION
+========================================================= */
+
+.map {
+
+  aspect-ratio: 16 / 9;
+
+  margin-bottom: 20px;
+}
+
+
+.venue {
+
+  text-align: center;
+
+  padding-bottom: 25px;
+}
+
+
+.venue-name {
+
+  font-size: 17px;
+
+  margin-bottom: 10px;
+
+  color: #584b42;
+}
+
+
+.venue-address {
+
+  font-size: 11px;
+
+  line-height: 1.8;
+
+  color: #806b59;
+}
+
+
+.location-info {
+
+  border-top:
+    1px solid rgba(115,88,66,.13);
+
+  padding:
+    18px 3px;
+}
+
+
+.location-info h3 {
+
+  margin:
+    0 0 9px;
+
+  font-size: 12px;
+
+  font-weight: normal;
+
+  color: #92765e;
+}
+
+
+.location-info p {
+
+  margin: 0;
+
+  font-size: 11px;
+
+  line-height: 1.9;
+}
+
+
+.map-buttons {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 8px;
+
+  margin-top: 20px;
+}
+
+
+.map-button {
+
+  text-align: center;
+
+  padding:
+    12px 5px;
+
+  border:
+    1px solid #b39a83;
+
+  font-size: 10px;
+
+  transition:
+    background .2s ease;
+}
+
+
+.map-button:hover {
+
+  background:
+    #eee2d5;
+}
+
+
+/* =========================================================
+   8. FLOWER
+========================================================= */
+
+.flower {
+
+  text-align: center;
+}
+
+
+.flower-photo {
+
+  aspect-ratio: 16 / 8;
+
+  margin-bottom: 25px;
+}
+
+
+.flower-description {
+
+  font-size: 11px;
+
+  line-height: 2;
+
+  color: #786453;
+}
+
+
+.flower-button {
+
+  display: inline-block;
+
+  margin-top: 15px;
+
+  padding:
+    13px 24px;
+
+  background: #a48a70;
+
+  color: white;
+
+  font-size: 10px;
+}
+
+
+/* =========================================================
+   9. SHARE
+========================================================= */
 
 .share {
-  padding-bottom:100px;
-}
-.share-buttons {
-  display:flex;
-  justify-content:center;
-  gap:8px;
-}
-.share-buttons button {
-  border:1px solid rgba(0,0,0,.22);
-  background:rgba(255,255,255,.48);
-  padding:11px 17px;
-  cursor:pointer;
-  font-size:10px;
-}
-.footer {
-  margin-top:55px;
-  color:#aaa;
-  font-size:8px;
-  letter-spacing:1px;
+
+  text-align: center;
+
+  padding-bottom: 90px;
 }
 
-@media (min-width:521px) {
-  body { padding:30px 0; }
+
+.share-description {
+
+  font-size: 11px;
+
+  line-height: 2;
+
+  color: #806c5a;
 }
 
-@media (prefers-reduced-motion:reduce) {
-  html { scroll-behavior:auto; }
-  .reveal { opacity:1; transform:none; transition:none; }
+
+.share-button {
+
+  width: 100%;
+
+  margin-top: 20px;
+
+  padding: 15px;
+
+  border: none;
+
+  background: #a48a70;
+
+  color: white;
+
+  cursor: pointer;
+
+  font-size: 11px;
 }
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+  padding:
+    0 20px 35px;
+
+  text-align: center;
+
+  font-family:
+    "Special Elite",
+    "Courier New",
+    monospace;
+
+  font-size: 9px;
+
+  letter-spacing: 1px;
+
+  color: #a38e7a;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+  section {
+
+    padding-left: 21px;
+
+    padding-right: 21px;
+  }
+
+
+  .names {
+
+    font-size: 26px;
+  }
+
+
+  .letter {
+
+    font-size: 12px;
+  }
+
+
+  .gallery-slide {
+
+    padding:
+      55px 30px 75px;
+  }
+
+
+  .gallery-prev,
+  .gallery-next {
+
+    width: 38px;
+
+    height: 55px;
+
+    font-size: 28px;
+  }
+
+
+  .gallery-close {
+
+    width: 36px;
+
+    height: 36px;
+
+    top: 14px;
+
+    right: 14px;
+
+    font-size: 21px;
+
+    line-height: 32px;
+  }
+
+}
+
 </style>
+
 </head>
 
+
 <body>
-<main class="page">
+
+
+<div class="page">
+
 <div class="content">
 
-  <!-- 1. 메인 사진 -->
-  <section class="hero">
-    <div class="star s1"></div>
-    <div class="star s2"></div>
 
-    <div class="hero-inner reveal">
-      <div class="photo-frame">
-        <!-- images/main.jpg 교체 -->
-        <img src="images/main.jpg" alt="웨딩 메인 사진"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-        <div class="photo-placeholder" style="display:none;">MAIN PHOTO</div>
-      </div>
+<!-- =====================================================
+     1. MAIN
+===================================================== -->
 
-      <div class="hero-text">
-        <div class="hero-date">2027. 01. 23 SAT</div>
-        <div class="hero-names">신랑 ○○○ &nbsp;·&nbsp; 신부 ○○○</div>
-        <div class="hero-sub">우리, 결혼합니다.</div>
-      </div>
-    </div>
-  </section>
+<section class="hero">
 
-  <!-- 2. 초대글 -->
-  <section class="invitation reveal">
-    <div class="star s3"></div>
-    <div class="kicker">INVITATION</div>
-    <h2 class="title">소중한 분들을 초대합니다</h2>
-    <div class="paper-rule"></div>
-    <p class="copy">
-      서로 다른 두 사람이 만나<br>
-      이제는 하나의 길을 함께 걸어가려 합니다.<br><br>
-      저희의 새로운 시작을<br>
-      소중한 분들과 함께하고 싶습니다.<br><br>
-      귀한 걸음으로 축복해 주시면<br>
-      감사한 마음 오래 간직하겠습니다.
-    </p>
-  </section>
+<div class="hero-inner reveal">
 
-  <!-- 3. 신랑 신부 정보 -->
-  <section class="couple reveal">
-    <div class="kicker">THE COUPLE</div>
-    <h2 class="title">신랑 · 신부</h2>
 
-    <div class="couple-grid">
-      <div class="person">
-        <div class="person-placeholder">GROOM PHOTO</div>
-        <div class="person-role">GROOM</div>
-        <div class="person-name">○○○</div>
-      </div>
+  <div class="photo hero-photo">
 
-      <div class="heart">＊</div>
+    <img
+      src="images/main.jpg"
+      alt="김연세 김승희 웨딩사진"
+    >
 
-      <div class="person">
-        <div class="person-placeholder">BRIDE PHOTO</div>
-        <div class="person-role">BRIDE</div>
-        <div class="person-name">○○○</div>
-      </div>
-    </div>
-  </section>
+  </div>
 
-  <!-- 4. 혼주 정보 -->
-  <section class="parents reveal">
-    <div class="kicker">FAMILY</div>
-    <h2 class="title">혼주</h2>
 
-    <div class="parent-list">
-      <div class="parent">
-        <div class="parent-side">신랑측</div>
-        <div>
-          <span class="parent-name">아버지 ○○○ · 어머니 ○○○</span>
-          <span class="parent-child">아들 ○○○</span>
-        </div>
-      </div>
-      <div class="parent">
-        <div class="parent-side">신부측</div>
-        <div>
-          <span class="parent-name">아버지 ○○○ · 어머니 ○○○</span>
-          <span class="parent-child">딸 ○○○</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  <div class="hero-subtitle typewriter">
 
-  <!-- 5. 날짜 / 시간 / 장소 -->
-  <section class="schedule reveal">
-    <div class="kicker">WEDDING DAY</div>
-    <h2 class="title">우리의 결혼식</h2>
+    WEDDING INVITATION
 
-    <div class="calendar">
-      <div class="month">JANUARY 2027</div>
-      <table>
-        <thead>
-          <tr>
-            <th>SU</th><th>MO</th><th>TU</th><th>WE</th>
-            <th>TH</th><th>FR</th><th>SA</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td></td><td></td><td></td><td></td><td></td><td>1</td><td>2</td></tr>
-          <tr><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td></tr>
-          <tr><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr>
-          <tr><td>17</td><td>18</td><td>19</td><td>20</td><td>21</td><td>22</td>
-              <td class="wedding-day"><strong>23</strong></td></tr>
-          <tr><td>24</td><td>25</td><td>26</td><td>27</td><td>28</td><td>29</td><td>30</td></tr>
-          <tr><td>31</td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
-        </tbody>
-      </table>
-    </div>
+  </div>
 
-    <div class="date-big">2027년 1월 23일 토요일</div>
-    <div class="date-small">오전 10시 30분</div>
 
-    <div class="venue">
-      <div class="venue-name">라도무스아트센터웨딩홀</div>
-      <div class="venue-address">대전 유성구 동서대로 639 · 8층 루미니스홀</div>
-      <a class="map-link"
-         href="https://map.kakao.com/?q=라도무스아트센터웨딩홀"
-         target="_blank" rel="noopener">
-        지도에서 보기
-      </a>
-    </div>
-  </section>
+  <h1 class="names typewriter">
 
-  <!-- 6. 웨딩 사진 -->
-  <section class="gallery reveal">
-    <div class="kicker">OUR MOMENTS</div>
-    <h2 class="title">우리의 순간</h2>
+    김연세
 
-    <div class="gallery-grid">
-      <div class="gallery-item">
-        <img src="images/wedding1.jpg" alt="웨딩사진"
-             onerror="this.style.display='none';">
-        <div class="gallery-placeholder">PHOTO 01</div>
-      </div>
-      <div class="gallery-item">
-        <img src="images/wedding2.jpg" alt="웨딩사진"
-             onerror="this.style.display='none';">
-        <div class="gallery-placeholder">PHOTO 02</div>
-      </div>
-      <div class="gallery-item">
-        <img src="images/wedding3.jpg" alt="웨딩사진"
-             onerror="this.style.display='none';">
-        <div class="gallery-placeholder">PHOTO 03</div>
-      </div>
-      <div class="gallery-item">
-        <img src="images/wedding4.jpg" alt="웨딩사진"
-             onerror="this.style.display='none';">
-        <div class="gallery-placeholder">PHOTO 04</div>
-      </div>
-      <div class="gallery-item">
-        <img src="images/wedding5.jpg" alt="웨딩사진"
-             onerror="this.style.display='none';">
-        <div class="gallery-placeholder">PHOTO 05</div>
-      </div>
-    </div>
-  </section>
+    <span>♥</span>
 
-  <!-- 7. 계좌번호 -->
-  <section class="account reveal">
-    <div class="kicker">ACCOUNT</div>
-    <h2 class="title">마음 전하실 곳</h2>
-    <p class="copy" style="font-size:11px; margin-bottom:25px;">
-      참석이 어려우신 분들을 위해<br>
-      계좌번호를 안내드립니다.
-    </p>
+    김승희
 
-    <div class="account-list">
-      <div class="account-item">
-        <button class="account-title" type="button">신랑측 계좌번호</button>
-        <div class="account-detail">
-          ○○은행 · ○○○<br>
-          000-000-000000
-          <br>
-          <button class="copy-btn" type="button" onclick="copyText('000000000000')">
-            계좌번호 복사
-          </button>
-        </div>
-      </div>
+  </h1>
 
-      <div class="account-item">
-        <button class="account-title" type="button">신부측 계좌번호</button>
-        <div class="account-detail">
-          ○○은행 · ○○○<br>
-          000-000-000000
-          <br>
-          <button class="copy-btn" type="button" onclick="copyText('000000000000')">
-            계좌번호 복사
-          </button>
-        </div>
-      </div>
-    </div>
-  </section>
 
-  <!-- 8. 방명록 -->
-  <section class="guestbook reveal">
-    <div class="kicker">GUESTBOOK</div>
-    <h2 class="title">축하의 마음을 남겨주세요</h2>
+  <div class="hero-date typewriter">
 
-    <div class="guestbook-form">
-      <input id="guestName" type="text" placeholder="이름">
-      <textarea id="guestMessage" placeholder="축하 메시지를 남겨주세요"></textarea>
-      <button class="submit" type="button" onclick="addGuest()">메시지 남기기</button>
-    </div>
+    2027. 01. 23 SATURDAY · 10:30 AM
 
-    <div id="guestList" class="guest-list"></div>
-  </section>
+    <br>
 
-  <!-- 9. 지도 / 교통 -->
-  <section class="location reveal">
-    <div class="kicker">LOCATION</div>
-    <h2 class="title">오시는 길</h2>
+    라도무스아트센터웨딩홀
 
-    <div class="map-box">
-      <strong>라도무스아트센터웨딩홀</strong>
-      <span>대전 유성구 동서대로 639 · 8층 루미니스홀</span>
-    </div>
+  </div>
 
-    <div class="transport">
-      <div class="transport-item">
-        <div class="transport-title">지하철</div>
-        <div class="transport-text">예식장에 맞는 실제 지하철 안내 문구를 입력해주세요.</div>
-      </div>
-      <div class="transport-item">
-        <div class="transport-title">버스</div>
-        <div class="transport-text">예식장에 맞는 실제 버스 노선 및 하차 정류장을 입력해주세요.</div>
-      </div>
-      <div class="transport-item">
-        <div class="transport-title">자가용</div>
-        <div class="transport-text">주차장 위치와 무료 주차 시간 등 실제 안내 내용을 입력해주세요.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 10. 화환 보내기 -->
-  <section class="flower reveal">
-    <div class="kicker">FLOWER</div>
-    <h2 class="title">화환 보내기</h2>
-    <p class="copy">
-      축하의 마음을 담아 보내주시는<br>
-      화환은 감사히 받겠습니다.
-    </p>
-    <a class="flower-button" href="tel:0000000000">화환 보내기</a>
-  </section>
-
-  <!-- 11. 공유하기 -->
-  <section class="share reveal">
-    <div class="star s4"></div>
-    <div class="kicker">SHARE</div>
-    <h2 class="title">소중한 분들과 함께해주세요</h2>
-
-    <div class="share-buttons">
-      <button type="button" onclick="sharePage()">청첩장 공유</button>
-      <button type="button" onclick="copyText(location.href)">URL 복사</button>
-    </div>
-
-    <div class="footer">THANK YOU FOR CELEBRATING WITH US</div>
-  </section>
 
 </div>
-</main>
+
+</section>
+
+
+
+<!-- =====================================================
+     2. INVITATION
+===================================================== -->
+
+<section>
+
+<div class="reveal">
+
+
+  <div class="section-title typewriter">
+
+    INVITATION
+
+  </div>
+
+
+  <div class="letter">
+
+    <div class="quote">
+
+      “
+
+    </div>
+
+
+    새해의 첫 달,<br>
+
+    차분한 빛 속에서 저희 두 사람은<br>
+
+    서로의 삶을 하나로 모으려 합니다.<br><br>
+
+    추운 겨울이지만 마음만큼은 따뜻한 이 날,<br>
+
+    저희의 소중한 시작을 따뜻하게 축복해주신다면<br>
+
+    더없는 기쁨으로 간직하겠습니다.
+
+
+    <div
+      class="quote"
+      style="margin-top:20px;margin-bottom:0"
+    >
+
+      ”
+
+    </div>
+
+  </div>
+
+
+  <div class="photo invitation-photo">
+
+    <img
+      src="images/invitation.jpg"
+      alt="초대글 사진"
+    >
+
+  </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     3. FAMILY
+===================================================== -->
+
+<section>
+
+<div class="reveal">
+
+
+  <div class="section-title typewriter">
+
+    OUR FAMILY
+
+  </div>
+
+
+  <div class="couple">
+
+
+    <div class="person">
+
+      <div class="photo person-photo">
+
+        <img
+          src="images/groom.jpg"
+          alt="신랑 김연세"
+        >
+
+      </div>
+
+
+      <div class="person-role">
+
+        GROOM
+
+      </div>
+
+
+      <div class="person-name">
+
+        김연세
+
+      </div>
+
+    </div>
+
+
+
+    <div class="person">
+
+      <div class="photo person-photo">
+
+        <img
+          src="images/bride.jpg"
+          alt="신부 김승희"
+        >
+
+      </div>
+
+
+      <div class="person-role">
+
+        BRIDE
+
+      </div>
+
+
+      <div class="person-name">
+
+        김승희
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+
+  <div class="parents">
+
+    <div class="parents-title typewriter">
+
+      FAMILY
+
+    </div>
+
+
+    <div class="parents-grid">
+
+
+      <div class="parent-box">
+
+        <small>
+          신랑 측
+        </small>
+
+        아버지 ○○○<br>
+
+        어머니 ○○○
+
+      </div>
+
+
+      <div class="parent-box">
+
+        <small>
+          신부 측
+        </small>
+
+        아버지 ○○○<br>
+
+        어머니 ○○○
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+  <div class="photo family-photo">
+
+    <img
+      src="images/family.jpg"
+      alt="가족사진"
+    >
+
+  </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     4. DATE
+===================================================== -->
+
+<section>
+
+<div class="reveal">
+
+
+  <div class="section-title typewriter">
+
+    DATE
+
+  </div>
+
+
+  <div class="date-card">
+
+
+    <div class="date-main">
+
+      2027. 01. 23 SAT
+
+    </div>
+
+
+    <div class="date-info">
+
+      오전 10시 30분
+
+      <br>
+
+      라도무스아트센터웨딩홀
+
+    </div>
+
+
+    <div class="calendar">
+
+
+      <div class="calendar-title">
+
+        JANUARY 2027
+
+      </div>
+
+
+      <table>
+
+        <thead>
+
+        <tr>
+
+          <th>SUN</th>
+          <th>MON</th>
+          <th>TUE</th>
+          <th>WED</th>
+          <th>THU</th>
+          <th>FRI</th>
+          <th>SAT</th>
+
+        </tr>
+
+        </thead>
+
+
+        <tbody>
+
+
+        <tr>
+
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+
+          <td>1</td>
+
+          <td>2</td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>3</td>
+          <td>4</td>
+          <td>5</td>
+          <td>6</td>
+          <td>7</td>
+          <td>8</td>
+          <td>9</td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>10</td>
+          <td>11</td>
+          <td>12</td>
+          <td>13</td>
+          <td>14</td>
+          <td>15</td>
+          <td>16</td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>17</td>
+          <td>18</td>
+          <td>19</td>
+          <td>20</td>
+          <td>21</td>
+          <td>22</td>
+
+          <td class="wedding-day">
+
+            23
+
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>24</td>
+          <td>25</td>
+          <td>26</td>
+          <td>27</td>
+          <td>28</td>
+          <td>29</td>
+          <td>30</td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>31</td>
+
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+
+        </tr>
+
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+
+  </div>
+
+
+  <div class="photo date-photo">
+
+    <img
+      src="images/date.jpg"
+      alt="웨딩사진"
+    >
+
+  </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     5. GALLERY
+===================================================== -->
+
+<section>
+
+<div class="reveal">
+
+
+  <div class="section-title typewriter">
+
+    GALLERY
+
+  </div>
+
+
+  <div
+    class="gallery"
+    id="gallery"
+  >
+
+
+    <div
+      class="photo wide gallery-item"
+      data-index="0"
+    >
+
+      <img
+        src="images/gallery1.jpg"
+        alt="웨딩사진 1"
+      >
+
+    </div>
+
+
+    <div
+      class="photo gallery-item"
+      data-index="1"
+    >
+
+      <img
+        src="images/gallery2.jpg"
+        alt="웨딩사진 2"
+      >
+
+    </div>
+
+
+    <div
+      class="photo gallery-item"
+      data-index="2"
+    >
+
+      <img
+        src="images/gallery3.jpg"
+        alt="웨딩사진 3"
+      >
+
+    </div>
+
+
+    <div
+      class="photo gallery-item"
+      data-index="3"
+    >
+
+      <img
+        src="images/gallery4.jpg"
+        alt="웨딩사진 4"
+      >
+
+    </div>
+
+
+    <div
+      class="photo gallery-item"
+      data-index="4"
+    >
+
+      <img
+        src="images/gallery5.jpg"
+        alt="웨딩사진 5"
+      >
+
+    </div>
+
+
+    <div
+      class="photo wide gallery-item"
+      data-index="5"
+    >
+
+      <img
+        src="images/gallery6.jpg"
+        alt="웨딩사진 6"
+      >
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     6. ACCOUNT
+===================================================== -->
+
+<section>
+
+<div class="reveal">
+
+
+  <div class="section-title typewriter">
+
+    WITH LOVE
+
+  </div>
+
+
+  <div class="account">
+
+    <div class="account-header">
+
+      <span>
+        신랑 · 김연세
+      </span>
+
+
+      <button
+        class="copy-button"
+        onclick="copyAccount('은행명 000-000-000000')"
+      >
+
+        복사
+
+      </button>
+
+    </div>
+
+
+    <div class="account-body">
+
+      은행명
+
+      <br>
+
+      000-000-000000
+
+    </div>
+
+  </div>
+
+
+
+  <div class="account">
+
+    <div class="account-header">
+
+      <span>
+        신부 · 김승희
+      </span>
+
+
+      <button
+        class="copy-button"
+        onclick="copyAccount('은행명 000-000-000000')"
+      >
+
+        복사
+
+      </button>
+
+    </div>
+
+
+    <div class="account-body">
+
+      은행명
+
+      <br>
+
+      000-000-000000
+
+    </div>
+
+  </div>
+
+
+
+  <div class="account">
+
+    <div class="account-header">
+
+      <span>
+        신랑 측 혼주
+      </span>
+
+
+      <button
+        class="copy-button"
+        onclick="copyAccount('은행명 000-000-000000')"
+      >
+
+        복사
+
+      </button>
+
+    </div>
+
+
+    <div class="account-body">
+
+      은행명
+
+      <br>
+
+      000-000-000000
+
+    </div>
+
+  </div>
+
+
+
+  <div class="account">
+
+    <div class="account-header">
+
+      <span>
+        신부 측 혼주
+      </span>
+
+
+      <button
+        class="copy-button"
+        onclick="copyAccount('은행명 000-000-000000')"
+      >
+
+        복사
+
+      </button>
+
+    </div>
+
+
+    <div class="account-body">
+
+      은행명
+
+      <br>
+
+      000-000-000000
+
+    </div>
+
+  </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     7. LOCATION
+===================================================== -->
+
+<section>
+
+<div class="reveal">
+
+
+  <div class="section-title typewriter">
+
+    LOCATION
+
+  </div>
+
+
+  <div class="photo map">
+
+    <img
+      src="images/map.jpg"
+      alt="예식장 위치"
+    >
+
+  </div>
+
+
+  <div class="venue">
+
+    <div class="venue-name">
+
+      라도무스아트센터웨딩홀
+
+    </div>
+
+
+    <div class="venue-address">
+
+      대전광역시 유성구 동서대로 639
+
+      <br>
+
+      2027년 1월 23일 오전 10시 30분
+
+    </div>
+
+  </div>
+
+
+
+  <div class="location-info">
+
+    <h3>
+      대중교통
+    </h3>
+
+
+    <p>
+
+      ※ 실제 이용 노선 및 소요시간은
+      예식일 기준 지도 앱에서 확인해주세요.
+
+      <br><br>
+
+      버스 / 지하철 이용 후
+      예식장까지 이동해주세요.
+
+    </p>
+
+  </div>
+
+
+
+  <div class="location-info">
+
+    <h3>
+      주차안내
+    </h3>
+
+
+    <p>
+
+      예식장 주차장을 이용하실 수 있습니다.
+
+      <br><br>
+
+      ※ 정확한 주차 위치 및 무료주차 시간은
+      예식장 안내사항을 기준으로 수정해주세요.
+
+    </p>
+
+  </div>
+
+
+
+  <div class="map-buttons">
+
+
+    <a
+      class="map-button"
+      href="https://map.kakao.com/?q=라도무스아트센터웨딩홀"
+      target="_blank"
+    >
+
+      카카오맵
+
+    </a>
+
+
+    <a
+      class="map-button"
+      href="https://map.naver.com/p/search/라도무스아트센터웨딩홀"
+      target="_blank"
+    >
+
+      네이버지도
+
+    </a>
+
+
+  </div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     8. FLOWER
+===================================================== -->
+
+<section>
+
+<div class="reveal flower">
+
+
+  <div class="section-title typewriter">
+
+    FLOWER GIFT
+
+  </div>
+
+
+  <div class="photo flower-photo">
+
+    <img
+      src="images/flower.jpg"
+      alt="축하화환"
+    >
+
+  </div>
+
+
+  <div class="flower-description">
+
+    직접 참석하지 못하시는 분들의
+
+    <br>
+
+    따뜻한 마음도 감사히 간직하겠습니다.
+
+  </div>
+
+
+  <a
+    class="flower-button"
+    href="tel:010-0000-0000"
+  >
+
+    축하화환 보내기
+
+  </a>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     9. SHARE
+===================================================== -->
+
+<section class="share">
+
+<div class="reveal">
+
+
+  <div class="section-title typewriter">
+
+    SHARE
+
+  </div>
+
+
+  <div class="share-description">
+
+    저희의 소중한 날에
+
+    <br>
+
+    따뜻한 마음을 함께 나누어 주세요.
+
+  </div>
+
+
+  <button
+    class="share-button"
+    onclick="shareInvitation()"
+  >
+
+    청첩장 공유하기
+
+  </button>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+  KIM YEONSE &amp; KIM SEUNGHEE
+
+  <br><br>
+
+  2027. 01. 23
+
+</footer>
+
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     GALLERY LIGHTBOX
+===================================================== -->
+
+<div
+  class="gallery-modal"
+  id="galleryModal"
+>
+
+
+  <button
+    class="gallery-close"
+    id="galleryClose"
+    aria-label="닫기"
+  >
+
+    ×
+
+  </button>
+
+
+
+  <button
+    class="gallery-prev"
+    id="galleryPrev"
+    aria-label="이전 사진"
+  >
+
+    ‹
+
+  </button>
+
+
+
+  <div
+    class="gallery-slider"
+    id="gallerySlider"
+  >
+
+    <div
+      class="gallery-track"
+      id="galleryTrack"
+    >
+
+    </div>
+
+  </div>
+
+
+
+  <button
+    class="gallery-next"
+    id="galleryNext"
+    aria-label="다음 사진"
+  >
+
+    ›
+
+  </button>
+
+
+
+  <div
+    class="gallery-counter"
+    id="galleryCounter"
+  >
+
+    1 / 6
+
+  </div>
+
+
+</div>
+
+
 
 <script>
-/* 스크롤할 때 천천히 올라오는 효과 */
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("show");
-      observer.unobserve(entry.target);
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+const observer =
+  new IntersectionObserver(
+
+    (entries) => {
+
+      entries.forEach(
+        (entry) => {
+
+          if (entry.isIntersecting) {
+
+            entry.target
+              .classList
+              .add("show");
+
+            observer
+              .unobserve(
+                entry.target
+              );
+
+          }
+
+        }
+      );
+
+    },
+
+    {
+
+      threshold: 0.12,
+
+      rootMargin:
+        "0px 0px -40px 0px"
+
     }
-  });
-}, {
-  threshold: 0.12,
-  rootMargin: "0px 0px -40px 0px"
-});
 
-document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  );
 
-/* 계좌번호 아코디언 */
-document.querySelectorAll(".account-title").forEach(button => {
-  button.addEventListener("click", () => {
-    button.parentElement.classList.toggle("open");
-  });
-});
 
-/* 복사 */
-async function copyText(text) {
-  try {
-    await navigator.clipboard.writeText(text);
-    alert("복사되었습니다.");
-  } catch(e) {
-    alert("복사에 실패했습니다.");
-  }
-}
+document
+  .querySelectorAll(".reveal")
+  .forEach(
+    (element) => {
 
-/* 데모 방명록 - 현재 브라우저에만 저장 */
-function addGuest() {
-  const name = document.getElementById("guestName").value.trim();
-  const message = document.getElementById("guestMessage").value.trim();
+      observer.observe(
+        element
+      );
 
-  if (!name || !message) {
-    alert("이름과 메시지를 입력해주세요.");
-    return;
-  }
+    }
+  );
 
-  const item = document.createElement("div");
-  item.className = "guest";
 
-  const safeName = name.replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
-  const safeMessage = message.replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
 
-  item.innerHTML = `<div class="guest-name">${safeName}</div><div class="guest-msg">${safeMessage}</div>`;
-  document.getElementById("guestList").prepend(item);
+/* =========================================================
+   ACCOUNT COPY
+========================================================= */
 
-  document.getElementById("guestName").value = "";
-  document.getElementById("guestMessage").value = "";
-}
+function copyAccount(account) {
 
-/* 모바일 공유 */
-async function sharePage() {
-  if (navigator.share) {
-    await navigator.share({
-      title: "우리, 결혼합니다",
-      text: "2027년 1월 23일, 저희 두 사람이 결혼합니다.",
-      url: location.href
+  navigator.clipboard
+    .writeText(account)
+
+    .then(() => {
+
+      alert(
+        "계좌번호가 복사되었습니다."
+      );
+
+    })
+
+    .catch(() => {
+
+      alert(account);
+
     });
-  } else {
-    await copyText(location.href);
-  }
+
 }
+
+
+
+/* =========================================================
+   SHARE
+========================================================= */
+
+async function shareInvitation() {
+
+  const shareData = {
+
+    title:
+      "김연세 ♥ 김승희 결혼식에 초대합니다",
+
+    text:
+      "2027년 1월 23일 오전 10시 30분\n라도무스아트센터웨딩홀",
+
+    url:
+      window.location.href
+
+  };
+
+
+  if (navigator.share) {
+
+    try {
+
+      await navigator.share(
+        shareData
+      );
+
+    }
+
+    catch (error) {
+
+    }
+
+  }
+
+  else {
+
+    try {
+
+      await navigator.clipboard
+        .writeText(
+          window.location.href
+        );
+
+      alert(
+        "청첩장 주소가 복사되었습니다."
+      );
+
+    }
+
+    catch (error) {
+
+      alert(
+        "현재 페이지 주소를 복사해주세요."
+      );
+
+    }
+
+  }
+
+}
+
+
+
+/* =========================================================
+   GALLERY
+========================================================= */
+
+const galleryItems =
+  document.querySelectorAll(
+    ".gallery-item"
+  );
+
+
+const galleryModal =
+  document.getElementById(
+    "galleryModal"
+  );
+
+
+const galleryTrack =
+  document.getElementById(
+    "galleryTrack"
+  );
+
+
+const gallerySlider =
+  document.getElementById(
+    "gallerySlider"
+  );
+
+
+const galleryCounter =
+  document.getElementById(
+    "galleryCounter"
+  );
+
+
+const galleryClose =
+  document.getElementById(
+    "galleryClose"
+  );
+
+
+const galleryPrev =
+  document.getElementById(
+    "galleryPrev"
+  );
+
+
+const galleryNext =
+  document.getElementById(
+    "galleryNext"
+  );
+
+
+const galleryImages =
+  Array.from(
+    galleryItems
+  ).map(
+    (item) => {
+
+      return item
+        .querySelector("img")
+        .src;
+
+    }
+  );
+
+
+let currentGalleryIndex = 0;
+
+let touchStartX = 0;
+
+let touchCurrentX = 0;
+
+let isDragging = false;
+
+
+
+/* =========================================================
+   SLIDE 생성
+========================================================= */
+
+function createGallerySlides() {
+
+  galleryTrack.innerHTML = "";
+
+
+  galleryImages.forEach(
+    (imageSrc, index) => {
+
+      const slide =
+        document.createElement(
+          "div"
+        );
+
+
+      slide.className =
+        "gallery-slide";
+
+
+      slide.dataset.index =
+        index;
+
+
+      const image =
+        document.createElement(
+          "img"
+        );
+
+
+      image.src =
+        imageSrc;
+
+
+      image.alt =
+        `웨딩사진 ${index + 1}`;
+
+
+      slide.appendChild(
+        image
+      );
+
+
+      galleryTrack.appendChild(
+        slide
+      );
+
+    }
+  );
+
+}
+
+
+createGallerySlides();
+
+
+
+/* =========================================================
+   UPDATE
+========================================================= */
+
+function updateGallery(
+  animate = true
+) {
+
+  if (animate) {
+
+    galleryTrack.style.transition =
+      "transform .42s cubic-bezier(.22,.61,.36,1)";
+
+  }
+
+  else {
+
+    galleryTrack.style.transition =
+      "none";
+
+  }
+
+
+  galleryTrack.style.transform =
+    `translateX(-${currentGalleryIndex * 100}%)`;
+
+
+  galleryCounter.textContent =
+    `${currentGalleryIndex + 1} / ${galleryImages.length}`;
+
+}
+
+
+
+/* =========================================================
+   OPEN
+========================================================= */
+
+function openGallery(index) {
+
+  currentGalleryIndex =
+    index;
+
+
+  updateGallery(false);
+
+
+  galleryModal.classList.add(
+    "show"
+  );
+
+
+  document.body.style.overflow =
+    "hidden";
+
+}
+
+
+
+/* =========================================================
+   CLOSE
+========================================================= */
+
+function closeGallery() {
+
+  galleryModal.classList.remove(
+    "show"
+  );
+
+
+  document.body.style.overflow =
+    "";
+
+}
+
+
+
+/* =========================================================
+   NEXT
+========================================================= */
+
+function nextGallery() {
+
+  if (
+    currentGalleryIndex <
+    galleryImages.length - 1
+  ) {
+
+    currentGalleryIndex++;
+
+  }
+
+  else {
+
+    currentGalleryIndex = 0;
+
+  }
+
+
+  updateGallery(true);
+
+}
+
+
+
+/* =========================================================
+   PREVIOUS
+========================================================= */
+
+function prevGallery() {
+
+  if (
+    currentGalleryIndex > 0
+  ) {
+
+    currentGalleryIndex--;
+
+  }
+
+  else {
+
+    currentGalleryIndex =
+      galleryImages.length - 1;
+
+  }
+
+
+  updateGallery(true);
+
+}
+
+
+
+/* =========================================================
+   PHOTO CLICK
+========================================================= */
+
+galleryItems.forEach(
+  (item, index) => {
+
+    item.addEventListener(
+      "click",
+      () => {
+
+        openGallery(index);
+
+      }
+    );
+
+  }
+);
+
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+galleryClose.addEventListener(
+  "click",
+  closeGallery
+);
+
+
+galleryNext.addEventListener(
+  "click",
+  nextGallery
+);
+
+
+galleryPrev.addEventListener(
+  "click",
+  prevGallery
+);
+
+
+
+/* =========================================================
+   BACKGROUND CLICK
+========================================================= */
+
+galleryModal.addEventListener(
+  "click",
+  (event) => {
+
+    if (
+      event.target ===
+      galleryModal
+    ) {
+
+      closeGallery();
+
+    }
+
+  }
+);
+
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  (event) => {
+
+    if (
+      !galleryModal.classList.contains(
+        "show"
+      )
+    ) {
+
+      return;
+
+    }
+
+
+    if (
+      event.key === "Escape"
+    ) {
+
+      closeGallery();
+
+    }
+
+
+    if (
+      event.key === "ArrowRight"
+    ) {
+
+      nextGallery();
+
+    }
+
+
+    if (
+      event.key === "ArrowLeft"
+    ) {
+
+      prevGallery();
+
+    }
+
+  }
+);
+
+
+
+/* =========================================================
+   TOUCH START
+========================================================= */
+
+gallerySlider.addEventListener(
+  "touchstart",
+  (event) => {
+
+    touchStartX =
+      event.changedTouches[0]
+        .screenX;
+
+    touchCurrentX =
+      touchStartX;
+
+    isDragging = true;
+
+
+    galleryTrack.style.transition =
+      "none";
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+
+/* =========================================================
+   TOUCH MOVE
+========================================================= */
+
+gallerySlider.addEventListener(
+  "touchmove",
+  (event) => {
+
+    if (!isDragging) {
+
+      return;
+
+    }
+
+
+    touchCurrentX =
+      event.changedTouches[0]
+        .screenX;
+
+
+    const distance =
+      touchCurrentX -
+      touchStartX;
+
+
+    const basePosition =
+      -(currentGalleryIndex * 100);
+
+
+    const screenWidth =
+      gallerySlider.offsetWidth;
+
+
+    const dragPercent =
+      (distance / screenWidth) * 100;
+
+
+    galleryTrack.style.transform =
+      `translateX(${basePosition + dragPercent}%)`;
+
+  },
+  {
+    passive: true
+  }
+);
+
+
+
+/* =========================================================
+   TOUCH END
+========================================================= */
+
+gallerySlider.addEventListener(
+  "touchend",
+  () => {
+
+    if (!isDragging) {
+
+      return;
+
+    }
+
+
+    isDragging = false;
+
+
+    const distance =
+      touchCurrentX -
+      touchStartX;
+
+
+    if (distance < -50) {
+
+      nextGallery();
+
+    }
+
+    else if (distance > 50) {
+
+      prevGallery();
+
+    }
+
+    else {
+
+      updateGallery(true);
+
+    }
+
+  },
+  {
+    passive: true
+  }
+);
+
 </script>
+
 </body>
+
 </html>
