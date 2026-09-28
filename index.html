@@ -268,29 +268,45 @@
 
     .hero-name:first-child { margin-bottom: 12px; }
     .hero-name:last-child { margin-top: 12px; }
-
-    .film {
-      position: relative;
-      width: 236px;
-      aspect-ratio: 813 / 603;
-    }
-
-    .film-photo {
-      position: absolute;
-      inset: 7% 1.4%;
-      overflow: hidden;
-      background: var(--card);
-    }
-
-    .film-frame {
-      position: absolute;
-      z-index: 10;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: fill;
-      pointer-events: none;
-    }
+	  
+	.film {
+	  position: relative;
+	  width: 236px;
+	  aspect-ratio: 399 / 308;
+	  overflow: hidden;
+	}
+	
+	.film-photo {
+	  position: absolute;
+	  /* 사진을 필름의 가운데 창 안으로 제한 */
+	  top: 17%;
+	  right: 12%;
+	  bottom: 17%;
+	  left: 12%;
+	  overflow: hidden;
+	  background: var(--card);
+	}
+	
+	.film-photo .image-slot,
+	.film-photo .image-slot > img {
+	  width: 100%;
+	  height: 100%;
+	}
+	
+	.film-photo .image-slot > img {
+	  display: block;
+	  object-fit: cover;
+	}
+	
+	.film-frame {
+	  position: absolute;
+	  z-index: 10;
+	  inset: 0;
+	  width: 100%;
+	  height: 100%;
+	  object-fit: fill;
+	  pointer-events: none;
+	}
 
     .hero-scroll {
       position: absolute;
