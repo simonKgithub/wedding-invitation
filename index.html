@@ -437,9 +437,10 @@
       width: 32px;
       height: 32px;
       justify-self: center;
+      border: 1.5px solid var(--primary);
       border-radius: 50%;
-      background: var(--primary);
-      color: var(--primary-foreground);
+      background: transparent;
+      color: var(--primary);
       font-weight: bold;
       text-decoration: none;
     }
@@ -1559,7 +1560,7 @@
           { height: `${targetHeight}px`, opacity: open ? 1 : 0 }
         ],
         {
-          duration: reducedMotion ? 0 : 300,
+          duration: reducedMotion ? 0 : 420,
           easing: "cubic-bezier(.32, .72, 0, 1)",
           fill: "forwards"
         }
