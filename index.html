@@ -9,8 +9,8 @@
 
 	<!--미리보기-->
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="김연세 ♥ 김승희 결혼합니다">
-	<meta property="og:description" content="2027년 1월 23일 오전 10시 30분 · 대전 라도무스 아트센터 루미니스홀">
+	<meta property="og:title" content="김연세 ♥ 김승희 결혼합니다.">
+	<meta property="og:description" content="소중한 자리에 소중한 분들을 초대합니다.">
 	<meta property="og:image" content="https://simonkgithub.github.io/wedding-invitation/preview.jpg">
 	<meta property="og:url" content="https://simonkgithub.github.io/wedding-invitation/">
 	
@@ -1375,7 +1375,7 @@
     document.querySelectorAll("[data-image]").forEach((node) => {
       const key = node.dataset.image;
       const src = key.startsWith("gallery-")
-        ? IMAGE_SLOTS.gallery[Number(key.slice(-1)) - 1]
+        ? IMAGE_SLOTS.gallery[Number(key.slice("gallery-".length)) - 1]
         : IMAGE_SLOTS[key];
 
       imageSlot(node, src, node.dataset.label);
