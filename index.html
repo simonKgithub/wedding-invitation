@@ -9,7 +9,7 @@
 
 	<!--미리보기-->
 	<meta property="og:type" content="website">
-	<meta property="og:title" content="김연세 ♥ 김승희 결혼합니다.">
+	<meta property="og:title" content="김연세 ♥ 김승희 결혼합니다">
 	<meta property="og:description" content="소중한 자리에 소중한 분들을 초대합니다.">
 	<meta property="og:image" content="https://simonkgithub.github.io/wedding-invitation/preview.jpg">
 	<meta property="og:url" content="https://simonkgithub.github.io/wedding-invitation/">
@@ -433,11 +433,14 @@
     .calendar .weekday { color: var(--muted-foreground); }
 
     .calendar .selected {
-      color: var(--primary);
+      width: 32px;
+      height: 32px;
+      justify-self: center;
+      border-radius: 50%;
+      background: var(--primary);
+      color: var(--primary-foreground);
       font-weight: bold;
-      text-decoration: underline;
-      text-decoration-color: var(--primary);
-      text-underline-offset: 4px;
+      text-decoration: none;
     }
 
     .countdown {
@@ -1048,11 +1051,11 @@
 			  <br>
 			  ↓
 			  <br>
-			  106번 탑승 후 흥도초 하차
+			  106번 버스 탑승 후 흥도초 하차
 			  <br>
 			  또는
 			  <br>
-			  706번 탑승 후 등기소/아이파트시티 하차
+			  706번 버스 탑승 후 등기소/아이파트시티 하차
 			  <br>
 			  ↓
 			  <br>
@@ -1423,7 +1426,10 @@
       const cell = document.createElement("span");
       cell.textContent = day;
 
-      if (day === 23) cell.className = "selected";
+      if (day === 23) {
+        cell.className = "selected";
+        cell.setAttribute("aria-label", "예식일 1월 23일");
+      }
       calendar.append(cell);
     }
 
