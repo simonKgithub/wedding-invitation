@@ -1531,22 +1531,54 @@
       button.addEventListener("click", () => toast(button.dataset.toast));
     });
 
+    function setAccountOpen(button, open) {
+      const panel = document.getElementById(
+        button.getAttribute("aria-controls")
+      );
+      const wasHidden = panel.hidden;
+      const currentHeight = wasHidden ? 0 : panel.getBoundingClientRect().height;
+      const currentOpacity = wasHidden ? 0 : Number(getComputedStyle(panel).opacity);
+
+      panel._animation?.cancel();
+      panel.hidden = false;
+      panel.style.overflow = "hidden";
+      button.setAttribute("aria-expanded", String(open));
+
+      const targetHeight = open ? panel.scrollHeight : 0;
+      const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const animation = panel.animate(
+        [
+          { height: `${currentHeight}px`, opacity: currentOpacity },
+          { height: `${targetHeight}px`, opacity: open ? 1 : 0 }
+        ],
+        {
+          duration: reducedMotion ? 0 : 300,
+          easing: "cubic-bezier(.32, .72, 0, 1)",
+          fill: "forwards"
+        }
+      );
+
+      panel._animation = animation;
+      animation.finished.then(() => {
+        if (panel._animation !== animation) return;
+        panel.hidden = !open;
+        panel.style.overflow = "";
+        animation.cancel();
+        panel._animation = null;
+      }).catch(() => {
+        // 빠르게 다시 누르면 이전 애니메이션이 취소됩니다.
+      });
+    }
+
     document.querySelectorAll(".accordion-trigger").forEach((button) => {
       button.addEventListener("click", () => {
-        const willOpen =
-          button.getAttribute("aria-expanded") !== "true";
+        const willOpen = button.getAttribute("aria-expanded") !== "true";
 
         document.querySelectorAll(".accordion-trigger").forEach((other) => {
-          other.setAttribute("aria-expanded", "false");
-          document.getElementById(
-            other.getAttribute("aria-controls")
-          ).hidden = true;
+          const shouldOpen = other === button && willOpen;
+          const isOpen = other.getAttribute("aria-expanded") === "true";
+          if (shouldOpen !== isOpen) setAccountOpen(other, shouldOpen);
         });
-
-        button.setAttribute("aria-expanded", String(willOpen));
-        document.getElementById(
-          button.getAttribute("aria-controls")
-        ).hidden = !willOpen;
       });
     });
 
