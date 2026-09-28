@@ -534,18 +534,39 @@
 
     .travel {
       margin-top: 24px;
-      padding-top: 20px;
+      padding-top: 24px;
       border-top: 1px solid var(--border);
       font-size: 12px;
-      line-height: 20px;
+      line-height: 1.9;
+      text-align: center;
+      word-break: keep-all;
     }
 
-    .travel p { margin: 0 0 16px; }
+    .travel p {
+      max-width: 330px;
+      margin: 0 auto;
+    }
+
+    .travel p + p { margin-top: 28px; }
 
     .travel b {
-      margin-right: 12px;
+      display: block;
+      margin-bottom: 10px;
       color: var(--primary);
       font: 11px var(--font-mono);
+      letter-spacing: 0.08em;
+    }
+
+    .location .map-links {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .location .map-links .action {
+      border: 1px solid var(--primary);
+      background: oklch(1 0 0 / 20%);
+      color: var(--primary);
+      text-align: center;
+      white-space: nowrap;
     }
 
     /* ⑦ 안내 */
@@ -1000,43 +1021,22 @@
           루미니스홀 8F
         </div>
 
-        <div class="button-grid">
-          <button
-            class="action"
-            type="button"
-            data-toast="https://kko.to/4dZ3Cq6NKf"
-          >
-            <svg viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.6">
-              <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
-              <circle cx="12" cy="10" r="2"></circle>
-            </svg>
-            카카오 길찾기
-          </button>
-
-          <button
-            class="action"
-            type="button"
-            data-toast="https://naver.me/Gxk1CPWi"
-          >
-            <svg viewBox="0 0 24 24" fill="none"
-                 stroke="currentColor" stroke-width="1.6">
-              <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"></path>
-              <circle cx="12" cy="10" r="2"></circle>
-            </svg>
-            네이버 길찾기
-          </button>
+        <div class="button-grid map-links">
+          <a class="action" href="https://kko.to/4dZ3Cq6NKf"
+             target="_blank" rel="noopener noreferrer">카카오 길찾기</a>
+          <a class="action" href="https://naver.me/Gxk1CPWi"
+             target="_blank" rel="noopener noreferrer">네이버 길찾기</a>
+          <!-- 아래 TMAP_SHARE_URL에 티맵 앱에서 복사한 장소 공유 링크를 넣으세요. -->
+          <button class="action" id="tmap-link" type="button">티맵 길찾기</button>
         </div>
 
         <div class="travel">
           <p>
 			  <b>PARKING</b>
-			  <br>
 			  주차빌딩 주차 가능, 만차 시 2·3·4 주차장 이용 가능
 		  </p>
           <p>
 			  <b>TRANSIT</b>
-			  <br>
 			  유성온천역 6번 출구
 			  <br>
 			  ↓
@@ -1055,7 +1055,7 @@
         </div>
       </section>
 
-      <!-- ⑦ 화환 안내 -->
+      <!-- ⑦ 화환 안내: 표시하려면 이 주석을 제거하세요.
 	<section class="notice padded">
 	  <header class="section-title"><h2>Notice</h2></header>
 	
@@ -1073,6 +1073,7 @@
 	    </p>
 	  </div>
 	</section>
+      -->
 
       <!-- ⑧ 계좌 -->
       <section class="account padded">
@@ -1119,7 +1120,7 @@
 		        <button
 		          class="copy-button"
 		          type="button"
-		          data-copy="〈신랑 아버지 계좌번호〉"
+		          data-copy="451-01-0767-180"
 		          aria-label="신랑 아버지 김권주 계좌번호 복사"
 		        >
 		          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1137,7 +1138,7 @@
 		        <button
 		          class="copy-button"
 		          type="button"
-		          data-copy="〈신랑 어머니 계좌번호〉"
+		          data-copy="478-21-0367-274"
 		          aria-label="신랑 어머니 신춘란 계좌번호 복사"
 		        >
 		          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1190,7 +1191,7 @@
 		        <button
 		          class="copy-button"
 		          type="button"
-		          data-copy="〈신부 아버지 계좌번호〉"
+		          data-copy="302-2125-6204-31"
 		          aria-label="신부 아버지 김창기 계좌번호 복사"
 		        >
 		          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1208,7 +1209,7 @@
 		        <button
 		          class="copy-button"
 		          type="button"
-		          data-copy="〈신부 어머니 계좌번호〉"
+		          data-copy="356-1110-0598-33"
 		          aria-label="신부 어머니 박경아 계좌번호 복사"
 		        >
 		          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
@@ -1290,13 +1291,30 @@
       gallery: [
         "./public/gallery-1.jpg",
         "./public/gallery-2.jpg",
-        "./public/gallery-3.jpg"
+        "./public/gallery-3.jpg",
+        "./public/gallery-4.jpg",
+        "./public/gallery-5.jpg",
+        "./public/gallery-6.jpg",
+        "./public/gallery-7.jpg",
+        "./public/gallery-8.jpg",
+        "./public/gallery-9.jpg",
+        "./public/gallery-10.jpg",
+        "./public/gallery-11.jpg",
+        "./public/gallery-12.jpg",
+        "./public/gallery-13.jpg",
+        "./public/gallery-14.jpg",
+        "./public/gallery-15.jpg",
+        "./public/gallery-16.jpg",
+        "./public/gallery-17.jpg",
+        "./public/gallery-18.jpg",
+        "./public/gallery-19.jpg"
       ],
       map: "./public/map.jpg"
     };
 
     const PHOTOS_READY = true;
     const MAP_EMBED_URL = "";
+    const TMAP_SHARE_URL = "https://tmap.life/f6a155aa1"; // 티맵에서 장소 공유 > 링크 복사
 
     // 비워 두면 이 브라우저에만 방명록이 저장됩니다.
     // 공용 방명록은 GET/POST 및 /events SSE를 제공하는 서버를 연결하세요.
@@ -1491,6 +1509,15 @@
     });
 
     syncMusicButton();
+
+    /* 티맵 장소 공유 링크 */
+    document.querySelector("#tmap-link").addEventListener("click", () => {
+      if (!TMAP_SHARE_URL) {
+        toast("티맵 장소 공유 링크를 입력해 주세요.");
+        return;
+      }
+      window.open(TMAP_SHARE_URL, "_blank", "noopener,noreferrer");
+    });
 
     /* 버튼과 계좌 */
     document.querySelectorAll("[data-toast]").forEach((button) => {
