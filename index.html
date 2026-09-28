@@ -930,74 +930,147 @@
       <section class="account padded">
         <header class="section-title"><h2>account</h2></header>
 
-        <div class="accordion-item">
-          <button
-            class="accordion-trigger plain"
-            type="button"
-            aria-expanded="false"
-            aria-controls="groom-account"
-          >
-            신랑측 계좌번호
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="m6 9 6 6 6-6"></path>
-            </svg>
-          </button>
+		  <!-- 신랑측 -->
+		  <div class="accordion-item">
+		    <button
+		      class="accordion-trigger plain"
+		      type="button"
+		      aria-expanded="false"
+		      aria-controls="groom-account"
+		    >
+		      신랑측 계좌번호
+		      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+		        <path d="m6 9 6 6 6-6"></path>
+		      </svg>
+		    </button>
+		
+		    <div id="groom-account" class="accordion-panel" hidden>
+		      <div class="account-row">
+		        <div class="account-details">
+		          국민 459601-01-615556<br>
+		          <span class="account-owner">예금주 김연세 · 신랑</span>
+		        </div>
+		        <button
+		          class="copy-button"
+		          type="button"
+		          data-copy="459601-01-615556"
+		          aria-label="신랑 김연세 계좌번호 복사"
+		        >
+		          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+		            <rect x="8" y="8" width="12" height="12"></rect>
+		            <path d="M16 8V4H4v12h4"></path>
+		          </svg>
+		        </button>
+		      </div>
+		
+		      <div class="account-row">
+		        <div class="account-details">
+		          국민 451-01-0767-180<br>
+		          <span class="account-owner">예금주 김권주 · 신랑 아버지</span>
+		        </div>
+		        <button
+		          class="copy-button"
+		          type="button"
+		          data-copy="〈신랑 아버지 계좌번호〉"
+		          aria-label="신랑 아버지 김권주 계좌번호 복사"
+		        >
+		          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+		            <rect x="8" y="8" width="12" height="12"></rect>
+		            <path d="M16 8V4H4v12h4"></path>
+		          </svg>
+		        </button>
+		      </div>
+		
+		      <div class="account-row">
+		        <div class="account-details">
+		          국민 478-21-0367-274<br>
+		          <span class="account-owner">예금주 신춘란 · 신랑 어머니</span>
+		        </div>
+		        <button
+		          class="copy-button"
+		          type="button"
+		          data-copy="〈신랑 어머니 계좌번호〉"
+		          aria-label="신랑 어머니 신춘란 계좌번호 복사"
+		        >
+		          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+		            <rect x="8" y="8" width="12" height="12"></rect>
+		            <path d="M16 8V4H4v12h4"></path>
+		          </svg>
+		        </button>
+		      </div>
+		    </div>
+		  </div>
 
-          <div id="groom-account" class="accordion-panel" hidden>
-            <div class="account-row">
-              <div class="account-details">
-                국민 459601-01-615556
-				<br>
-                <span class="account-owner">예금주 김연세</span>
-              </div>
-              <button
-                class="copy-button"
-                type="button"
-                data-copy="〈계좌번호〉"
-                aria-label="신랑측 계좌번호 복사"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <rect x="8" y="8" width="12" height="12"></rect>
-                  <path d="M16 8V4H4v12h4"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div class="accordion-item">
-          <button
-            class="accordion-trigger plain"
-            type="button"
-            aria-expanded="false"
-            aria-controls="bride-account"
-          >
-            신부측 계좌번호
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-              <path d="m6 9 6 6 6-6"></path>
-            </svg>
-          </button>
-
-          <div id="bride-account" class="accordion-panel" hidden>
-            <div class="account-row">
-              <div class="account-details">
-                신한 110-475-790973<br>
-                <span class="account-owner">예금주 김승희</span>
-              </div>
-              <button
-                class="copy-button"
-                type="button"
-                data-copy="〈계좌번호〉"
-                aria-label="신부측 계좌번호 복사"
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                  <rect x="8" y="8" width="12" height="12"></rect>
-                  <path d="M16 8V4H4v12h4"></path>
-                </svg>
-              </button>
-            </div>
-          </div>
-        </div>
+		  <!-- 신부측 -->
+		  <div class="accordion-item">
+		    <button
+		      class="accordion-trigger plain"
+		      type="button"
+		      aria-expanded="false"
+		      aria-controls="bride-account"
+		    >
+		      신부측 계좌번호
+		      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+		        <path d="m6 9 6 6 6-6"></path>
+		      </svg>
+		    </button>
+		
+		    <div id="bride-account" class="accordion-panel" hidden>
+		      <div class="account-row">
+		        <div class="account-details">
+		          신한 110-475-790973<br>
+		          <span class="account-owner">예금주 김승희 · 신부</span>
+		        </div>
+		        <button
+		          class="copy-button"
+		          type="button"
+		          data-copy="110-475-790973"
+		          aria-label="신부 김승희 계좌번호 복사"
+		        >
+		          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+		            <rect x="8" y="8" width="12" height="12"></rect>
+		            <path d="M16 8V4H4v12h4"></path>
+		          </svg>
+		        </button>
+		      </div>
+		
+		      <div class="account-row">
+		        <div class="account-details">
+		          농협 302-2125-6204-31<br>
+		          <span class="account-owner">예금주 김창기 · 신부 아버지</span>
+		        </div>
+		        <button
+		          class="copy-button"
+		          type="button"
+		          data-copy="〈신부 아버지 계좌번호〉"
+		          aria-label="신부 아버지 김창기 계좌번호 복사"
+		        >
+		          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+		            <rect x="8" y="8" width="12" height="12"></rect>
+		            <path d="M16 8V4H4v12h4"></path>
+		          </svg>
+		        </button>
+		      </div>
+		
+		      <div class="account-row">
+		        <div class="account-details">
+		          농협 356-1110-0598-33<br>
+		          <span class="account-owner">예금주 박경아 · 신부 어머니</span>
+		        </div>
+		        <button
+		          class="copy-button"
+		          type="button"
+		          data-copy="〈신부 어머니 계좌번호〉"
+		          aria-label="신부 어머니 박경아 계좌번호 복사"
+		        >
+		          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+		            <rect x="8" y="8" width="12" height="12"></rect>
+		            <path d="M16 8V4H4v12h4"></path>
+		          </svg>
+		        </button>
+		      </div>
+		    </div>
+		  </div>
       </section>
 
       <!-- ⑨ 방명록 -->
