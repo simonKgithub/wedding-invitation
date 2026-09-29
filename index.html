@@ -1,62 +1,42 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f5ee">
+  <title>김연세 ♥ 김승희 결혼합니다</title>
+  <meta name="description" content="소중한 자리에 소중한 분들을 초대합니다.">
+  <!--<meta name="description" content="2027년 1월 23일 오전 10시 30분, 대전 라도무스 아트센터 8층 루미니스홀">-->
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
-  />
+  <!--미리보기-->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="김연세 ♥ 김승희 결혼합니다">
+  <meta property="og:description" content="소중한 자리에 소중한 분들을 초대합니다.">
+  <meta property="og:image" content="https://simonkgithub.github.io/wedding-invitation/preview.jpg">
+  <meta property="og:url" content="https://simonkgithub.github.io/wedding-invitation/">
 
-  <meta name="theme-color" content="#f5f1e8" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="김연세 · 김승희 결혼합니다" />
-  <meta
-    property="og:description"
-    content="2027년 1월 23일 토요일 오전 10시 30분, 라도무스 아트센터"
-  />
-  <meta
-    property="og:image"
-    content="https://simonkgithub.github.io/wedding-invitation/preview.jpg"
-  />
-  <meta
-    property="og:url"
-    content="https://simonkgithub.github.io/wedding-invitation/"
-  />
-
-  <title>김연세 · 김승희 결혼합니다</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Rubik:wght@300;400;500&family=Special+Elite&family=Space+Mono:wght@400;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Rubik:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Special+Elite&display=swap"
     rel="stylesheet"
-  />
+  >
 
   <style>
     :root {
       --radius: 0.125rem;
-
       --background: oklch(0.972 0.012 88);
       --foreground: oklch(0.255 0.014 55);
-
       --card: oklch(0.985 0.008 88);
-
       --primary: oklch(0.405 0.105 18);
       --primary-foreground: oklch(0.985 0.008 88);
-
       --secondary: oklch(0.925 0.015 85);
       --muted: oklch(0.925 0.015 85);
       --muted-foreground: oklch(0.53 0.025 45);
-
       --accent: var(--primary);
-
       --border: oklch(0.405 0.04 35 / 20%);
       --input: oklch(0.405 0.04 35 / 28%);
       --ring: var(--primary);
-
       --ink: var(--foreground);
       --paper: var(--card);
       --wash: oklch(1 0 0 / 20%);
@@ -74,326 +54,419 @@
       --font-script: "Pinyon Script", cursive;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
       margin: 0;
       background: var(--background);
       color: var(--foreground);
       font-family: var(--font-sans);
-      font-weight: 300;
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
+      letter-spacing: 0;
     }
 
-    body::before {
-      content: "";
+    button, input, textarea { font: inherit; }
+    button { cursor: pointer; border-radius: 0; box-shadow: none; }
+    img { display: block; }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    .font-typewriter { font-family: var(--font-typewriter); }
+    .font-script { font-family: var(--font-script); }
+    .mono { font-family: var(--font-mono); }
+    .muted { color: var(--muted-foreground); }
+
+    @keyframes rise {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes scroll-bounce {
+      0%, 100% { transform: translateY(0); opacity: 0.45; }
+      50% { transform: translateY(10px); opacity: 1; }
+    }
+
+    .rise {
+      animation: rise 700ms cubic-bezier(0.32, 0.72, 0, 1) both;
+    }
+
+    .scroll-bounce {
+      animation: scroll-bounce 1.5s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .rise, .scroll-bounce { animation: none; }
+    }
+
+    /* 배경 */
+    .paper-background,
+    .white-wash {
       position: fixed;
       inset: 0;
-      z-index: -10;
       pointer-events: none;
-      background-image:
-        linear-gradient(
-          90deg,
-          oklch(1 0 0 / 4%) 0,
-          transparent 35%,
-          oklch(0.4 0.02 60 / 3%) 70%,
-          transparent 100%
-        ),
-        linear-gradient(
-          0deg,
-          oklch(1 0 0 / 4%) 0,
-          transparent 40%,
-          oklch(0.4 0.02 60 / 3%) 100%
-        );
-      opacity: 0.6;
     }
 
-    button,
-    input,
-    textarea {
-      font: inherit;
+    .paper-background {
+      z-index: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    button {
-      cursor: pointer;
+    .white-wash {
+      z-index: 1;
+      background: var(--wash);
     }
 
-    img {
-      max-width: 100%;
+    main {
+      position: relative;
+      z-index: 2;
+      isolation: isolate;
+      min-height: 100vh;
+      overflow: hidden;
+      color: var(--foreground);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    main button {
+      color: var(--primary);
+      box-shadow: none;
+    }
+
+    main button:not(.plain) {
+      border: 1px solid var(--primary);
+      background: oklch(1 0 0 / 20%);
+    }
+
+    main button.plain {
+      border: 0;
+      background: none;
     }
 
     .page {
-      width: 100%;
-      max-width: 480px;
-      margin: 0 auto;
-      overflow: hidden;
-      background: var(--background);
-    }
-
-    .padded {
-      padding-inline: 28px;
-    }
-
-    section {
       position: relative;
+      max-width: 480px;
+      min-height: 100vh;
+      margin: auto;
+      overflow: hidden;
+      border-inline: 1px solid oklch(0.405 0.105 18 / 10%);
+      background: oklch(0.972 0.012 88 / 35%);
+      box-shadow: 0 0 60px color-mix(
+        in oklab,
+        var(--foreground) 8%,
+        transparent
+      );
     }
+
+    .padded { padding-inline: 28px; }
 
     .section-title {
       margin: 0 0 28px;
-      color: var(--primary);
-      font: 18px var(--font-typewriter);
       text-align: center;
-      letter-spacing: 0.02em;
     }
 
-    .section-subtitle {
-      margin: -16px 0 28px;
-      color: var(--muted-foreground);
-      font-size: 11px;
-      line-height: 20px;
-      text-align: center;
-      word-break: keep-all;
+    .section-title h2 {
+      margin: 0;
+      font: 400 24px / 1.2 var(--font-typewriter);
+      text-transform: none;
     }
 
-    /* =========================================
-       이미지 공통
-       ========================================= */
-
+    /* 사진 슬롯 */
     .image-slot {
-      position: relative;
       width: 100%;
+      height: 100%;
       overflow: hidden;
-      background: var(--secondary);
     }
 
-    .image-slot img {
-      display: block;
+    .image-slot > img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
     .image-placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
       min-height: 100px;
       border: 1px dashed oklch(0.255 0.014 55 / 20%);
-      color: var(--muted-foreground);
-      font-size: 11px;
-    }
-
-    .ratio-45 {
-      width: 100%;
-      aspect-ratio: 4 / 5;
-    }
-
-    /* =========================================
-       Reveal
-       ========================================= */
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(28px);
-      transition:
-        opacity 800ms ease,
-        transform 800ms ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* =========================================
-       Hero
-       ========================================= */
-
-    .hero {
-      padding-bottom: 72px;
-    }
-
-    .hero-image {
-      width: 100%;
-      aspect-ratio: 4 / 5;
-    }
-
-    .hero-image::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(
-          to bottom,
-          transparent 72%,
-          var(--background) 100%
-        );
-    }
-
-    .hero-copy {
-      position: relative;
-      margin-top: -34px;
-      padding-inline: 28px;
+      background: oklch(0.925 0.015 85 / 50%);
       text-align: center;
     }
 
-    .hero-kicker {
-      margin-bottom: 18px;
+    .image-placeholder svg {
+      width: 20px;
+      height: 20px;
+      margin: 0 auto 8px;
       color: var(--primary);
+    }
+
+    .image-placeholder .label {
       font: 10px var(--font-mono);
-      letter-spacing: 0.12em;
     }
 
-    .hero-title {
-      margin: 0;
-      color: var(--primary);
-      font: 38px var(--font-typewriter);
-      line-height: 1.25;
-    }
-
-    .hero-date {
-      margin-top: 22px;
+    .image-placeholder .filename {
+      margin-top: 4px;
+      font-size: 9px;
       color: var(--muted-foreground);
-      font: 11px var(--font-mono);
-      line-height: 20px;
     }
 
-    /* =========================================
-       Invitation
-       ========================================= */
+    .square { aspect-ratio: 1; }
+    .ratio-45 { aspect-ratio: 4 / 5; }
+    .ratio-map { aspect-ratio: 16 / 10; }
 
-    .invitation {
-      padding-top: 42px;
-      padding-bottom: 72px;
-      text-align: center;
+    /* ① 히어로 */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      padding: 28px;
     }
 
-    .invitation-copy {
-      margin: 0 auto;
-      color: var(--foreground);
-      font-size: 13px;
-      line-height: 29px;
-      word-break: keep-all;
+    .hero-inner {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      height: calc(100svh - 56px);
+      flex-direction: column;
+      justify-content: space-between;
+      font-family: var(--font-typewriter);
     }
 
-    .invitation-sign {
-      margin-top: 30px;
+    .hero-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      line-height: 1.45;
+      text-transform: uppercase;
       color: var(--primary);
-      font: 22px var(--font-script);
     }
 
-    /* =========================================
-       Middle image
-       ========================================= */
+    .hero-row > :last-child { text-align: right; }
 
-    .square {
-      padding-inline: 28px;
-      padding-bottom: 72px;
-    }
-
-    .square-image {
+    .hero-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: flex;
       width: 100%;
-      aspect-ratio: 1 / 1;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      transform: translate(-50%, -50%);
+    }
+
+    .hero-name {
+      font: 28px / 1 var(--font-typewriter);
+      color: var(--primary);
+      white-space: nowrap;
+    }
+
+    .hero-name:first-child { margin-bottom: 12px; }
+    .hero-name:last-child { margin-top: 12px; }
+
+    .film {
+      position: relative;
+      width: 236px;
+      aspect-ratio: 399 / 308;
       overflow: hidden;
     }
 
-    .square-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
+    .film-photo {
+      position: absolute;
+      top: 8%;
+      right: 5%;
+      bottom: 8%;
+      left: 3.5%;
+      overflow: hidden;
+      background: var(--card);
     }
 
-    /* =========================================
-       Date
-       ========================================= */
+    .film-photo .image-slot,
+    .film-photo .image-slot > img {
+      width: 100%;
+      height: 100%;
+    }
 
-    .day {
-      padding: 48px 28px 72px;
+    .film-photo .image-slot > img {
+      display: block;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .film-frame {
+      position: absolute;
+      z-index: 10;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: fill;
+      pointer-events: none;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      z-index: 20;
+      right: 0;
+      bottom: 8px;
+      left: 0;
+      color: var(--primary);
+      text-align: center;
+      opacity: 0.65;
+    }
+
+    .hero-scroll svg {
+      display: block;
+      width: 16px;
+      height: 16px;
+      margin: auto;
+    }
+
+    @media (min-width: 480px) {
+      .hero { padding: 40px; }
+      .hero-inner { height: calc(100svh - 80px); }
+    }
+
+    /* ② 초대장 */
+    .invite {
+      position: relative;
+      padding-top: 160px;
+      padding-bottom: 96px;
       text-align: center;
     }
 
-    .day-number {
+    .music-button {
+      position: absolute;
+      z-index: 10;
+      top: 28px;
+      right: 28px;
+      display: grid;
+      width: 40px;
+      height: 40px;
+      place-items: center;
+    }
+
+    .music-button svg { width: 20px; height: 20px; }
+
+    .star {
+      width: 32px;
+      height: 32px;
+      margin: auto;
+      object-fit: contain;
+    }
+
+    .parents {
+      margin-top: 28px;
+      font-size: 14px;
+    }
+
+    .parents + .parents { margin-top: 8px; }
+
+    .greeting {
+      max-width: 320px;
+      margin: 48px auto 0;
+      color: oklch(0.255 0.014 55 / 85%);
+      font-size: 14px;
+      line-height: 28px;
+      word-break: keep-all;
+    }
+
+    .greeting p { margin: 0 0 8px; }
+    .greeting p:first-child,
+    .greeting p:nth-child(2) { padding-top: 12px; }
+
+    .greeting .signature {
+      padding-top: 48px;
       color: var(--primary);
-      font: 52px var(--font-typewriter);
-      line-height: 1;
     }
 
-    .day-week {
+    /* ④ 날짜 */
+    .day {
+      padding-block: 48px;
+      background: oklch(1 0 0 / 75%);
+    }
+
+    .calendar-wrap {
+      width: 88%;
+      margin: auto;
+      font-family: var(--font-typewriter);
+    }
+
+    .month {
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .time {
       margin-top: 12px;
-      color: var(--muted-foreground);
-      font: 10px var(--font-mono);
-      letter-spacing: 0.08em;
-    }
-
-    .day-time {
-      margin-top: 18px;
-      color: var(--foreground);
-      font: 12px var(--font-mono);
+      color: var(--primary);
+      font-size: 11px;
+      text-align: center;
     }
 
     .calendar {
-      margin-top: 36px;
-    }
-
-    .calendar-head {
-      margin-bottom: 16px;
-      color: var(--primary);
-      font: 16px var(--font-typewriter);
-    }
-
-    .calendar-grid {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 4px;
+      row-gap: 8px;
+      margin-top: 32px;
+      font-size: 10px;
+      text-align: center;
     }
 
-    .calendar-cell {
-      display: flex;
-      min-height: 34px;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted-foreground);
-      font: 10px var(--font-mono);
+    .calendar span {
+      display: grid;
+      height: 32px;
+      place-items: center;
     }
 
-    .calendar-cell.head {
-      color: var(--primary);
-      font-size: 9px;
-    }
+    .calendar .weekday { color: var(--muted-foreground); }
 
-    .calendar-cell.wedding {
-      position: relative;
-      color: var(--primary);
-      font-weight: 700;
-    }
-
-    .calendar-cell.wedding::after {
-      content: "";
-      position: absolute;
-      width: 27px;
-      height: 27px;
-      border: 1px solid var(--primary);
+    .calendar .selected {
+      width: 32px;
+      height: 32px;
+      justify-self: center;
+      border: 1.5px solid var(--primary);
       border-radius: 50%;
+      background: transparent;
+      color: var(--primary);
+      font-weight: bold;
+      text-decoration: none;
     }
 
     .countdown {
-      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      margin-top: 24px;
+      text-align: center;
+    }
+
+    .countdown strong {
+      display: block;
+      color: var(--primary);
+      font: 18px var(--font-typewriter);
+    }
+
+    .countdown small {
       color: var(--muted-foreground);
-      font: 10px var(--font-mono);
+      font: 8px var(--font-typewriter);
     }
 
     /* =========================================
-       Album
+       ⑤ 앨범 - 3 x 3 갤러리
        ========================================= */
-
     .album {
       padding-block: 48px;
     }
@@ -452,9 +525,8 @@
     }
 
     /* =========================================
-       Gallery Lightbox
+       앨범 내부 팝업
        ========================================= */
-
     .gallery-lightbox {
       position: fixed;
       z-index: 200;
@@ -512,6 +584,11 @@
       color: var(--primary);
     }
 
+    .lightbox-close svg {
+      width: 18px;
+      height: 18px;
+    }
+
     .lightbox-nav {
       position: absolute;
       top: 50%;
@@ -562,7 +639,6 @@
         opacity: 0;
         transform: translateX(24px);
       }
-
       to {
         opacity: 1;
         transform: translateX(0);
@@ -574,456 +650,11 @@
         opacity: 0;
         transform: translateX(-24px);
       }
-
       to {
         opacity: 1;
         transform: translateX(0);
       }
     }
-
-    /* =========================================
-       Location
-       ========================================= */
-
-    .location {
-      padding: 48px 28px 72px;
-    }
-
-    .location-map {
-      width: 100%;
-      aspect-ratio: 4 / 3;
-      overflow: hidden;
-      margin-bottom: 24px;
-    }
-
-    .location-map img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .location-name {
-      color: var(--primary);
-      font-size: 15px;
-      font-weight: 500;
-      text-align: center;
-    }
-
-    .location-address {
-      margin-top: 8px;
-      color: var(--muted-foreground);
-      font-size: 11px;
-      line-height: 20px;
-      text-align: center;
-      word-break: keep-all;
-    }
-
-    .location-info {
-      margin-top: 28px;
-    }
-
-    .info-row {
-      display: grid;
-      grid-template-columns: 70px 1fr;
-      gap: 10px;
-      padding: 11px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 11px;
-      line-height: 19px;
-    }
-
-    .info-row:last-child {
-      border-bottom: 0;
-    }
-
-    .info-label {
-      color: var(--primary);
-      font-weight: 500;
-    }
-
-    .info-value {
-      color: var(--muted-foreground);
-      word-break: keep-all;
-    }
-
-    /* =========================================
-       Account
-       ========================================= */
-
-    .account {
-      padding: 48px 28px 72px;
-    }
-
-    .account-notice {
-      margin: -4px auto 28px;
-      color: var(--muted-foreground);
-      font-size: 12px;
-      line-height: 22px;
-      text-align: center;
-      word-break: keep-all;
-    }
-
-    .account-notice strong {
-      display: block;
-      margin-bottom: 6px;
-      color: var(--primary);
-      font-size: 13px;
-      font-weight: 500;
-    }
-
-    .account-notice p {
-      margin: 0;
-    }
-
-    .account-group {
-      margin-bottom: 32px;
-    }
-
-    .account-group:last-child {
-      margin-bottom: 0;
-    }
-
-    .account-group-title {
-      margin-bottom: 12px;
-      color: var(--primary);
-      font: 13px var(--font-typewriter);
-    }
-
-    .account-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px 0;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .account-card:first-of-type {
-      border-top: 1px solid var(--border);
-    }
-
-    .account-text {
-      min-width: 0;
-    }
-
-    .account-owner {
-      color: var(--foreground);
-      font-size: 12px;
-      line-height: 19px;
-    }
-
-    .account-number {
-      margin-top: 3px;
-      color: var(--muted-foreground);
-      font: 10px var(--font-mono);
-      word-break: break-all;
-    }
-
-    .copy-account {
-      flex: 0 0 auto;
-      padding: 7px 9px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: transparent;
-      color: var(--primary);
-      font-size: 10px;
-    }
-
-    /* =========================================
-       Guestbook
-       ========================================= */
-
-    .guestbook {
-      padding: 48px 28px 72px;
-    }
-
-    .guestbook-form {
-      margin-bottom: 30px;
-    }
-
-    .guestbook-input {
-      width: 100%;
-      min-height: 90px;
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      outline: none;
-      background: oklch(0.985 0.008 88 / 55%);
-      color: var(--foreground);
-      font-size: 12px;
-      line-height: 22px;
-      resize: vertical;
-    }
-
-    .guestbook-input:focus {
-      border-color: var(--primary);
-    }
-
-    .guestbook-input::placeholder {
-      color: var(--muted-foreground);
-    }
-
-    .guestbook-submit {
-      width: 100%;
-      margin-top: 10px;
-      padding: 12px;
-      border: 1px solid var(--primary);
-      border-radius: var(--radius);
-      background: var(--primary);
-      color: var(--primary-foreground);
-      font-size: 11px;
-    }
-
-    .guestbook-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .guestbook-empty {
-      padding: 30px 0;
-      color: var(--muted-foreground);
-      font-size: 11px;
-      text-align: center;
-    }
-
-    .guestbook-item {
-      padding: 14px;
-      border: 1px solid var(--border);
-      background: oklch(0.985 0.008 88 / 40%);
-    }
-
-    .guestbook-item-date {
-      color: var(--muted-foreground);
-      font: 9px var(--font-mono);
-    }
-
-    .guestbook-item-message {
-      margin-top: 8px;
-      color: var(--foreground);
-      font-size: 12px;
-      line-height: 22px;
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-
-    /* =========================================
-       Buttons
-       ========================================= */
-
-    .button-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-    }
-
-    .action {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-      min-height: 42px;
-      padding: 10px;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      background: oklch(0.985 0.008 88 / 70%);
-      color: var(--primary);
-      font-size: 11px;
-    }
-
-    .action svg {
-      width: 14px;
-      height: 14px;
-      stroke-width: 1.5;
-    }
-
-    /* =========================================
-       Footer
-       ========================================= */
-
-    footer {
-      position: relative;
-      overflow: hidden;
-      min-height: 620px;
-      padding: 100px 28px 76px;
-      border-top: 0;
-      isolation: isolate;
-    }
-
-    /*
-      gallery-13을 footer 전체 배경으로 사용
-    */
-    footer::before {
-      content: "";
-      position: absolute;
-      z-index: -3;
-      inset: 0;
-
-      background-image: url("./public/gallery-13.jpg");
-      background-position: center center;
-      background-size: cover;
-      background-repeat: no-repeat;
-
-      transform: scale(1.02);
-    }
-
-    /*
-      사진 위·아래를 미색으로 자연스럽게 페이드
-    */
-    footer::after {
-      content: "";
-      position: absolute;
-      z-index: -2;
-      inset: 0;
-
-      background:
-        linear-gradient(
-          to bottom,
-          var(--background) 0%,
-          oklch(0.972 0.012 88 / 82%) 9%,
-          oklch(0.972 0.012 88 / 28%) 24%,
-          oklch(0.972 0.012 88 / 5%) 48%,
-          oklch(0.972 0.012 88 / 18%) 70%,
-          oklch(0.972 0.012 88 / 82%) 91%,
-          var(--background) 100%
-        );
-    }
-
-    .footer-content {
-      position: relative;
-      z-index: 2;
-
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .footer-label {
-      color: var(--primary);
-      font: 10px var(--font-mono);
-      text-align: center;
-      letter-spacing: 0.16em;
-      opacity: 0.85;
-    }
-
-    .footer-ornament {
-      width: 1px;
-      height: 42px;
-      margin: 16px auto 22px;
-      background: oklch(0.405 0.105 18 / 40%);
-    }
-
-    /*
-      핵심:
-      박스처럼 보이지 않고 사진 위에 직접
-      글을 쓰는 느낌으로 만든 영역
-    */
-    .footer-message {
-      width: 90%;
-      min-height: 140px;
-
-      margin: 0 auto;
-      padding: 10px 4px;
-
-      border: 0;
-      outline: none;
-      background: transparent;
-
-      color: var(--foreground);
-      font-family: var(--font-typewriter);
-      font-size: 14px;
-      line-height: 29px;
-      text-align: center;
-
-      word-break: keep-all;
-      white-space: pre-wrap;
-
-      caret-color: var(--primary);
-
-      text-shadow:
-        0 1px 8px oklch(0.985 0.008 88 / 95%);
-
-      transition: opacity 180ms ease;
-    }
-
-    .footer-message:empty::before {
-      content: attr(data-placeholder);
-      color: var(--primary);
-      opacity: 0.68;
-      pointer-events: none;
-    }
-
-    .footer-message:focus {
-      outline: none;
-      border: 0;
-      background: transparent;
-    }
-
-    .footer-message:focus:empty::before {
-      opacity: 0.45;
-    }
-
-    .footer-share {
-      width: 100%;
-      margin-top: 18px;
-    }
-
-    footer .action {
-      background: oklch(0.985 0.008 88 / 48%);
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
-    }
-
-    .footer-thanks {
-      margin-top: 72px;
-      color: var(--primary);
-      font: 24px var(--font-script);
-      text-align: center;
-      text-shadow:
-        0 1px 8px oklch(0.985 0.008 88 / 90%);
-    }
-
-    .footer-line {
-      width: 36px;
-      height: 1px;
-      margin: 18px auto 0;
-      background: oklch(0.405 0.105 18 / 45%);
-    }
-
-    .footer-names {
-      margin-top: 24px;
-      color: var(--muted-foreground);
-      font: 10px var(--font-mono);
-      text-align: center;
-    }
-
-    /* =========================================
-       Spacing
-       ========================================= */
-
-    .album {
-      margin-top: 95px;
-    }
-
-    .location {
-      margin-top: 95px;
-    }
-
-    .account {
-      margin-top: 95px;
-    }
-
-    .guestbook {
-      margin-top: 95px;
-    }
-
-    .guestbook + footer {
-      margin-top: 24px;
-    }
-
-    /* =========================================
-       Mobile
-       ========================================= */
 
     @media (max-width: 420px) {
       .gallery-grid {
@@ -1048,30 +679,9 @@
         top: -48px;
         right: 0;
       }
-
-      footer {
-        min-height: 600px;
-        padding-inline: 24px;
-      }
-
-      .footer-message {
-        width: 94%;
-        font-size: 13px;
-        line-height: 27px;
-      }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none;
-      }
-
       .gallery-item .image-slot > img,
       .gallery-lightbox,
       .lightbox-image {
@@ -1079,1879 +689,2715 @@
         animation: none;
       }
     }
+
+    /* ⑥ 위치 */
+    .location,
+    .notice,
+    .account,
+    .guestbook {
+      padding-bottom: 96px;
+    }
+
+    .map-frame {
+      width: 100%;
+      overflow: hidden;
+      border: 1px solid oklch(0.405 0.105 18 / 20%);
+      aspect-ratio: 16 / 10;
+    }
+
+    .map-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      touch-action: pan-x pan-y;
+    }
+
+    .venue {
+      margin-top: 20px;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .venue-sub {
+      margin-top: 5px;
+      color: var(--muted-foreground);
+      font-size: 12px;
+      line-height: 20px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 20px;
+    }
+
+    .action {
+      display: inline-flex;
+      min-height: 42px;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px;
+      font-size: 12px;
+      text-decoration: none;
+    }
+
+    .action svg,
+    .copy-button svg {
+      width: 15px;
+      height: 15px;
+      flex: none;
+    }
+
+    .travel {
+      margin-top: 24px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      line-height: 1.9;
+      text-align: center;
+      word-break: keep-all;
+    }
+
+    .travel p {
+      max-width: 330px;
+      margin: 0 auto;
+    }
+
+    .travel p + p {
+      margin-top: 28px;
+    }
+
+    .travel b {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--primary);
+      font: 11px var(--font-mono);
+      letter-spacing: 0.08em;
+    }
+
+    .location .map-links {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .location .map-links .action {
+      border: 1px solid var(--primary);
+      background: oklch(1 0 0 / 20%);
+      color: var(--primary);
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    /* ⑦ 안내 */
+    .ornament {
+      display: flex;
+      height: 112px;
+      flex-direction: column;
+      align-items: center;
+      margin: 40px auto 0;
+      color: var(--primary);
+    }
+
+    .ornament span {
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .ornament i {
+      width: 1px;
+      height: 80px;
+      background: oklch(0.405 0.105 18 / 60%);
+    }
+
+    .notice-copy {
+      max-width: 320px;
+      margin: 40px auto 0;
+      color: oklch(0.255 0.014 55 / 85%);
+      font-size: 14px;
+      line-height: 32px;
+      text-align: center;
+      word-break: keep-all;
+    }
+
+    .notice-copy p {
+      margin: 0;
+    }
+
+    .notice-copy p + p {
+      margin-top: 32px;
+    }
+
+    /* ⑧ 계좌 */
+    .accordion-item {
+      border-bottom: 1px solid var(--border);
+    }
+
+    .accordion-trigger {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .accordion-trigger svg {
+      width: 16px;
+      height: 16px;
+      transition: transform 0.2s;
+    }
+
+    .accordion-trigger[aria-expanded="true"] svg {
+      transform: rotate(180deg);
+    }
+
+    .accordion-panel {
+      padding-inline: 16px;
+    }
+
+    .account-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-block: 16px;
+    }
+
+    .account-details {
+      font-size: 12px;
+      line-height: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    .account-owner {
+      color: var(--muted-foreground);
+    }
+
+    .copy-button {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      flex: none;
+      place-items: center;
+    }
+
+    /* ⑨ 방명록 */
+    .guest-form {
+      display: grid;
+      gap: 12px;
+    }
+
+    .guest-form input,
+    .guest-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--input);
+      border-radius: 0;
+      outline: none;
+      background: oklch(1 0 0 / 20%);
+      color: var(--foreground);
+      font-size: 13px;
+    }
+
+    .guest-form input:focus,
+    .guest-form textarea:focus {
+      border-color: var(--ring);
+    }
+
+    .guest-form textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+
+    .guest-form .action {
+      width: 100%;
+    }
+
+    .notes {
+      columns: 2;
+      column-gap: 12px;
+      margin-top: 32px;
+    }
+
+    .note {
+      display: inline-block;
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 16px;
+      break-inside: avoid;
+      color: var(--ink);
+      box-shadow: 0 1px 2px oklch(0.255 0.014 55 / 8%);
+    }
+
+    .note p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    .note small {
+      display: block;
+      margin-top: 12px;
+      color: oklch(0.255 0.014 55 / 60%);
+      font: 9px var(--font-mono);
+    }
+
+    .empty {
+      margin-top: 32px;
+      padding: 40px 8px;
+      border: 1px dashed var(--border);
+      color: var(--muted-foreground);
+      font-size: 12px;
+      text-align: center;
+    }
+
+    /* ⑩ 하단 */
+    footer {
+      padding: 48px 28px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-label {
+      color: var(--muted-foreground);
+      font: 10px var(--font-mono);
+      text-align: center;
+    }
+
+    .footer-names {
+      margin-top: 48px;
+      color: var(--muted-foreground);
+      font: 9px var(--font-mono);
+      text-align: center;
+    }
+    /* =========================================
+   푸터 마지막 사진
+   ========================================= */
+
+  .footer-photo {
+    position: relative;
+    width: 100%;
+    height: 430px;
+    overflow: hidden;
+    margin-bottom: 48px;
+  }
+  
+  .footer-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  /* 위쪽 페이드 */
+  .footer-photo::before {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    inset: 0 0 auto 0;
+    height: 35%;
+    background: linear-gradient(
+      to bottom,
+      var(--background) 0%,
+      oklch(0.972 0.012 88 / 75%) 35%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+  
+  /* 아래쪽 페이드 */
+  .footer-photo::after {
+    content: "";
+    position: absolute;
+    z-index: 2;
+    inset: auto 0 0 0;
+    height: 40%;
+    background: linear-gradient(
+      to top,
+      var(--background) 0%,
+      oklch(0.972 0.012 88 / 80%) 40%,
+      transparent 100%
+    );
+    pointer-events: none;
+  }
+  
+  /* 사진 위 문구 */
+  .footer-photo-copy {
+    position: absolute;
+    z-index: 5;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    transform: translate(-50%, -50%);
+    color: var(--primary);
+    text-align: center;
+    pointer-events: none;
+  }
+  
+  .footer-photo-copy .main {
+    font: 22px / 1.8 var(--font-typewriter);
+    letter-spacing: 0.04em;
+    text-shadow: 0 1px 8px oklch(1 0 0 / 35%);
+  }
+  
+  .footer-photo-copy .sub {
+    margin-top: 18px;
+    font: 9px / 1.5 var(--font-mono);
+    letter-spacing: 0.18em;
+    opacity: 0.75;
+  }
+  
+  /* 모바일 */
+  @media (max-width: 420px) {
+    .footer-photo {
+      height: 390px;
+      margin-bottom: 42px;
+    }
+  
+    .footer-photo-copy .main {
+      font-size: 20px;
+    }
+  }
+
+    .toast {
+      position: fixed;
+      z-index: 100;
+      bottom: 24px;
+      left: 50%;
+      max-width: calc(100vw - 32px);
+      padding: 10px 14px;
+      border: 1px solid var(--primary);
+      background: var(--paper);
+      color: var(--primary);
+      box-shadow: 0 4px 20px oklch(0.255 0.014 55 / 12%);
+      font-size: 12px;
+      white-space: nowrap;
+      transform: translateX(-50%);
+    }
+
+    /* =========================================
+       섹션 간 여백
+       ========================================= */
+
+    /* 날짜
+    .day {
+      margin-top: 72px;
+    }
+	 */
+
+    /* 앨범 */
+    .album {
+      margin-top: 72px;
+    }
+
+    /* 위치 */
+    .location {
+      margin-top: 72px;
+    }
+
+    /* 계좌 */
+    .account {
+      margin-top: 72px;
+    }
+
+    /* 방명록 */
+    .guestbook {
+      margin-top: 72px;
+    }
+
+    /* 정사각형 사진
+    .square {
+      margin-top: 0;
+      margin-bottom: 72px;
+    }
+	 */
+
+    /* 푸터 */
+    .guestbook + footer {
+      margin-top: 24px;
+    }
   </style>
 </head>
 
 <body>
+  <img class="paper-background" src="./paperbackground.jpg" alt="">
+  <div class="white-wash"></div>
 
-<div class="page">
+  <main>
+    <div class="page">
 
-  <!-- =========================================
-       ① 메인
-       ========================================= -->
-  <section class="hero reveal">
+      <!-- ① 히어로 -->
+      <section class="hero" aria-label="결혼식 초대">
+        <div class="hero-inner">
 
-    <div class="hero-image image-slot">
-      <img
-        src="./public/hero.jpg"
-        alt="김연세와 김승희의 웨딩 사진"
-      />
-    </div>
+          <div class="hero-row">
+            <div>Save Our<br>Date</div>
+            <div>La domus<br>Daejeon</div>
+          </div>
 
-    <div class="hero-copy">
+          <div class="hero-center">
+            <div class="hero-name">Kim Yeonse</div>
 
-      <div class="hero-kicker">
-        OUR WEDDING DAY
-      </div>
+            <div class="film">
+              <div class="film-photo">
+                <div
+                  class="image-slot"
+                  data-image="hero"
+                  data-label="메인 사진"
+                ></div>
+              </div>
 
-      <h1 class="hero-title">
-        김연세 · 김승희
-      </h1>
+              <img class="film-frame" src="./filmframe.png" alt="">
+            </div>
 
-      <div class="hero-date">
-        2027. 01. 23 SATURDAY<br />
-        10:30 AM
-      </div>
+            <div class="hero-name">Kim Seunghee</div>
+          </div>
 
-    </div>
+          <div class="hero-row">
+            <div>Jan 23,<br>2027 · 10:30 AM</div>
+            <div>Kim Yeonse<br>Kim Seunghee</div>
+          </div>
 
-  </section>
-
-
-  <!-- =========================================
-       ② 초대글
-       ========================================= -->
-  <section class="invitation padded reveal">
-
-    <h2 class="section-title">
-      Invitation
-    </h2>
-
-    <p class="invitation-copy">
-      서로의 하루를 함께 걷고,<br />
-      서로의 계절을 함께 기다리며<br />
-      이제 한 사람의 평생을<br />
-      함께 걸어가려 합니다.<br /><br />
-
-      소중한 분들을 모시고<br />
-      저희 두 사람의 새로운 시작을<br />
-      함께하고 싶습니다.
-    </p>
-
-    <div class="invitation-sign">
-      김연세 · 김승희
-    </div>
-
-  </section>
-
-
-  <!-- =========================================
-       ③ 중간 사진
-       ========================================= -->
-  <section class="square reveal">
-
-    <div class="square-image">
-      <img
-        src="./public/middle.jpg"
-        alt="웨딩 사진"
-      />
-    </div>
-
-  </section>
-
-
-  <!-- =========================================
-       ④ 날짜 / 달력
-       ========================================= -->
-  <section class="day reveal">
-
-    <h2 class="section-title">
-      Wedding Day
-    </h2>
-
-    <div class="day-number">
-      23
-    </div>
-
-    <div class="day-week">
-      JANUARY · SATURDAY · 2027
-    </div>
-
-    <div class="day-time">
-      10:30 AM
-    </div>
-
-    <div class="calendar">
-
-      <div class="calendar-head">
-        JANUARY 2027
-      </div>
-
-      <div class="calendar-grid">
-
-        <div class="calendar-cell head">SUN</div>
-        <div class="calendar-cell head">MON</div>
-        <div class="calendar-cell head">TUE</div>
-        <div class="calendar-cell head">WED</div>
-        <div class="calendar-cell head">THU</div>
-        <div class="calendar-cell head">FRI</div>
-        <div class="calendar-cell head">SAT</div>
-
-        <div class="calendar-cell"></div>
-        <div class="calendar-cell"></div>
-        <div class="calendar-cell"></div>
-        <div class="calendar-cell"></div>
-        <div class="calendar-cell"></div>
-        <div class="calendar-cell">1</div>
-        <div class="calendar-cell">2</div>
-
-        <div class="calendar-cell">3</div>
-        <div class="calendar-cell">4</div>
-        <div class="calendar-cell">5</div>
-        <div class="calendar-cell">6</div>
-        <div class="calendar-cell">7</div>
-        <div class="calendar-cell">8</div>
-        <div class="calendar-cell">9</div>
-
-        <div class="calendar-cell">10</div>
-        <div class="calendar-cell">11</div>
-        <div class="calendar-cell">12</div>
-        <div class="calendar-cell">13</div>
-        <div class="calendar-cell">14</div>
-        <div class="calendar-cell">15</div>
-        <div class="calendar-cell">16</div>
-
-        <div class="calendar-cell">17</div>
-        <div class="calendar-cell">18</div>
-        <div class="calendar-cell">19</div>
-        <div class="calendar-cell">20</div>
-        <div class="calendar-cell">21</div>
-        <div class="calendar-cell">22</div>
-
-        <div class="calendar-cell wedding">
-          23
         </div>
 
-        <div class="calendar-cell">24</div>
-        <div class="calendar-cell">25</div>
-        <div class="calendar-cell">26</div>
-        <div class="calendar-cell">27</div>
-        <div class="calendar-cell">28</div>
-        <div class="calendar-cell">29</div>
-        <div class="calendar-cell">30</div>
-
-        <div class="calendar-cell">31</div>
-
-      </div>
-
-    </div>
-
-    <div id="countdown" class="countdown">
-      WEDDING DAY
-    </div>
-
-  </section>
-
-
-  <!-- =========================================
-       ⑤ 앨범
-       ========================================= -->
-  <section class="album reveal">
-
-    <h2 class="section-title">
-      Album
-    </h2>
-
-    <div class="gallery-grid" aria-label="사진 앨범">
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="0"
-        aria-label="갤러리 사진 1 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-1"
-          data-label="갤러리 사진 1"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="1"
-        aria-label="갤러리 사진 2 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-2"
-          data-label="갤러리 사진 2"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="2"
-        aria-label="갤러리 사진 3 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-3"
-          data-label="갤러리 사진 3"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="3"
-        aria-label="갤러리 사진 4 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-4"
-          data-label="갤러리 사진 4"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="4"
-        aria-label="갤러리 사진 5 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-5"
-          data-label="갤러리 사진 5"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="5"
-        aria-label="갤러리 사진 6 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-6"
-          data-label="갤러리 사진 6"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="6"
-        aria-label="갤러리 사진 7 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-7"
-          data-label="갤러리 사진 7"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="7"
-        aria-label="갤러리 사진 8 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-8"
-          data-label="갤러리 사진 8"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="8"
-        aria-label="갤러리 사진 9 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-9"
-          data-label="갤러리 사진 9"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="9"
-        aria-label="갤러리 사진 10 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-10"
-          data-label="갤러리 사진 10"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="10"
-        aria-label="갤러리 사진 11 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-11"
-          data-label="갤러리 사진 11"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="11"
-        aria-label="갤러리 사진 12 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-12"
-          data-label="갤러리 사진 12"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="12"
-        aria-label="갤러리 사진 13 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-13"
-          data-label="갤러리 사진 13"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="13"
-        aria-label="갤러리 사진 14 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-14"
-          data-label="갤러리 사진 14"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="14"
-        aria-label="갤러리 사진 15 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-15"
-          data-label="갤러리 사진 15"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="15"
-        aria-label="갤러리 사진 16 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-16"
-          data-label="갤러리 사진 16"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="16"
-        aria-label="갤러리 사진 17 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-17"
-          data-label="갤러리 사진 17"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="17"
-        aria-label="갤러리 사진 18 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-18"
-          data-label="갤러리 사진 18"
-        ></div>
-      </button>
-
-      <button
-        class="gallery-item"
-        type="button"
-        data-gallery-index="18"
-        aria-label="갤러리 사진 19 열기"
-      >
-        <div
-          class="ratio-45"
-          data-image="gallery-19"
-          data-label="갤러리 사진 19"
-        ></div>
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================================
-       ⑥ 위치
-       ========================================= -->
-  <section class="location reveal">
-
-    <h2 class="section-title">
-      Location
-    </h2>
-
-    <div class="location-map">
-      <img
-        src="./public/map.jpg"
-        alt="라도무스 아트센터 위치"
-      />
-    </div>
-
-    <div class="location-name">
-      라도무스 아트센터웨딩홀
-    </div>
-
-    <div class="location-address">
-      대전광역시 유성구 동서대로 639<br />
-      8층 루미니스홀
-    </div>
-
-    <div class="location-info">
-
-      <div class="info-row">
-        <div class="info-label">예식</div>
-        <div class="info-value">
-          2027년 1월 23일 토요일 오전 10시 30분
+        <div class="hero-scroll">
+          <svg
+            class="scroll-bounce"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+          >
+            <path d="m6 9 6 6 6-6"></path>
+          </svg>
         </div>
-      </div>
+      </section>
 
-      <div class="info-row">
-        <div class="info-label">주소</div>
-        <div class="info-value">
+      <!-- ② 초대장 -->
+      <section class="invite padded rise">
+
+        <button
+          id="music-button"
+          class="music-button plain"
+          type="button"
+          aria-label="배경음악 재생"
+          aria-pressed="false"
+        >
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M7 4.5 20 12 7 19.5z"></path>
+          </svg>
+        </button>
+
+        <audio
+          id="bgm"
+          src="./public/bgm.mp3"
+          loop
+          autoplay
+          preload="auto"
+        ></audio>
+
+        <img class="star" src="./star.png" alt="">
+
+        <div class="parents">
+          <span class="muted">김권주 · 신춘란의 장남</span> 김연세
+        </div>
+
+        <div class="parents">
+          <span class="muted">김창기 · 박경아의 장녀</span> 김승희
+        </div>
+
+        <div class="greeting">
+          <p>
+            새해의 첫 달,<br>
+            차분한 빛 속에서 저희 두 사람은<br>
+            서로의 삶을 하나로 모으려 합니다.
+          </p>
+
+          <p>
+            추운 겨울이지만 마음만큼은 따뜻한 이날,<br>
+            저희의 소중한 시작을 따뜻하게 축복해 주신다면<br>
+            더없는 기쁨으로 간직하겠습니다.
+          </p>
+
+          <p class="signature">
+            김연세 · 김승희 드림
+          </p>
+        </div>
+
+      </section>
+
+      <!-- ③ 정사각형 사진 -->
+      <section class="square" aria-label="사진">
+        <div
+          class="image-slot"
+          data-image="middle"
+          data-label="정사각형 사진"
+        ></div>
+      </section>
+
+      <!-- ④ 날짜 -->
+      <section class="day padded">
+
+        <header class="section-title">
+          <h2>The day</h2>
+        </header>
+
+        <div class="calendar-wrap">
+
+          <div class="month">
+            2027년 1월 23일 (토) 오전 10:30
+          </div>
+
+          <div id="calendar" class="calendar"></div>
+
+          <div
+            id="countdown"
+            class="countdown"
+            aria-label="예식까지 남은 시간"
+          ></div>
+
+        </div>
+      </section>
+
+      <!-- =========================================
+           ⑤ 앨범
+           3 x 3 썸네일
+           ========================================= -->
+      <section class="album">
+
+        <header class="section-title">
+          <h2>Album</h2>
+        </header>
+
+        <div class="gallery-grid" aria-label="사진 앨범">
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="0"
+            aria-label="갤러리 사진 1 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-1"
+              data-label="갤러리 사진 1"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="1"
+            aria-label="갤러리 사진 2 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-2"
+              data-label="갤러리 사진 2"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="2"
+            aria-label="갤러리 사진 3 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-3"
+              data-label="갤러리 사진 3"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="3"
+            aria-label="갤러리 사진 4 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-4"
+              data-label="갤러리 사진 4"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="4"
+            aria-label="갤러리 사진 5 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-5"
+              data-label="갤러리 사진 5"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="5"
+            aria-label="갤러리 사진 6 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-6"
+              data-label="갤러리 사진 6"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="6"
+            aria-label="갤러리 사진 7 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-7"
+              data-label="갤러리 사진 7"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="7"
+            aria-label="갤러리 사진 8 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-8"
+              data-label="갤러리 사진 8"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="8"
+            aria-label="갤러리 사진 9 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-9"
+              data-label="갤러리 사진 9"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="9"
+            aria-label="갤러리 사진 10 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-10"
+              data-label="갤러리 사진 10"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="10"
+            aria-label="갤러리 사진 11 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-11"
+              data-label="갤러리 사진 11"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="11"
+            aria-label="갤러리 사진 12 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-12"
+              data-label="갤러리 사진 12"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="12"
+            aria-label="갤러리 사진 13 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-13"
+              data-label="갤러리 사진 13"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="13"
+            aria-label="갤러리 사진 14 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-14"
+              data-label="갤러리 사진 14"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="14"
+            aria-label="갤러리 사진 15 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-15"
+              data-label="갤러리 사진 15"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="15"
+            aria-label="갤러리 사진 16 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-16"
+              data-label="갤러리 사진 16"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="16"
+            aria-label="갤러리 사진 17 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-17"
+              data-label="갤러리 사진 17"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="17"
+            aria-label="갤러리 사진 18 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-18"
+              data-label="갤러리 사진 18"
+            ></div>
+          </button>
+
+          <button
+            class="gallery-item"
+            type="button"
+            data-gallery-index="18"
+            aria-label="갤러리 사진 19 열기"
+          >
+            <div
+              class="ratio-45"
+              data-image="gallery-19"
+              data-label="갤러리 사진 19"
+            ></div>
+          </button>
+
+        </div>
+      </section>
+
+      <!-- ⑥ 위치 -->
+      <section class="location padded">
+
+        <header class="section-title">
+          <h2>Location</h2>
+        </header>
+
+        <div id="map-area"></div>
+
+        <div class="venue">
+          라도무스 아트센터
+        </div>
+
+        <div class="venue-sub">
           대전 유성구 동서대로 639
+          <br>
+          루미니스홀 8F
         </div>
-      </div>
 
-      <div class="info-row">
-        <div class="info-label">홀</div>
-        <div class="info-value">
-          8층 루미니스홀
-        </div>
-      </div>
+        <div class="button-grid map-links">
 
-      <div class="info-row">
-        <div class="info-label">주차</div>
-        <div class="info-value">
-          예식장 주차장을 이용해 주세요.
+          <a
+            class="action"
+            href="https://kko.to/4dZ3Cq6NKf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            카카오 길찾기
+          </a>
+
+          <a
+            class="action"
+            href="https://naver.me/Gxk1CPWi"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            네이버 길찾기
+          </a>
+
+          <button class="action" id="tmap-link" type="button">
+            티맵 길찾기
+          </button>
+
         </div>
+
+        <div class="travel">
+
+          <p>
+            <b>PARKING</b>
+            주차빌딩 주차 가능, 만차 시 2·3·4 주차장 이용 가능
+          </p>
+
+          <p>
+            <b>TRANSIT</b>
+            유성온천역 6번 출구
+            <br>
+            ↓
+            <br>
+            106번 버스 탑승 후 흥도초 하차
+            <br>
+            ·
+            <br>
+            706번 버스 탑승 후 등기소/아이파트시티 하차
+            <br>
+            ↓
+            <br>
+            목원대사거리 우측 500M 도보
+          </p>
+
+        </div>
+      </section>
+
+      <!-- ⑦ 화환 안내 -->
+      <!--
+      <section class="notice padded">
+        <header class="section-title">
+          <h2>Notice</h2>
+        </header>
+
+        <div class="ornament">
+          <span>✤</span>
+          <i></i>
+        </div>
+
+        <div class="notice-copy">
+          <p>
+            축하의 마음을 담아 보내주시는<br>
+            화환은 감사히 받겠습니다.
+          </p>
+
+          <p>
+            화환 보내실 곳<br>
+            대전 유성구 동서대로 639<br>
+            라도무스 아트센터 8층 루미니스홀
+          </p>
+        </div>
+      </section>
+      -->
+
+      <!-- ⑧ 계좌 -->
+      <section class="account padded">
+
+        <header class="section-title">
+          <h2>Account</h2>
+        </header>
+
+        <!-- 신랑측 -->
+        <div class="accordion-item">
+
+          <button
+            class="accordion-trigger plain"
+            type="button"
+            aria-expanded="false"
+            aria-controls="groom-account"
+          >
+            신랑측 계좌번호
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+          </button>
+
+          <div id="groom-account" class="accordion-panel" hidden>
+
+            <div class="account-row">
+              <div class="account-details">
+                국민 459601-01-615556<br>
+                <span class="account-owner">
+                  예금주 김연세 · 신랑
+                </span>
+              </div>
+
+              <button
+                class="copy-button"
+                type="button"
+                data-copy="459601-01-615556"
+                aria-label="신랑 김연세 계좌번호 복사"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <rect x="8" y="8" width="12" height="12"></rect>
+                  <path d="M16 8V4H4v12h4"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="account-row">
+              <div class="account-details">
+                국민 451-01-0767-180<br>
+                <span class="account-owner">
+                  예금주 김권주 · 신랑 아버지
+                </span>
+              </div>
+
+              <button
+                class="copy-button"
+                type="button"
+                data-copy="451-01-0767-180"
+                aria-label="신랑 아버지 김권주 계좌번호 복사"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <rect x="8" y="8" width="12" height="12"></rect>
+                  <path d="M16 8V4H4v12h4"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="account-row">
+              <div class="account-details">
+                국민 478-21-0367-274<br>
+                <span class="account-owner">
+                  예금주 신춘란 · 신랑 어머니
+                </span>
+              </div>
+
+              <button
+                class="copy-button"
+                type="button"
+                data-copy="478-21-0367-274"
+                aria-label="신랑 어머니 신춘란 계좌번호 복사"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <rect x="8" y="8" width="12" height="12"></rect>
+                  <path d="M16 8V4H4v12h4"></path>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 신부측 -->
+        <div class="accordion-item">
+
+          <button
+            class="accordion-trigger plain"
+            type="button"
+            aria-expanded="false"
+            aria-controls="bride-account"
+          >
+            신부측 계좌번호
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+          </button>
+
+          <div id="bride-account" class="accordion-panel" hidden>
+
+            <div class="account-row">
+              <div class="account-details">
+                신한 110-475-790973<br>
+                <span class="account-owner">
+                  예금주 김승희 · 신부
+                </span>
+              </div>
+
+              <button
+                class="copy-button"
+                type="button"
+                data-copy="110-475-790973"
+                aria-label="신부 김승희 계좌번호 복사"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <rect x="8" y="8" width="12" height="12"></rect>
+                  <path d="M16 8V4H4v12h4"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="account-row">
+              <div class="account-details">
+                농협 302-2125-6204-31<br>
+                <span class="account-owner">
+                  예금주 김창기 · 신부 아버지
+                </span>
+              </div>
+
+              <button
+                class="copy-button"
+                type="button"
+                data-copy="302-2125-6204-31"
+                aria-label="신부 아버지 김창기 계좌번호 복사"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <rect x="8" y="8" width="12" height="12"></rect>
+                  <path d="M16 8V4H4v12h4"></path>
+                </svg>
+              </button>
+            </div>
+
+            <div class="account-row">
+              <div class="account-details">
+                농협 356-1110-0598-33<br>
+                <span class="account-owner">
+                  예금주 박경아 · 신부 어머니
+                </span>
+              </div>
+
+              <button
+                class="copy-button"
+                type="button"
+                data-copy="356-1110-0598-33"
+                aria-label="신부 어머니 박경아 계좌번호 복사"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+                  <rect x="8" y="8" width="12" height="12"></rect>
+                  <path d="M16 8V4H4v12h4"></path>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ⑨ 방명록 -->
+      <section class="guestbook padded">
+
+        <header class="section-title">
+          <h2>Guestbook</h2>
+        </header>
+
+        <form id="guest-form" class="guest-form">
+
+          <input
+            name="author"
+            aria-label="이름"
+            placeholder="이름"
+            maxlength="30"
+            required
+          >
+
+          <textarea
+            name="message"
+            aria-label="축하 메시지"
+            placeholder="축하 메시지를 남겨주세요"
+            maxlength="300"
+            required
+          ></textarea>
+
+          <button class="action" type="submit">
+            메시지 남기기
+          </button>
+
+        </form>
+
+        <div id="guest-list"></div>
+
+      </section>
+
+      <!-- ⑩ 하단 -->
+      <footer>
+        
+      <!--사진 -->
+      <div class="footer-photo">
+    
+        <img
+          src="./public/gallery-13.jpg"
+          alt="김연세 · 김승희"
+        >
+    
+        <div class="footer-photo-copy">
+    
+          <div class="main">
+            함께하는 모든 순간이<br>
+            더 특별하길
+          </div>
+    
+          <div class="sub">
+            OUR STORY · OUR BEGINNING
+          </div>
+    
+        </div>
+    
       </div>
+        <div class="footer-label">
+          SHARE THE INVITATION
+        </div>
+
+        <div class="button-grid">
+
+          <button id="share" class="action" type="button">
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <circle cx="18" cy="5" r="2"></circle>
+              <circle cx="6" cy="12" r="2"></circle>
+              <circle cx="18" cy="19" r="2"></circle>
+              <path d="m8 11 8-5M8 13l8 5"></path>
+            </svg>
+
+            공유하기
+          </button>
+
+          <button id="link-copy" class="action" type="button">
+
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M10 13a5 5 0 0 0 7 .3l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7-.3l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path>
+            </svg>
+
+            링크 복사
+          </button>
+
+        </div>
+
+        <div class="footer-names">
+          김연세 · 김승희
+        </div>
+
+      </footer>
 
     </div>
-
-  </section>
-
+  </main>
 
   <!-- =========================================
-       ⑦ 계좌
+       앨범 사진 팝업
        ========================================= -->
-  <section class="account reveal">
-
-    <h2 class="section-title">
-      Account
-    </h2>
-
-    <div class="account-notice">
-
-      <strong>마음 전하실 곳</strong>
-
-      <p>
-        참석이 어려우신 분들을 위해 계좌번호를 기재하였습니다.<br />
-        너그러운 마음으로 양해 부탁드립니다.
-      </p>
-
-    </div>
-
-
-    <div class="account-group">
-
-      <div class="account-group-title">
-        GROOM
-      </div>
-
-      <!-- 현재 사용 중인 계좌번호로 교체 -->
-      <div class="account-card">
-
-        <div class="account-text">
-
-          <div class="account-owner">
-            김연세 · 신랑
-          </div>
-
-          <div class="account-number">
-            국민은행 000000-00-000000
-          </div>
-
-        </div>
-
-        <button
-          class="copy-account"
-          type="button"
-          data-account="000000-00-000000"
-        >
-          복사
-        </button>
-
-      </div>
-
-
-      <div class="account-card">
-
-        <div class="account-text">
-
-          <div class="account-owner">
-            김권주 · 신랑 아버지
-          </div>
-
-          <div class="account-number">
-            국민은행 000-00-000000-000
-          </div>
-
-        </div>
-
-        <button
-          class="copy-account"
-          type="button"
-          data-account="000-00-000000-000"
-        >
-          복사
-        </button>
-
-      </div>
-
-
-      <div class="account-card">
-
-        <div class="account-text">
-
-          <div class="account-owner">
-            신춘란 · 신랑 어머니
-          </div>
-
-          <div class="account-number">
-            국민은행 000-00-000000-000
-          </div>
-
-        </div>
-
-        <button
-          class="copy-account"
-          type="button"
-          data-account="000-00-000000-000"
-        >
-          복사
-        </button>
-
-      </div>
-
-    </div>
-
-
-    <div class="account-group">
-
-      <div class="account-group-title">
-        BRIDE
-      </div>
-
-      <div class="account-card">
-
-        <div class="account-text">
-
-          <div class="account-owner">
-            김승희 · 신부
-          </div>
-
-          <div class="account-number">
-            신한은행 000-000-000000
-          </div>
-
-        </div>
-
-        <button
-          class="copy-account"
-          type="button"
-          data-account="000-000-000000"
-        >
-          복사
-        </button>
-
-      </div>
-
-
-      <div class="account-card">
-
-        <div class="account-text">
-
-          <div class="account-owner">
-            김창기 · 신부 아버지
-          </div>
-
-          <div class="account-number">
-            농협은행 000-0000-0000-00
-          </div>
-
-        </div>
-
-        <button
-          class="copy-account"
-          type="button"
-          data-account="000-0000-0000-00"
-        >
-          복사
-        </button>
-
-      </div>
-
-
-      <div class="account-card">
-
-        <div class="account-text">
-
-          <div class="account-owner">
-            박경아 · 신부 어머니
-          </div>
-
-          <div class="account-number">
-            농협은행 000-0000-0000-00
-          </div>
-
-        </div>
-
-        <button
-          class="copy-account"
-          type="button"
-          data-account="000-0000-0000-00"
-        >
-          복사
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================================
-       ⑧ 방명록
-       ========================================= -->
-  <section class="guestbook reveal">
-
-    <h2 class="section-title">
-      Guestbook
-    </h2>
-
-    <div class="guestbook-form">
-
-      <textarea
-        id="guestbook-input"
-        class="guestbook-input"
-        maxlength="300"
-        placeholder="두 분에게 따뜻한 축하의 말을 남겨주세요."
-      ></textarea>
+  <div
+    id="gallery-lightbox"
+    class="gallery-lightbox"
+    aria-hidden="true"
+  >
+
+    <div class="lightbox-inner">
 
       <button
-        id="guestbook-submit"
-        class="guestbook-submit"
+        id="lightbox-close"
+        class="lightbox-close"
         type="button"
+        aria-label="사진 닫기"
       >
-        축하 메시지 남기기
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path d="M6 6l12 12M18 6 6 18"></path>
+        </svg>
       </button>
 
-    </div>
+      <button
+        id="lightbox-prev"
+        class="lightbox-nav lightbox-prev"
+        type="button"
+        aria-label="이전 사진"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path d="m15 18-6-6 6-6"></path>
+        </svg>
+      </button>
 
-    <div
-      id="guestbook-list"
-      class="guestbook-list"
-    ></div>
+      <img
+        id="lightbox-image"
+        class="lightbox-image"
+        src=""
+        alt=""
+      >
 
-  </section>
+      <button
+        id="lightbox-next"
+        class="lightbox-nav lightbox-next"
+        type="button"
+        aria-label="다음 사진"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <path d="m9 18 6-6-6-6"></path>
+        </svg>
+      </button>
 
-
-  <!-- =========================================
-       ⑨ Footer
-       gallery-13 사진 위에 직접 글 작성
-       ========================================= -->
-  <footer>
-
-    <div class="footer-content">
-
-      <div class="footer-label">
-        SHARE THE INVITATION
-      </div>
-
-      <div class="footer-ornament"></div>
-
-
-      <!--
-        textarea가 아닌 contenteditable 사용.
-        화면에서는 박스가 전혀 보이지 않고
-        사진 위에 바로 글씨가 입력되는 형태.
-      -->
       <div
-        id="footer-message"
-        class="footer-message"
-        contenteditable="true"
-        role="textbox"
-        aria-label="축하 메시지"
-        data-placeholder="두 분에게 전하고 싶은 마음을 남겨주세요."
-      ></div>
-
-
-      <div class="button-grid footer-share">
-
-        <button
-          id="share"
-          class="action"
-          type="button"
-        >
-
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-          >
-            <circle cx="18" cy="5" r="2"></circle>
-            <circle cx="6" cy="12" r="2"></circle>
-            <circle cx="18" cy="19" r="2"></circle>
-            <path d="m8 11 8-5M8 13l8 5"></path>
-          </svg>
-
-          공유하기
-
-        </button>
-
-
-        <button
-          id="link-copy"
-          class="action"
-          type="button"
-        >
-
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-          >
-            <path
-              d="M10 13a5 5 0 0 0 7 .3l3-3a5 5 0 0 0-7-7l-1.7 1.7M14 11a5 5 0 0 0-7-.3l-3 3a5 5 0 0 0 7 7l1.7-1.7"
-            ></path>
-          </svg>
-
-          링크 복사
-
-        </button>
-
-      </div>
-
-
-      <div class="footer-thanks">
-        Thank you
-      </div>
-
-      <div class="footer-line"></div>
-
-      <div class="footer-names">
-        김연세 · 김승희
+        id="lightbox-counter"
+        class="lightbox-counter"
+      >
+        1 / 19
       </div>
 
     </div>
-
-  </footer>
-
-</div>
-
-
-<!-- =========================================
-     Gallery Lightbox
-     ========================================= -->
-<div
-  id="gallery-lightbox"
-  class="gallery-lightbox"
-  aria-hidden="true"
->
-
-  <div class="lightbox-inner">
-
-    <button
-      id="lightbox-close"
-      class="lightbox-close"
-      type="button"
-      aria-label="사진 닫기"
-    >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-      >
-        <path d="M6 6l12 12M18 6L6 18"></path>
-      </svg>
-    </button>
-
-
-    <button
-      id="lightbox-prev"
-      class="lightbox-nav lightbox-prev"
-      type="button"
-      aria-label="이전 사진"
-    >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-      >
-        <path d="m15 18-6-6 6-6"></path>
-      </svg>
-    </button>
-
-
-    <img
-      id="lightbox-image"
-      class="lightbox-image"
-      src=""
-      alt=""
-    />
-
-
-    <button
-      id="lightbox-next"
-      class="lightbox-nav lightbox-next"
-      type="button"
-      aria-label="다음 사진"
-    >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-      >
-        <path d="m9 18 6-6-6-6"></path>
-      </svg>
-    </button>
-
-
-    <div
-      id="lightbox-counter"
-      class="lightbox-counter"
-    >
-      1 / 19
-    </div>
-
   </div>
 
-</div>
+  <div
+    id="toast"
+    class="toast"
+    role="status"
+    hidden
+  ></div>
 
+  <script>
+    /* =========================================================
+       여기부터 필요한 값만 수정하면 됩니다.
+       public/ 폴더의 파일은 배포 후 /hero.jpg처럼 접근합니다.
+       ========================================================= */
 
-<script>
-  /* =========================================
-     기본 설정
-     ========================================= */
+    const WEDDING_DATE =
+      new Date("2027-01-23T10:30:00+09:00");
 
-  const WEDDING_DATE =
-    new Date("2027-01-23T10:30:00+09:00");
+    const WEDDING_TIME_LABEL = "10:30 AM";
 
-  const WEDDING_TIME_LABEL =
-    "10:30 AM";
+    const IMAGE_SLOTS = {
+      hero: "./public/hero.jpg",
 
+      middle: "./public/middle.jpg",
 
-  const IMAGE_SLOTS = {
+      gallery: [
+        "./public/gallery-1.jpg",
+        "./public/gallery-2.jpg",
+        "./public/gallery-3.jpg",
+        "./public/gallery-4.jpg",
+        "./public/gallery-5.jpg",
+        "./public/gallery-6.jpg",
+        "./public/gallery-7.jpg",
+        "./public/gallery-8.jpg",
+        "./public/gallery-9.jpg",
+        "./public/gallery-10.jpg",
+        "./public/gallery-11.jpg",
+        "./public/gallery-12.jpg",
+        "./public/gallery-13.jpg",
+        "./public/gallery-14.jpg",
+        "./public/gallery-15.jpg",
+        "./public/gallery-16.jpg",
+        "./public/gallery-17.jpg",
+        "./public/gallery-18.jpg",
+        "./public/gallery-19.jpg"
+      ],
 
-    hero: "./public/hero.jpg",
+      map: "./public/map.jpg"
+    };
 
-    middle: "./public/middle.jpg",
+    const PHOTOS_READY = true;
 
-    gallery: [
-      "./public/gallery-1.jpg",
-      "./public/gallery-2.jpg",
-      "./public/gallery-3.jpg",
-      "./public/gallery-4.jpg",
-      "./public/gallery-5.jpg",
-      "./public/gallery-6.jpg",
-      "./public/gallery-7.jpg",
-      "./public/gallery-8.jpg",
-      "./public/gallery-9.jpg",
-      "./public/gallery-10.jpg",
-      "./public/gallery-11.jpg",
-      "./public/gallery-12.jpg",
-      "./public/gallery-13.jpg",
-      "./public/gallery-14.jpg",
-      "./public/gallery-15.jpg",
-      "./public/gallery-16.jpg",
-      "./public/gallery-17.jpg",
-      "./public/gallery-18.jpg",
-      "./public/gallery-19.jpg"
-    ],
+    const MAP_EMBED_URL = "";
 
-    map: "./public/map.jpg"
+    const TMAP_SHARE_URL =
+      "https://tmap.life/f6a155aa1";
 
-  };
+    const GUESTBOOK_API_URL = "";
 
+    /* =========================================================
+       사진
+       ========================================================= */
 
-  const PHOTOS_READY = true;
+    const imageIcon = `
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <rect
+          x="3"
+          y="3"
+          width="18"
+          height="18"
+          rx="1"
+        ></rect>
 
-  const TMAP_SHARE_URL =
-    "https://tmap.life/f6a155aa1";
+        <circle
+          cx="8"
+          cy="8"
+          r="1"
+        ></circle>
 
-  const GUESTBOOK_API_URL = "";
+        <path
+          d="m3 17 5-5 4 4 3-3 6 6M18 4v7m-3.5-3.5h7"
+        ></path>
+      </svg>
+    `;
 
-  const STORAGE_KEY =
-    "wedding-guestbook-2027-01-23";
+    function imageSlot(node, src, label) {
 
+      node.classList.add("image-slot");
 
-  /* =========================================
-     이미지 로딩
-     ========================================= */
+      function showPlaceholder() {
 
-  function getImagePath(key) {
+        node.replaceChildren();
 
-    if (key === "hero") {
-      return IMAGE_SLOTS.hero;
+        const placeholder =
+          document.createElement("div");
+
+        placeholder.className =
+          "image-placeholder";
+
+        placeholder.innerHTML = `
+          ${imageIcon}
+
+          <div>
+            <div class="label"></div>
+            <div class="filename"></div>
+          </div>
+        `;
+
+        placeholder.querySelector(".label")
+          .textContent = label;
+
+        placeholder.querySelector(".filename")
+          .textContent =
+          src.split("/").pop();
+
+        node.append(placeholder);
+      }
+
+      if (!PHOTOS_READY) {
+        showPlaceholder();
+        return;
+      }
+
+      const image = new Image();
+
+      image.alt = label;
+
+      image.onload = () => {
+        node.replaceChildren(image);
+      };
+
+      image.onerror = showPlaceholder;
+
+      image.src = src;
     }
 
-    if (key === "middle") {
-      return IMAGE_SLOTS.middle;
-    }
+    document
+      .querySelectorAll("[data-image]")
+      .forEach((node) => {
 
-    if (key === "map") {
-      return IMAGE_SLOTS.map;
-    }
+        const key = node.dataset.image;
 
-    const match =
-      key.match(/^gallery-(\d+)$/);
+        const src = key.startsWith("gallery-")
+          ? IMAGE_SLOTS.gallery[
+              Number(
+                key.slice("gallery-".length)
+              ) - 1
+            ]
+          : IMAGE_SLOTS[key];
 
-    if (match) {
+        imageSlot(
+          node,
+          src,
+          node.dataset.label
+        );
+      });
 
-      const index =
-        Number(match[1]) - 1;
+    /* =========================================================
+       앨범 팝업
+       ========================================================= */
+
+    const lightbox =
+      document.querySelector("#gallery-lightbox");
+
+    const lightboxImage =
+      document.querySelector("#lightbox-image");
+
+    const lightboxClose =
+      document.querySelector("#lightbox-close");
+
+    const lightboxPrev =
+      document.querySelector("#lightbox-prev");
+
+    const lightboxNext =
+      document.querySelector("#lightbox-next");
+
+    const lightboxCounter =
+      document.querySelector("#lightbox-counter");
+
+    const galleryItems = [
+      ...document.querySelectorAll(".gallery-item")
+    ];
+
+    let currentGalleryIndex = 0;
+
+    let lastFocusedGalleryItem = null;
+
+    let touchStartX = 0;
+    let touchStartY = 0;
+
+    function getGalleryImage(index) {
 
       return IMAGE_SLOTS.gallery[index];
 
     }
 
-    return "";
-  }
+    function showGalleryImage(
+      index,
+      direction = "next"
+    ) {
 
+      const total =
+        IMAGE_SLOTS.gallery.length;
 
-  function loadImages() {
+      currentGalleryIndex =
+        (index + total) % total;
 
-    document
-      .querySelectorAll("[data-image]")
-      .forEach((slot) => {
-
-        const key =
-          slot.dataset.image;
-
-        const src =
-          getImagePath(key);
-
-        if (!src) {
-          return;
-        }
-
-        const img =
-          document.createElement("img");
-
-        img.src = src;
-
-        img.alt =
-          slot.dataset.label || "";
-
-        img.loading =
-          "lazy";
-
-        img.decoding =
-          "async";
-
-        img.addEventListener(
-          "error",
-          () => {
-
-            slot.innerHTML =
-              '<div class="image-placeholder">IMAGE</div>';
-
-          }
+      const src =
+        getGalleryImage(
+          currentGalleryIndex
         );
 
-        slot.innerHTML = "";
-
-        slot.appendChild(img);
-
-      });
-
-  }
-
-
-  /* =========================================
-     Countdown
-     ========================================= */
-
-  function updateCountdown() {
-
-    const element =
-      document.getElementById("countdown");
-
-    if (!element) {
-      return;
-    }
-
-    const now =
-      new Date();
-
-    const diff =
-      WEDDING_DATE.getTime() -
-      now.getTime();
-
-    if (diff <= 0) {
-
-      element.textContent =
-        "TODAY IS OUR WEDDING DAY";
-
-      return;
-    }
-
-    const totalSeconds =
-      Math.floor(diff / 1000);
-
-    const days =
-      Math.floor(
-        totalSeconds / 86400
+      lightboxImage.classList.remove(
+        "slide-next",
+        "slide-prev"
       );
 
-    const hours =
-      Math.floor(
-        (totalSeconds % 86400) / 3600
+      void lightboxImage.offsetWidth;
+
+      lightboxImage.src = src;
+
+      lightboxImage.alt =
+        `갤러리 사진 ${
+          currentGalleryIndex + 1
+        }`;
+
+      lightboxImage.classList.add(
+        direction === "prev"
+          ? "slide-prev"
+          : "slide-next"
       );
 
-    const minutes =
-      Math.floor(
-        (totalSeconds % 3600) / 60
-      );
-
-    const seconds =
-      totalSeconds % 60;
-
-    element.textContent =
-      `${days} DAYS · ${String(hours).padStart(2, "0")}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
-
-  }
-
-
-  /* =========================================
-     Reveal
-     ========================================= */
-
-  function setupReveal() {
-
-    const items =
-      document.querySelectorAll(".reveal");
-
-    if (
-      !("IntersectionObserver" in window)
-    ) {
-
-      items.forEach(
-        item =>
-          item.classList.add("visible")
-      );
-
-      return;
+      lightboxCounter.textContent =
+        `${currentGalleryIndex + 1} / ${total}`;
     }
 
-    const observer =
-      new IntersectionObserver(
-        (entries) => {
+    function openGallery(index) {
 
-          entries.forEach((entry) => {
+      currentGalleryIndex = index;
 
-            if (
-              entry.isIntersecting
-            ) {
+      showGalleryImage(index);
 
-              entry.target
-                .classList
-                .add("visible");
+      lightbox.classList.add("open");
 
-              observer.unobserve(
-                entry.target
-              );
-
-            }
-
-          });
-
-        },
-        {
-          threshold: 0.12
-        }
+      lightbox.setAttribute(
+        "aria-hidden",
+        "false"
       );
 
-    items.forEach(
-      item => observer.observe(item)
-    );
+      document.body.style.overflow =
+        "hidden";
 
-  }
+      lastFocusedGalleryItem =
+        galleryItems[index];
 
-
-  /* =========================================
-     Gallery Lightbox
-     ========================================= */
-
-  const galleryItems =
-    Array.from(
-      document.querySelectorAll(".gallery-item")
-    );
-
-  const galleryLightbox =
-    document.getElementById(
-      "gallery-lightbox"
-    );
-
-  const lightboxImage =
-    document.getElementById(
-      "lightbox-image"
-    );
-
-  const lightboxClose =
-    document.getElementById(
-      "lightbox-close"
-    );
-
-  const lightboxPrev =
-    document.getElementById(
-      "lightbox-prev"
-    );
-
-  const lightboxNext =
-    document.getElementById(
-      "lightbox-next"
-    );
-
-  const lightboxCounter =
-    document.getElementById(
-      "lightbox-counter"
-    );
-
-
-  let currentGalleryIndex = 0;
-
-  let lastFocusedGalleryItem = null;
-
-  let touchStartX = 0;
-
-
-  function updateLightbox(
-    index,
-    direction = "next"
-  ) {
-
-    if (!IMAGE_SLOTS.gallery.length) {
-      return;
+      lightboxClose.focus();
     }
 
-    currentGalleryIndex =
-      (
-        index +
-        IMAGE_SLOTS.gallery.length
-      ) %
-      IMAGE_SLOTS.gallery.length;
+    function closeGallery() {
 
+      lightbox.classList.remove("open");
 
-    lightboxImage.classList.remove(
-      "slide-next",
-      "slide-prev"
-    );
+      lightbox.setAttribute(
+        "aria-hidden",
+        "true"
+      );
 
+      document.body.style.overflow = "";
 
-    void lightboxImage.offsetWidth;
+      lightboxImage.removeAttribute("src");
 
-
-    lightboxImage.src =
-      IMAGE_SLOTS.gallery[
-        currentGalleryIndex
-      ];
-
-    lightboxImage.alt =
-      `갤러리 사진 ${currentGalleryIndex + 1}`;
-
-
-    lightboxCounter.textContent =
-      `${currentGalleryIndex + 1} / ${IMAGE_SLOTS.gallery.length}`;
-
-
-    lightboxImage.classList.add(
-      direction === "prev"
-        ? "slide-prev"
-        : "slide-next"
-    );
-
-  }
-
-
-  function openLightbox(index) {
-
-    currentGalleryIndex =
-      index;
-
-    lastFocusedGalleryItem =
-      document.activeElement;
-
-    updateLightbox(
-      currentGalleryIndex,
-      "next"
-    );
-
-    galleryLightbox.classList.add(
-      "open"
-    );
-
-    galleryLightbox.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-    document.body.style.overflow =
-      "hidden";
-
-    lightboxClose.focus();
-
-  }
-
-
-  function closeLightbox() {
-
-    galleryLightbox.classList.remove(
-      "open"
-    );
-
-    galleryLightbox.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-    document.body.style.overflow =
-      "";
-
-    if (
-      lastFocusedGalleryItem &&
-      typeof lastFocusedGalleryItem.focus ===
-        "function"
-    ) {
-
-      lastFocusedGalleryItem.focus();
-
+      if (lastFocusedGalleryItem) {
+        lastFocusedGalleryItem.focus();
+      }
     }
 
-  }
+    function nextGallery() {
 
+      showGalleryImage(
+        currentGalleryIndex + 1,
+        "next"
+      );
+    }
 
-  function showPrevious() {
+    function prevGallery() {
 
-    updateLightbox(
-      currentGalleryIndex - 1,
-      "prev"
-    );
+      showGalleryImage(
+        currentGalleryIndex - 1,
+        "prev"
+      );
+    }
 
-  }
-
-
-  function showNext() {
-
-    updateLightbox(
-      currentGalleryIndex + 1,
-      "next"
-    );
-
-  }
-
-
-  galleryItems.forEach(
-    (item, index) => {
+    galleryItems.forEach((item) => {
 
       item.addEventListener(
         "click",
-        () => openLightbox(index)
-      );
+        () => {
 
-    }
-  );
-
-
-  lightboxClose.addEventListener(
-    "click",
-    closeLightbox
-  );
-
-
-  lightboxPrev.addEventListener(
-    "click",
-    showPrevious
-  );
-
-
-  lightboxNext.addEventListener(
-    "click",
-    showNext
-  );
-
-
-  galleryLightbox.addEventListener(
-    "click",
-    (event) => {
-
-      if (
-        event.target ===
-        galleryLightbox
-      ) {
-
-        closeLightbox();
-
-      }
-
-    }
-  );
-
-
-  document.addEventListener(
-    "keydown",
-    (event) => {
-
-      if (
-        !galleryLightbox.classList.contains(
-          "open"
-        )
-      ) {
-
-        return;
-
-      }
-
-      if (event.key === "Escape") {
-
-        closeLightbox();
-
-      }
-
-      if (event.key === "ArrowLeft") {
-
-        showPrevious();
-
-      }
-
-      if (event.key === "ArrowRight") {
-
-        showNext();
-
-      }
-
-    }
-  );
-
-
-  lightboxImage.addEventListener(
-    "touchstart",
-    (event) => {
-
-      touchStartX =
-        event.changedTouches[0].screenX;
-
-    },
-    {
-      passive: true
-    }
-  );
-
-
-  lightboxImage.addEventListener(
-    "touchend",
-    (event) => {
-
-      const touchEndX =
-        event.changedTouches[0].screenX;
-
-      const diff =
-        touchEndX - touchStartX;
-
-      if (Math.abs(diff) < 40) {
-        return;
-      }
-
-      if (diff < 0) {
-        showNext();
-      } else {
-        showPrevious();
-      }
-
-    },
-    {
-      passive: true
-    }
-  );
-
-
-  /* =========================================
-     계좌번호 복사
-     ========================================= */
-
-  document
-    .querySelectorAll(".copy-account")
-    .forEach((button) => {
-
-      button.addEventListener(
-        "click",
-        async () => {
-
-          const account =
-            button.dataset.account;
-
-          if (!account) {
-            return;
-          }
-
-          try {
-
-            await navigator.clipboard.writeText(
-              account
+          const index =
+            Number(
+              item.dataset.galleryIndex
             );
 
-            const original =
-              button.textContent;
-
-            button.textContent =
-              "복사됨";
-
-            setTimeout(() => {
-
-              button.textContent =
-                original;
-
-            }, 1200);
-
-          } catch (error) {
-
-            alert(
-              "계좌번호 복사에 실패했습니다."
-            );
-
-          }
+          openGallery(index);
 
         }
       );
 
     });
 
-
-  /* =========================================
-     Guestbook
-     ========================================= */
-
-  function getGuestbookItems() {
-
-    try {
-
-      const saved =
-        localStorage.getItem(
-          STORAGE_KEY
-        );
-
-      if (!saved) {
-        return [];
-      }
-
-      const parsed =
-        JSON.parse(saved);
-
-      return Array.isArray(parsed)
-        ? parsed
-        : [];
-
-    } catch (error) {
-
-      return [];
-
-    }
-
-  }
-
-
-  function saveGuestbookItems(items) {
-
-    localStorage.setItem(
-      STORAGE_KEY,
-      JSON.stringify(items)
+    lightboxClose.addEventListener(
+      "click",
+      closeGallery
     );
 
-  }
+    lightboxPrev.addEventListener(
+      "click",
+      (event) => {
 
+        event.stopPropagation();
 
-  function renderGuestbook() {
+        prevGallery();
 
-    const list =
-      document.getElementById(
-        "guestbook-list"
-      );
+      }
+    );
 
-    if (!list) {
-      return;
-    }
+    lightboxNext.addEventListener(
+      "click",
+      (event) => {
 
-    const items =
-      getGuestbookItems();
+        event.stopPropagation();
 
-    list.innerHTML = "";
+        nextGallery();
 
+      }
+    );
 
-    if (!items.length) {
+    lightbox.addEventListener(
+      "click",
+      (event) => {
 
-      const empty =
+        if (
+          event.target === lightbox
+        ) {
+          closeGallery();
+        }
+
+      }
+    );
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          !lightbox.classList.contains(
+            "open"
+          )
+        ) {
+          return;
+        }
+
+        if (
+          event.key === "Escape"
+        ) {
+          closeGallery();
+          return;
+        }
+
+        if (
+          event.key === "ArrowRight"
+        ) {
+          nextGallery();
+          return;
+        }
+
+        if (
+          event.key === "ArrowLeft"
+        ) {
+          prevGallery();
+        }
+
+      }
+    );
+
+    lightboxImage.addEventListener(
+      "touchstart",
+      (event) => {
+
+        const touch =
+          event.changedTouches[0];
+
+        touchStartX =
+          touch.clientX;
+
+        touchStartY =
+          touch.clientY;
+
+      },
+      {
+        passive: true
+      }
+    );
+
+    lightboxImage.addEventListener(
+      "touchend",
+      (event) => {
+
+        const touch =
+          event.changedTouches[0];
+
+        const deltaX =
+          touch.clientX - touchStartX;
+
+        const deltaY =
+          touch.clientY - touchStartY;
+
+        if (
+          Math.abs(deltaX) < 40
+        ) {
+          return;
+        }
+
+        if (
+          Math.abs(deltaX) <=
+          Math.abs(deltaY)
+        ) {
+          return;
+        }
+
+        if (deltaX < 0) {
+          nextGallery();
+        } else {
+          prevGallery();
+        }
+
+      },
+      {
+        passive: true
+      }
+    );
+
+    /* =========================================================
+       지도
+       ========================================================= */
+
+    const mapArea =
+      document.querySelector("#map-area");
+
+    if (MAP_EMBED_URL) {
+
+      const frame =
         document.createElement("div");
 
-      empty.className =
-        "guestbook-empty";
+      frame.className =
+        "map-frame";
 
-      empty.textContent =
-        "첫 번째 축하 메시지를 남겨주세요.";
+      const iframe =
+        document.createElement("iframe");
 
-      list.appendChild(empty);
+      iframe.src =
+        MAP_EMBED_URL;
 
-      return;
+      iframe.title =
+        "예식장 약도";
+
+      iframe.loading =
+        "lazy";
+
+      iframe.allowFullscreen =
+        true;
+
+      frame.append(iframe);
+
+      mapArea.append(frame);
+
+    } else {
+
+      const map =
+        document.createElement("div");
+
+      map.className =
+        "ratio-map";
+
+      mapArea.append(map);
+
+      imageSlot(
+        map,
+        IMAGE_SLOTS.map,
+        "예식장 약도"
+      );
+    }
+
+    /* =========================================================
+       달력
+       ========================================================= */
+
+    const calendar =
+      document.querySelector("#calendar");
+
+    const weekdays =
+      ["S", "M", "T", "W", "T", "F", "S"];
+
+    weekdays.forEach((day) => {
+
+      const cell =
+        document.createElement("span");
+
+      cell.className =
+        "weekday";
+
+      cell.textContent =
+        day;
+
+      calendar.append(cell);
+
+    });
+
+    for (let i = 0; i < 5; i++) {
+
+      calendar.append(
+        document.createElement("span")
+      );
 
     }
 
+    for (
+      let day = 1;
+      day <= 31;
+      day++
+    ) {
 
-    items
-      .slice()
-      .reverse()
-      .forEach((item) => {
+      const cell =
+        document.createElement("span");
 
-        const wrapper =
-          document.createElement("div");
+      cell.textContent =
+        day;
 
-        wrapper.className =
-          "guestbook-item";
+      if (day === 23) {
 
+        cell.className =
+          "selected";
 
-        const date =
-          document.createElement("div");
+        cell.setAttribute(
+          "aria-label",
+          "예식일 1월 23일"
+        );
 
-        date.className =
-          "guestbook-item-date";
+      }
 
-        date.textContent =
-          item.date || "";
+      calendar.append(cell);
+    }
 
+    /* =========================================================
+       카운트다운
+       ========================================================= */
 
-        const message =
-          document.createElement("div");
+    const countdown =
+      document.querySelector("#countdown");
 
-        message.className =
-          "guestbook-item-message";
+    function updateCountdown() {
 
-        message.textContent =
-          item.message || "";
+      const seconds =
+        Math.max(
+          0,
+          Math.floor(
+            (
+              WEDDING_DATE.getTime()
+              - Date.now()
+            ) / 1000
+          )
+        );
 
+      const values = [
 
-        wrapper.appendChild(date);
+        Math.floor(
+          seconds / 86400
+        ),
 
-        wrapper.appendChild(message);
+        Math.floor(
+          (seconds % 86400) / 3600
+        ),
 
-        list.appendChild(wrapper);
+        Math.floor(
+          (seconds % 3600) / 60
+        ),
 
-      });
+        seconds % 60
 
-  }
+      ];
 
+      countdown.replaceChildren();
 
-  document
-    .getElementById("guestbook-submit")
-    ?.addEventListener(
+      [
+        "day",
+        "hour",
+        "min",
+        "sec"
+      ].forEach(
+        (label, index) => {
+
+          const item =
+            document.createElement("div");
+
+          const value =
+            document.createElement("strong");
+
+          const caption =
+            document.createElement("small");
+
+          value.textContent =
+            String(
+              values[index]
+            ).padStart(2, "0");
+
+          caption.textContent =
+            label;
+
+          item.append(
+            value,
+            caption
+          );
+
+          countdown.append(item);
+
+        }
+      );
+    }
+
+    updateCountdown();
+
+    setInterval(
+      updateCountdown,
+      1000
+    );
+
+    /* =========================================================
+       안내 메시지
+       ========================================================= */
+
+    let toastTimer;
+
+    function toast(message) {
+
+      const element =
+        document.querySelector("#toast");
+
+      element.textContent =
+        message;
+
+      element.hidden =
+        false;
+
+      clearTimeout(toastTimer);
+
+      toastTimer =
+        setTimeout(
+          () => {
+            element.hidden =
+              true;
+          },
+          3000
+        );
+    }
+
+    /* =========================================================
+       배경음악
+       ========================================================= */
+
+    const audio =
+      document.querySelector("#bgm");
+
+    const musicButton =
+      document.querySelector("#music-button");
+
+    function syncMusicButton() {
+
+      const playing =
+        !audio.paused;
+
+      musicButton.setAttribute(
+        "aria-pressed",
+        String(playing)
+      );
+
+      musicButton.setAttribute(
+        "aria-label",
+        playing
+          ? "배경음악 정지"
+          : "배경음악 재생"
+      );
+
+      musicButton.querySelector(
+        "svg"
+      ).style.opacity =
+        playing ? "0.5" : "1";
+    }
+
+    audio.addEventListener(
+      "play",
+      syncMusicButton
+    );
+
+    audio.addEventListener(
+      "pause",
+      syncMusicButton
+    );
+
+    musicButton.addEventListener(
       "click",
       () => {
 
-        const input =
-          document.getElementById(
-            "guestbook-input"
-          );
+        if (audio.paused) {
 
-        if (!input) {
-          return;
-        }
+          audio.play().catch(() => {
 
-        const message =
-          input.value.trim();
+            toast(
+              "배경음악 파일을 확인해 주세요."
+            );
 
-        if (!message) {
+          });
 
-          alert(
-            "축하 메시지를 입력해주세요."
-          );
+        } else {
 
-          input.focus();
-
-          return;
+          audio.pause();
 
         }
-
-
-        const items =
-          getGuestbookItems();
-
-
-        items.push({
-
-          message,
-
-          date:
-            new Date()
-              .toLocaleDateString(
-                "ko-KR"
-              )
-
-        });
-
-
-        saveGuestbookItems(items);
-
-        input.value = "";
-
-        renderGuestbook();
 
       }
     );
 
+    function retryAutoplay() {
 
-  /* =========================================
-     Footer 직접 작성 영역
-     ========================================= */
+      audio.play().catch(() => {});
 
-  const footerMessage =
-    document.getElementById(
-      "footer-message"
-    );
-
-
-  /*
-    contenteditable 내부에 입력한 글은
-    실제로 사진 위에 바로 표시됨.
-  */
-  footerMessage?.addEventListener(
-    "keydown",
-    (event) => {
-
-      /*
-        너무 많은 줄바꿈 방지
-      */
-      if (
-        event.key === "Enter" &&
-        event.shiftKey === false
-      ) {
-
-        event.preventDefault();
-
-        document.execCommand(
-          "insertLineBreak"
-        );
-
-      }
-
-    }
-  );
-
-
-  /*
-    내용이 비어 있을 때 생기는
-    빈 div / br 정리
-  */
-  footerMessage?.addEventListener(
-    "input",
-    () => {
-
-      if (
-        footerMessage.textContent.trim() === ""
-      ) {
-
-        footerMessage.innerHTML = "";
-
-      }
-
-    }
-  );
-
-
-  /* =========================================
-     공유
-     ========================================= */
-
-  const shareButton =
-    document.getElementById("share");
-
-
-  shareButton?.addEventListener(
-    "click",
-    async () => {
-
-      const shareData = {
-
-        title:
-          "김연세 · 김승희 결혼합니다",
-
-        text:
-          "2027년 1월 23일 토요일 오전 10시 30분, 라도무스 아트센터",
-
-        url:
-          window.location.href
-
-      };
-
-
-      if (
-        navigator.share
-      ) {
-
-        try {
-
-          await navigator.share(
-            shareData
-          );
-
-        } catch (error) {
-
-          /*
-            사용자가 공유창을 닫은 경우
-            별도 처리하지 않음
-          */
-
-        }
-
-        return;
-
-      }
-
-
-      try {
-
-        await navigator.clipboard.writeText(
-          window.location.href
-        );
-
-        alert(
-          "청첩장 링크가 복사되었습니다."
-        );
-
-      } catch (error) {
-
-        alert(
-          "링크 복사에 실패했습니다."
-        );
-
-      }
-
-    }
-  );
-
-
-  /* =========================================
-     링크 복사
-     ========================================= */
-
-  const linkCopy =
-    document.getElementById(
-      "link-copy"
-    );
-
-
-  linkCopy?.addEventListener(
-    "click",
-    async () => {
-
-      try {
-
-        await navigator.clipboard.writeText(
-          window.location.href
-        );
-
-        const original =
-          linkCopy.innerHTML;
-
-        linkCopy.textContent =
-          "복사됨";
-
-        setTimeout(() => {
-
-          linkCopy.innerHTML =
-            original;
-
-        }, 1200);
-
-      } catch (error) {
-
-        alert(
-          "링크 복사에 실패했습니다."
-        );
-
-      }
-
-    }
-  );
-
-
-  /* =========================================
-     초기화
-     ========================================= */
-
-  document.addEventListener(
-    "DOMContentLoaded",
-    () => {
-
-      loadImages();
-
-      setupReveal();
-
-      updateCountdown();
-
-      renderGuestbook();
-
-      setInterval(
-        updateCountdown,
-        1000
+      window.removeEventListener(
+        "pointerdown",
+        retryAutoplay
       );
 
+      window.removeEventListener(
+        "keydown",
+        retryAutoplay
+      );
     }
-  );
 
-</script>
+    audio.play().catch(() => {
 
+      window.addEventListener(
+        "pointerdown",
+        retryAutoplay,
+        { once: true }
+      );
+
+      window.addEventListener(
+        "keydown",
+        retryAutoplay,
+        { once: true }
+      );
+
+    });
+
+    syncMusicButton();
+
+    /* =========================================================
+       티맵
+       ========================================================= */
+
+    document
+      .querySelector("#tmap-link")
+      .addEventListener(
+        "click",
+        () => {
+
+          if (!TMAP_SHARE_URL) {
+
+            toast(
+              "티맵 장소 공유 링크를 입력해 주세요."
+            );
+
+            return;
+          }
+
+          window.open(
+            TMAP_SHARE_URL,
+            "_blank",
+            "noopener,noreferrer"
+          );
+        }
+      );
+
+    /* =========================================================
+       버튼과 계좌
+       ========================================================= */
+
+    document
+      .querySelectorAll("[data-toast]")
+      .forEach((button) => {
+
+        button.addEventListener(
+          "click",
+          () =>
+            toast(
+              button.dataset.toast
+            )
+        );
+
+      });
+
+    function setAccountOpen(
+      button,
+      open
+    ) {
+
+      const panel =
+        document.getElementById(
+          button.getAttribute(
+            "aria-controls"
+          )
+        );
+
+      const wasHidden =
+        panel.hidden;
+
+      const currentHeight =
+        wasHidden
+          ? 0
+          : panel.getBoundingClientRect()
+              .height;
+
+      const currentOpacity =
+        wasHidden
+          ? 0
+          : Number(
+              getComputedStyle(
+                panel
+              ).opacity
+            );
+
+      panel._animation?.cancel();
+
+      panel.hidden =
+        false;
+
+      panel.style.overflow =
+        "hidden";
+
+      button.setAttribute(
+        "aria-expanded",
+        String(open)
+      );
+
+      const targetHeight =
+        open
+          ? panel.scrollHeight
+          : 0;
+
+      const reducedMotion =
+        matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+
+      const animation =
+        panel.animate(
+          [
+            {
+              height:
+                `${currentHeight}px`,
+              opacity:
+                currentOpacity
+            },
+            {
+              height:
+                `${targetHeight}px`,
+              opacity:
+                open ? 1 : 0
+            }
+          ],
+          {
+            duration:
+              reducedMotion
+                ? 0
+                : 420,
+
+            easing:
+              "cubic-bezier(.32, .72, 0, 1)",
+
+            fill:
+              "forwards"
+          }
+        );
+
+      panel._animation =
+        animation;
+
+      animation.finished
+        .then(() => {
+
+          if (
+            panel._animation !==
+            animation
+          ) {
+            return;
+          }
+
+          panel.hidden =
+            !open;
+
+          panel.style.overflow =
+            "";
+
+          animation.cancel();
+
+          panel._animation =
+            null;
+
+        })
+        .catch(() => {});
+    }
+
+    document
+      .querySelectorAll(
+        ".accordion-trigger"
+      )
+      .forEach((button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const willOpen =
+              button.getAttribute(
+                "aria-expanded"
+              ) !== "true";
+
+            document
+              .querySelectorAll(
+                ".accordion-trigger"
+              )
+              .forEach(
+                (other) => {
+
+                  const shouldOpen =
+                    other === button &&
+                    willOpen;
+
+                  const isOpen =
+                    other.getAttribute(
+                      "aria-expanded"
+                    ) === "true";
+
+                  if (
+                    shouldOpen !==
+                    isOpen
+                  ) {
+                    setAccountOpen(
+                      other,
+                      shouldOpen
+                    );
+                  }
+
+                }
+              );
+          }
+        );
+
+      });
+
+    /* =========================================================
+       복사
+       ========================================================= */
+
+    async function copyText(value) {
+
+      try {
+
+        await navigator.clipboard
+          .writeText(value);
+
+        toast("복사했어요.");
+
+      } catch {
+
+        toast(
+          "복사하지 못했습니다."
+        );
+
+      }
+    }
+
+    document
+      .querySelectorAll("[data-copy]")
+      .forEach((button) => {
+
+        button.addEventListener(
+          "click",
+          () => {
+            copyText(
+              button.dataset.copy
+            );
+          }
+        );
+
+      });
+
+    document
+      .querySelector("#link-copy")
+      .addEventListener(
+        "click",
+        () => {
+          copyText(location.href);
+        }
+      );
+
+    document
+      .querySelector("#share")
+      .addEventListener(
+        "click",
+        async () => {
+
+          if (!navigator.share) {
+
+            copyText(location.href);
+
+            return;
+          }
+
+          try {
+
+            await navigator.share({
+
+              title:
+                document.title,
+
+              text:
+                "김연세 · 김승희 결혼식에 초대합니다.",
+
+              url:
+                location.href
+
+            });
+
+          } catch (error) {
+
+            if (
+              error.name !==
+              "AbortError"
+            ) {
+
+              toast(
+                "공유하지 못했습니다."
+              );
+
+            }
+
+          }
+
+        }
+      );
+
+    /* =========================================================
+       방명록
+       ========================================================= */
+
+    const STORAGE_KEY =
+      "wedding-guestbook-2027-01-23";
+
+    let messages = [];
+
+    const seenIds =
+      new Set();
+
+    function renderMessages() {
+
+      const list =
+        document.querySelector(
+          "#guest-list"
+        );
+
+      list.replaceChildren();
+
+      if (!messages.length) {
+
+        const empty =
+          document.createElement(
+            "div"
+          );
+
+        empty.className =
+          "empty";
+
+        empty.textContent =
+          "첫 번째 축하 메시지를 남겨주세요.";
+
+        list.append(empty);
+
+        return;
+      }
+
+      const grid =
+        document.createElement(
+          "div"
+        );
+
+      grid.className =
+        "notes";
+
+      messages
+        .slice(0, 30)
+        .forEach(
+          (row, index) => {
+
+            const card =
+              document.createElement(
+                "article"
+              );
+
+            card.className =
+              "note";
+
+            card.style.background =
+              `var(--note-${
+                Math.max(
+                  1,
+                  Math.min(
+                    6,
+                    Number(
+                      row.color_index
+                    ) + 1
+                  )
+                )
+              })`;
+
+            card.style.transform =
+              `rotate(${
+                [-1, 1, 0][
+                  index % 3
+                ]
+              }deg)`;
+
+            const body =
+              document.createElement(
+                "p"
+              );
+
+            body.textContent =
+              row.message;
+
+            const author =
+              document.createElement(
+                "small"
+              );
+
+            author.textContent =
+              "— " + row.author;
+
+            card.append(
+              body,
+              author
+            );
+
+            grid.append(card);
+
+          }
+        );
+
+      list.append(grid);
+    }
+
+    function addMessage(row) {
+
+      const id =
+        row.id ||
+        `${row.created_at}:${row.author}:${row.message}`;
+
+      if (
+        seenIds.has(id)
+      ) {
+        return;
+      }
+
+      seenIds.add(id);
+
+      messages.unshift(row);
+
+      messages.sort(
+        (a, b) =>
+          new Date(b.created_at) -
+          new Date(a.created_at)
+      );
+
+      messages =
+        messages.slice(0, 30);
+
+      renderMessages();
+    }
+
+    async function loadMessages() {
+
+      try {
+
+        let rows;
+
+        if (GUESTBOOK_API_URL) {
+
+          const response =
+            await fetch(
+              `${GUESTBOOK_API_URL}?limit=30`
+            );
+
+          if (!response.ok) {
+            throw new Error("load");
+          }
+
+          rows =
+            await response.json();
+
+        } else {
+
+          rows =
+            JSON.parse(
+              localStorage.getItem(
+                STORAGE_KEY
+              ) || "[]"
+            );
+
+        }
+
+        rows
+          .sort(
+            (a, b) =>
+              new Date(a.created_at) -
+              new Date(b.created_at)
+          )
+          .forEach(addMessage);
+
+      } catch {
+
+        renderMessages();
+
+      }
+    }
+
+    loadMessages();
+
+    document
+      .querySelector("#guest-form")
+      .addEventListener(
+        "submit",
+        async (event) => {
+
+          event.preventDefault();
+
+          const form =
+            event.currentTarget;
+
+          if (
+            !form.reportValidity()
+          ) {
+            return;
+          }
+
+          const row = {
+
+            id:
+              crypto.randomUUID?.() ||
+              String(Date.now()),
+
+            author:
+              form.elements
+                .author.value.trim(),
+
+            message:
+              form.elements
+                .message.value.trim(),
+
+            color_index:
+              Math.floor(
+                Math.random() * 6
+              ),
+
+            created_at:
+              new Date().toISOString()
+
+          };
+
+          if (
+            !row.author ||
+            !row.message
+          ) {
+            return;
+          }
+
+          try {
+
+            if (GUESTBOOK_API_URL) {
+
+              const response =
+                await fetch(
+                  GUESTBOOK_API_URL,
+                  {
+                    method: "POST",
+
+                    headers: {
+                      "Content-Type":
+                        "application/json"
+                    },
+
+                    body:
+                      JSON.stringify(row)
+                  }
+                );
+
+              if (!response.ok) {
+                throw new Error("save");
+              }
+
+              addMessage(
+                await response.json()
+              );
+
+            } else {
+
+              const rows =
+                JSON.parse(
+                  localStorage.getItem(
+                    STORAGE_KEY
+                  ) || "[]"
+                );
+
+              rows.unshift(row);
+
+              localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(
+                  rows.slice(0, 30)
+                )
+              );
+
+              addMessage(row);
+            }
+
+            form.reset();
+
+            toast(
+              "축하 메시지를 남겼어요."
+            );
+
+          } catch {
+
+            toast(
+              "메시지를 남기지 못했습니다."
+            );
+
+          }
+        }
+      );
+
+    if (GUESTBOOK_API_URL) {
+
+      const events =
+        new EventSource(
+          `${GUESTBOOK_API_URL}/events`
+        );
+
+      events.addEventListener(
+        "insert",
+        (event) => {
+
+          try {
+
+            addMessage(
+              JSON.parse(
+                event.data
+              )
+            );
+
+          } catch {}
+
+        }
+      );
+    }
+  </script>
 </body>
 </html>
