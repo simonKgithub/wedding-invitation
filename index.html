@@ -975,85 +975,99 @@
       text-align: center;
     }
 
-   /* =========================================
-   FOOTER — 마지막 사진을 배경처럼
+/* =========================================
+   FOOTER
    ========================================= */
-	
+
 	footer {
 	  position: relative;
 	  overflow: hidden;
-	  padding: 0 28px 55px;
+	
+	  min-height: 680px;
+	
+	  padding: 0 28px 50px;
+	
 	  border-top: 0;
+	
 	  background: transparent;
 	}
 	
-	/* 사진 전체 배경 */
+	
+	/* =========================================
+	   푸터 전체를 차지하는 사진
+	   ========================================= */
+	
 	.footer-photo {
 	  position: absolute;
 	  z-index: 0;
-	  inset: -20px 0 0;
-	  height: calc(100% + 80px);
+	
+	  top: 0;
+	  left: 0;
+	  right: 0;
+	  bottom: 0;
+	
 	  overflow: hidden;
+	
 	  pointer-events: none;
 	}
 	
-	/* 사진 */
+	
+	/* 사진 자체는 투명도 없음 */
+	
 	.footer-photo img {
 	  position: absolute;
-	  inset: 0;
+	
+	  top: 0;
+	  left: 0;
+	
 	  width: 100%;
 	  height: 100%;
+	
 	  object-fit: cover;
 	  object-position: center;
-	  opacity: 0.92;
 	
-	  /*
-	   * 사진 자체도 위아래가 자연스럽게 사라지도록 처리
-	   */
-	  -webkit-mask-image: linear-gradient(
-	    to bottom,
-	    transparent 0%,
-	    rgba(0, 0, 0, 0.35) 9%,
-	    rgba(0, 0, 0, 0.85) 20%,
-	    black 32%,
-	    black 68%,
-	    rgba(0, 0, 0, 0.85) 80%,
-	    rgba(0, 0, 0, 0.4) 91%,
-	    transparent 100%
-	  );
-	
-	  mask-image: linear-gradient(
-	    to bottom,
-	    transparent 0%,
-	    rgba(0, 0, 0, 0.35) 9%,
-	    rgba(0, 0, 0, 0.85) 20%,
-	    black 32%,
-	    black 68%,
-	    rgba(0, 0, 0, 0.85) 80%,
-	    rgba(0, 0, 0, 0.4) 91%,
-	    transparent 100%
-	  );
+	  opacity: 1;
 	}
 	
-	/* 사진 위 미색 오버레이 */
+	
+	/* =========================================
+	   위 / 아래 페이드
+	   사진은 그대로 두고
+	   미색 배경을 위아래에 자연스럽게 얹음
+	   ========================================= */
+	
 	.footer-photo::after {
 	  content: "";
+	
 	  position: absolute;
+	  z-index: 2;
+	
 	  inset: 0;
+	
+	  pointer-events: none;
 	
 	  background:
 	    linear-gradient(
 	      to bottom,
+	
+	      /* 위쪽 */
 	      var(--background) 0%,
-		    oklch(0.972 0.012 88 / 15%) 15%,
-		    oklch(0.972 0.012 88 / 3%) 35%,
-		    oklch(0.972 0.012 88 / 3%) 65%,
-		    oklch(0.972 0.012 88 / 18%) 85%,
+	      var(--background) 7%,
+	      oklch(0.972 0.012 88 / 85%) 13%,
+	      oklch(0.972 0.012 88 / 35%) 21%,
+	      transparent 31%,
+	
+	      /* 사진 중앙 */
+	      transparent 68%,
+	
+	      /* 아래쪽 */
+	      oklch(0.972 0.012 88 / 35%) 78%,
+	      oklch(0.972 0.012 88 / 85%) 88%,
+	      var(--background) 97%,
 	      var(--background) 100%
 	    );
-	
-	  pointer-events: none;
 	}
+	
 	
 	/* =========================================
 	   사진 위 문구
@@ -1061,101 +1075,162 @@
 	
 	.footer-photo-copy {
 	  position: relative;
-	  z-index: 2;
+	  z-index: 5;
 	
-	  min-height: 430px;
+	  min-height: 500px;
 	
 	  display: flex;
 	  flex-direction: column;
-	  justify-content: center;
 	
-	  /* 중앙이 아니라 살짝 왼쪽 */
+	  justify-content: center;
 	  align-items: flex-start;
 	
-	  padding-left: 11%;
+	  padding-left: 10%;
+	
 	  box-sizing: border-box;
 	
 	  color: var(--primary);
+	
 	  text-align: left;
 	
 	  pointer-events: none;
 	}
 	
+	
 	/* 작은 장식선 */
+	
 	.footer-photo-copy::before {
 	  content: "";
+	
 	  width: 25px;
 	  height: 1px;
 	
 	  margin-bottom: 24px;
 	
 	  background: currentColor;
-	  opacity: 0.55;
+	
+	  opacity: 0.65;
 	}
 	
+	
 	/* 메인 문구 */
+	
 	.footer-photo-copy .main {
-	  font: 24px / 1.85 var(--font-typewriter);
+	  font: 24px / 1.9 var(--font-typewriter);
 	
 	  letter-spacing: 0.025em;
 	
 	  text-shadow:
-	    0 1px 12px oklch(1 0 0 / 70%),
-	    0 0 25px oklch(1 0 0 / 30%);
+	    0 1px 10px rgba(255,255,255,0.75),
+	    0 0 25px rgba(255,255,255,0.35);
 	}
 	
-	/* 영문 서브 문구 */
+	
+	/* 영문 */
+	
 	.footer-photo-copy .sub {
-	  margin-top: 22px;
+	  margin-top: 20px;
 	
 	  font: 8px / 1.6 var(--font-mono);
 	
 	  letter-spacing: 0.25em;
 	
-	  opacity: 0.68;
+	  opacity: 0.7;
+	
+	  text-shadow:
+	    0 1px 8px rgba(255,255,255,0.7);
 	}
 	
+	
 	/* =========================================
-	   공유 영역
+	   아래쪽 페이드 영역
 	   ========================================= */
 	
 	.footer-content {
 	  position: relative;
-	  z-index: 3;
-	  margin-top: -30px;
+	  z-index: 6;
+	
+	  /*
+	   * 사진 하단으로 살짝 겹쳐서
+	   * 페이드 영역에 버튼이 들어가게 함
+	   */
+	  margin-top: 0;
+	
+	  padding-top: 70px;
 	}
 	
-	/* 기존 SHARE 영역 */
+	
+	/* 공유 안내 */
+	
 	.footer-label {
 	  margin-bottom: 16px;
+	
 	  color: var(--muted-foreground);
+	
 	  font: 9px var(--font-mono);
-	  text-align: center;
+	
 	  letter-spacing: 0.15em;
-	  text-shadow: 0 1px 8px oklch(1 0 0 / 70%);
+	
+	  text-align: center;
+	
+	  text-shadow:
+	    0 1px 8px rgba(255,255,255,0.8);
 	}
 	
-	/* 공유 버튼 */
+	
+	/* =========================================
+	   공유 / 복사 버튼
+	   ========================================= */
+	
 	.button-grid {
 	  position: relative;
-	  z-index: 4;
+	  z-index: 10;
+	
 	  display: grid;
+	
 	  grid-template-columns: 1fr 1fr;
+	
 	  gap: 10px;
 	}
 	
-	/* 이름 */
+	
+	.button-grid .action {
+	  /*
+	   * 사진이 비치는 아주 은은한 버튼
+	   */
+	  background: rgba(248, 245, 238, 0.72);
+	
+	  border: 1px solid rgba(80, 70, 55, 0.16);
+	
+	  backdrop-filter: blur(6px);
+	  -webkit-backdrop-filter: blur(6px);
+	
+	  box-shadow:
+	    0 4px 18px rgba(60, 50, 40, 0.08);
+	
+	  text-shadow:
+	    0 1px 5px rgba(255,255,255,0.8);
+	}
+	
+	
+	/* =========================================
+	   이름
+	   ========================================= */
+	
 	.footer-names {
 	  position: relative;
-	  z-index: 3;
+	  z-index: 6;
 	
 	  margin-top: 42px;
 	
 	  color: var(--muted-foreground);
+	
 	  font: 9px var(--font-mono);
+	
 	  text-align: center;
 	
-	  text-shadow: 0 1px 8px oklch(1 0 0 / 70%);
+	  text-shadow:
+	    0 1px 8px rgba(255,255,255,0.8);
 	}
 	
 	
@@ -1165,30 +1240,39 @@
 	
 	@media (max-width: 420px) {
 	
-	  .footer-photo {
-	    inset: -20px 0 0;
-	    height: calc(100% + 70px);
+	  footer {
+	    min-height: 630px;
+	
+	    padding-left: 24px;
+	    padding-right: 24px;
 	  }
+	
 	
 	  .footer-photo-copy {
-	    min-height: 390px;
+	    min-height: 470px;
 	
-	    padding-left: 10%;
+	    padding-left: 9%;
 	  }
+	
 	
 	  .footer-photo-copy .main {
 	    font-size: 20px;
+	
 	    line-height: 1.9;
 	  }
 	
+	
 	  .footer-photo-copy .sub {
 	    margin-top: 18px;
+	
 	    font-size: 7px;
+	
 	    letter-spacing: 0.2em;
 	  }
-
+	
+	
 	  .footer-content {
-	    margin-top: -35px;
+	    padding-top: 65px;
 	  }
 	
 	}
@@ -2007,31 +2091,22 @@
       </section>
 
       <!-- ⑩ 하단 -->
-	<footer>
-		
-		  <!-- =====================================
-		       마지막 사진 배경
-		       ===================================== -->
-		
+		<footer>
+	
+		  <!-- 푸터 전체를 채우는 사진 -->
 		  <div class="footer-photo">
-		
 		    <img
 		      src="./public/gallery-13.jpg"
 		      alt=""
 		    >
-		
 		  </div>
 		
 		
-		  <!-- =====================================
-		       사진 위 문구
-		       ===================================== -->
-		
+		  <!-- 사진 위 문구 -->
 		  <div class="footer-photo-copy">
 		
 		    <div class="main">
-		      함께하는 모든 순간이<br>
-		      더 특별하길
+		      ㅇㅇㅇㅇㅇㅇ
 		    </div>
 		
 		    <div class="sub">
@@ -2041,10 +2116,7 @@
 		  </div>
 		
 		
-		  <!-- =====================================
-		       사진 아래쪽 페이드 영역
-		       ===================================== -->
-		
+		  <!-- 아래쪽 페이드 영역 -->
 		  <div class="footer-content">
 		
 		    <div class="footer-label">
@@ -2054,31 +2126,23 @@
 		    <div class="button-grid">
 		
 		      <button id="share" class="action" type="button">
-		
-		        <!-- 기존 공유 아이콘 -->
-		
+		        <!-- 기존 공유 SVG -->
 		        초대장 공유하기
-		
 		      </button>
 		
-		
 		      <button id="link-copy" class="action" type="button">
-		
-		        <!-- 기존 링크 아이콘 -->
-		
+		        <!-- 기존 링크 SVG -->
 		        링크 복사하기
-		
 		      </button>
 		
 		    </div>
-		
 		
 		    <div class="footer-names">
 		      김연세 · 김승희
 		    </div>
 		
 		  </div>
-		
+
 		</footer>
     </div>
   </main>
