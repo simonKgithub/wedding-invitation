@@ -11,8 +11,8 @@
 
   <!--미리보기-->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="김연세 ♥ 김승희 결혼합니다">
-  <meta property="og:description" content="소중한 자리에 소중한 분들을 초대합니다.">
+  <meta property="og:title" content="김연세 ♥ 김승희 결혼합니다.">
+  <meta property="og:description" content="2027년 1월 23일 10:30, 대전 라도무스">
   <meta property="og:image" content="https://simonkgithub.github.io/wedding-invitation/preview.jpg">
   <meta property="og:url" content="https://simonkgithub.github.io/wedding-invitation/">
 
@@ -22,6 +22,8 @@
     href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Rubik:wght@400;500;600;700&family=Space+Mono:wght@400;700&family=Special+Elite&display=swap"
     rel="stylesheet"
   >
+  <!--supabase cdn-->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
     :root {
@@ -2312,6 +2314,18 @@
       "https://tmap.life/f6a155aa1";
 
     const GUESTBOOK_API_URL = "";
+	
+	const SUPABASE_URL =
+	  "https://dyhqrfputxdvndcvlyvn.supabase.co";
+
+	const SUPABASE_KEY =
+	  "sb_publishable_vOrzCBWnMCez2rAhZgu-cQ_tT4ig5bG";
+
+	const supabaseClient =
+	  window.supabase.createClient(
+		SUPABASE_URL,
+		SUPABASE_KEY
+	  );
 
     /* =========================================================
        사진
@@ -3322,7 +3336,229 @@
     /* =========================================================
        방명록
        ========================================================= */
+	  /* =========================================================
+   GUESTBOOK - SUPABASE
+   ========================================================= */
 
+const guestForm =
+  document.getElementById("guest-form");
+
+const guestList =
+  document.getElementById("guest-list");
+
+
+/* ---------------------------------------------------------
+   HTML 특수문자 처리
+   --------------------------------------------------------- */
+
+function escapeGuestbookHtml(value) {
+
+  return String(value)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+
+/* ---------------------------------------------------------
+   날짜 표시
+   --------------------------------------------------------- */
+
+function formatGuestbookDate(value) {
+
+  const date = new Date(value);
+
+  if (Number.isNaN(date.getTime())) {
+    return "";
+  }
+
+  return date.toLocaleDateString(
+    "ko-KR",
+    {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    }
+  );
+}
+
+
+/* ---------------------------------------------------------
+   방명록 조회
+   --------------------------------------------------------- */
+
+async function loadGuestbook() {
+
+  const {
+    data,
+    error
+  } = await supabaseClient
+    .from("guestbook")
+    .select(
+      "id, author, message, color_index, created_at"
+    )
+    .order("created_at", {
+      ascending: false
+    })
+    .limit(30);
+
+  if (error) {
+
+    console.error(
+      "방명록 조회 실패:",
+      error
+    );
+
+    return;
+  }
+
+  renderGuestbook(data || []);
+}
+
+
+/* ---------------------------------------------------------
+   방명록 출력
+   --------------------------------------------------------- */
+
+function renderGuestbook(items) {
+
+  if (!guestList) {
+    return;
+  }
+
+  guestList.innerHTML = "";
+
+  items.forEach((item) => {
+
+    const article =
+      document.createElement("div");
+
+    article.className =
+      "guestbook-item";
+
+    /*
+     * 기존 디자인을 사용하는 경우
+     * 현재 사용 중인 class가 있다면
+     * 이 부분의 class명은 기존 HTML에 맞춰 유지하면 됨.
+     */
+
+    article.innerHTML = `
+      <div class="guest-author">
+        ${escapeGuestbookHtml(item.author)}
+      </div>
+
+      <div class="guest-message">
+        ${escapeGuestbookHtml(item.message)}
+      </div>
+
+      <div class="guest-date">
+        ${formatGuestbookDate(item.created_at)}
+      </div>
+    `;
+
+    guestList.appendChild(article);
+  });
+}
+
+
+/* ---------------------------------------------------------
+   방명록 작성
+   --------------------------------------------------------- */
+
+	if (guestForm) {
+
+	  guestForm.addEventListener(
+		"submit",
+		async (event) => {
+
+		  event.preventDefault();
+
+		  const formData =
+			new FormData(guestForm);
+
+		  const author =
+			String(
+			  formData.get("author") || ""
+			).trim();
+
+		  const message =
+			String(
+			  formData.get("message") || ""
+			).trim();
+
+
+		  /* 입력값 확인 */
+
+		  if (!author) {
+			alert("이름을 입력해주세요.");
+			return;
+		  }
+
+		  if (!message) {
+			alert("메시지를 입력해주세요.");
+			return;
+		  }
+
+
+		  /* 기존 코드와 동일하게 0~5 */
+
+		  const colorIndex =
+			Math.floor(
+			  Math.random() * 6
+			);
+
+
+		  /* Supabase 저장 */
+
+		  const {
+			error
+		  } = await supabaseClient
+			.from("guestbook")
+			.insert({
+			  author,
+			  message,
+			  color_index: colorIndex
+			});
+
+
+		  if (error) {
+
+			console.error(
+			  "방명록 작성 실패:",
+			  error
+			);
+
+			alert(
+			  "방명록 등록에 실패했습니다.\n잠시 후 다시 시도해주세요."
+			);
+
+			return;
+		  }
+
+
+		  /* 작성 완료 */
+
+		  guestForm.reset();
+
+		  await loadGuestbook();
+
+		}
+	  );
+	}
+
+
+	/* ---------------------------------------------------------
+	   최초 방명록 조회
+	   --------------------------------------------------------- */
+
+	loadGuestbook(); 
+	   
+   /* ---------------------------------------------------------
+	  기존 방명록 조회
+	--------------------------------------------------------- */
+	  
     const STORAGE_KEY =
       "wedding-guestbook-2027-01-23";
 
@@ -3479,12 +3715,17 @@
         } else {
 
           rows =
-            JSON.parse(
-              localStorage.getItem(
-                STORAGE_KEY
-              ) || "[]"
-            );
-
+            const {data,
+				  error
+				} = await supabaseClient
+				  .from("guestbook")
+				  .select(
+					"id, author, message, color_index, created_at"
+				  )
+				  .order("created_at", {
+					ascending: false
+				  })
+				  .limit(30);
         }
 
         rows
@@ -3583,19 +3824,30 @@
             } else {
 
               const rows =
-                JSON.parse(
-                  localStorage.getItem(
-                    STORAGE_KEY
-                  ) || "[]"
-                );
+               const {data,
+					  error
+					} = await supabaseClient
+					  .from("guestbook")
+					  .select(
+						"id, author, message, color_index, created_at"
+					  )
+					  .order("created_at", {
+						ascending: false
+					  })
+					  .limit(30);
 
               rows.unshift(row);
 
               localStorage.setItem(
-                STORAGE_KEY,
-                JSON.stringify(
-                  rows.slice(0, 30)
-                )
+			  
+				await supabaseClient
+				  .from("guestbook")
+				  .insert({
+					author,
+					message,
+					color_index
+				  });
+				
               );
 
               addMessage(row);
