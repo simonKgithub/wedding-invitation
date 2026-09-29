@@ -11,8 +11,8 @@
 
   <!--미리보기-->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="김연세 ♥ 김승희 결혼합니다">
-  <meta property="og:description" content="소중한 자리에 소중한 분들을 초대합니다.">
+  <meta property="og:title" content="김연세 ♥ 김승희 결혼합니다.">
+  <meta property="og:description" content="2027년 1월 23일 10:30, 대전 라도무스">
   <meta property="og:image" content="https://simonkgithub.github.io/wedding-invitation/preview.jpg">
   <meta property="og:url" content="https://simonkgithub.github.io/wedding-invitation/">
 
@@ -538,6 +538,15 @@
 
     .gallery-item .image-placeholder {
       border: 1px dashed oklch(0.255 0.014 55 / 20%);
+    }
+
+    /* 사진 길게 누르기·드래그 저장 메뉴 제한 */
+    .image-slot > img,
+    .lightbox-image {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-user-drag: none;
     }
 
     /* =========================================
@@ -1579,8 +1588,8 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="6"
-            aria-label="갤러리 사진 6 열기"
+            data-gallery-index="5"
+            aria-label="갤러리 사진 21 열기"
           >
             <div
               class="ratio-45"
@@ -1592,7 +1601,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="7"
+            data-gallery-index="6"
             aria-label="갤러리 사진 6 열기"
           >
             <div
@@ -1605,7 +1614,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="8"
+            data-gallery-index="7"
             aria-label="갤러리 사진 7 열기"
           >
             <div
@@ -1618,7 +1627,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="9"
+            data-gallery-index="8"
             aria-label="갤러리 사진 8 열기"
           >
             <div
@@ -1631,7 +1640,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="10"
+            data-gallery-index="9"
             aria-label="갤러리 사진 9 열기"
           >
             <div
@@ -1644,7 +1653,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="11"
+            data-gallery-index="10"
             aria-label="갤러리 사진 10 열기"
           >
             <div
@@ -1657,7 +1666,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="12"
+            data-gallery-index="11"
             aria-label="갤러리 사진 11 열기"
           >
             <div
@@ -1670,7 +1679,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="13"
+            data-gallery-index="12"
             aria-label="갤러리 사진 12 열기"
           >
             <div
@@ -1683,7 +1692,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="14"
+            data-gallery-index="13"
             aria-label="갤러리 사진 13 열기"
           >
             <div
@@ -1696,7 +1705,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="15"
+            data-gallery-index="14"
             aria-label="갤러리 사진 14 열기"
           >
             <div
@@ -1709,7 +1718,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="16"
+            data-gallery-index="15"
             aria-label="갤러리 사진 15 열기"
           >
             <div
@@ -1722,7 +1731,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="17"
+            data-gallery-index="16"
             aria-label="갤러리 사진 16 열기"
           >
             <div
@@ -1735,7 +1744,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="18"
+            data-gallery-index="17"
             aria-label="갤러리 사진 17 열기"
           >
             <div
@@ -1748,7 +1757,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="19"
+            data-gallery-index="18"
             aria-label="갤러리 사진 18 열기"
           >
             <div
@@ -1761,7 +1770,7 @@
           <button
             class="gallery-item"
             type="button"
-            data-gallery-index="20"
+            data-gallery-index="19"
             aria-label="갤러리 사진 19 열기"
           >
             <div
@@ -2300,6 +2309,7 @@
         "./public/gallery-3.jpg",
         "./public/gallery-4.jpg",
         "./public/gallery-5.jpg",
+        "./public/gallery-21.jpg",
         "./public/gallery-6.jpg",
         "./public/gallery-7.jpg",
         "./public/gallery-8.jpg",
@@ -2313,8 +2323,7 @@
         "./public/gallery-16.jpg",
         "./public/gallery-17.jpg",
         "./public/gallery-18.jpg",
-        "./public/gallery-19.jpg",
-        "./public/gallery-21.jpg"
+        "./public/gallery-19.jpg"
       ],
 
       map: "./public/map.jpg"
@@ -2413,6 +2422,7 @@
       const image = new Image();
 
       image.alt = label;
+      image.draggable = false;
 
       image.onload = () => {
         node.replaceChildren(image);
@@ -2453,6 +2463,16 @@
 
     const lightboxImage =
       document.querySelector("#lightbox-image");
+
+    lightboxImage.draggable = false;
+
+    for (const eventName of ["contextmenu", "dragstart"]) {
+      document.addEventListener(eventName, (event) => {
+        if (event.target.matches(".image-slot img, .lightbox-image")) {
+          event.preventDefault();
+        }
+      });
+    }
 
     const lightboxClose =
       document.querySelector("#lightbox-close");
