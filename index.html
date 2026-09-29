@@ -1142,7 +1142,7 @@
 	
 	.footer-photo-copy .main {
 	  font-family: "Batang", "바탕", serif;
-  	  font-size: 13px;
+  	  font-size: 14px;
    	  line-height: 1.5;
   	  font-weight: 400;
   
@@ -2409,12 +2409,12 @@
 
         placeholder.querySelector(".filename")
           .textContent =
-          src.split("/").pop();
+          src ? src.split("/").pop() : "파일 경로 없음";
 
         node.append(placeholder);
       }
 
-      if (!PHOTOS_READY) {
+      if (!PHOTOS_READY || !src) {
         showPlaceholder();
         return;
       }
@@ -2440,11 +2440,9 @@
         const key = node.dataset.image;
 
         const src = key.startsWith("gallery-")
-          ? IMAGE_SLOTS.gallery[
-              Number(
-                key.slice("gallery-".length)
-              ) - 1
-            ]
+          ? IMAGE_SLOTS.gallery.find(
+              (path) => path.split("/").pop() === `${key}.jpg`
+            )
           : IMAGE_SLOTS[key];
 
         imageSlot(
