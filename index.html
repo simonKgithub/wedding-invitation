@@ -11,8 +11,8 @@
 
   <!--미리보기-->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="김연세 ♥ 김승희 결혼합니다.">
-  <meta property="og:description" content="2027년 1월 23일 10:30, 대전 라도무스">
+  <meta property="og:title" content="김연세 ♥ 김승희 결혼합니다">
+  <meta property="og:description" content="소중한 자리에 소중한 분들을 초대합니다.">
   <meta property="og:image" content="https://simonkgithub.github.io/wedding-invitation/preview.jpg">
   <meta property="og:url" content="https://simonkgithub.github.io/wedding-invitation/">
 
@@ -3333,9 +3333,10 @@
         }
       );
 
-    /* =========================================================
-       방명록
-       ========================================================= */
+	/* =========================================================
+	   방명록
+	   ========================================================= */
+
 	const guestForm =
 	  document.querySelector("#guest-form");
 
@@ -3345,6 +3346,19 @@
 	let messages = [];
 
 	const seenIds = new Set();
+
+
+	/* ---------------------------------------------------------
+	   입력값 정리
+	   --------------------------------------------------------- */
+
+	function normalizeGuestbookText(value) {
+
+	  return String(value ?? "")
+		.replace(/\u0000/g, "")
+		.trim();
+
+	}
 
 
 	/* ---------------------------------------------------------
@@ -3388,21 +3402,33 @@
 		  card.className = "note";
 
 
-		  /* 기존 메모지 색상 */
+		  /* ---------------------------------------------------
+			 메모지 색상
+			 --------------------------------------------------- */
+
+		  const colorIndex =
+			Number(row.color_index);
+
+
+		  const safeColorIndex =
+			Number.isInteger(colorIndex)
+			  ? Math.max(
+				  0,
+				  Math.min(
+					5,
+					colorIndex
+				  )
+				)
+			  : 0;
+
 
 		  card.style.background =
-			`var(--note-${
-			  Math.max(
-				1,
-				Math.min(
-				  6,
-				  Number(row.color_index) + 1
-				)
-			  )
-			})`;
+			`var(--note-${safeColorIndex + 1})`;
 
 
-		  /* 기존 메모지 회전 */
+		  /* ---------------------------------------------------
+			 메모지 회전
+			 --------------------------------------------------- */
 
 		  card.style.transform =
 			`rotate(${
@@ -3410,18 +3436,37 @@
 			}deg)`;
 
 
+		  /* ---------------------------------------------------
+			 메시지
+			 
+			 innerHTML을 사용하지 않고
+			 textContent를 사용하여 XSS 방지
+			 --------------------------------------------------- */
+
 		  const body =
 			document.createElement("p");
 
 		  body.textContent =
-			row.message;
+			normalizeGuestbookText(
+			  row.message
+			);
 
+
+		  /* ---------------------------------------------------
+			 작성자
+			 
+			 innerHTML을 사용하지 않고
+			 textContent를 사용하여 XSS 방지
+			 --------------------------------------------------- */
 
 		  const author =
 			document.createElement("small");
 
 		  author.textContent =
-			"— " + row.author;
+			"— " +
+			normalizeGuestbookText(
+			  row.author
+			);
 
 
 		  card.append(
@@ -3444,17 +3489,24 @@
 
 	function addMessage(row) {
 
-	  const id =
-		row.id ||
-		`${row.created_at}:${row.author}:${row.message}`;
-
-
-	  if (seenIds.has(id)) {
+	  if (!row) {
 		return;
 	  }
 
 
-	  seenIds.add(id);
+	  const id =
+		row.id ??
+		`${row.created_at}:${row.author}:${row.message}`;
+
+
+	  /* 중복 방지 */
+
+	  if (seenIds.has(String(id))) {
+		return;
+	  }
+
+
+	  seenIds.add(String(id));
 
 	  messages.unshift(row);
 
@@ -3508,12 +3560,19 @@
 
 		(data || []).forEach((row) => {
 
+		  /*
+		   * DB에서 가져온 값도 그대로 신뢰하지 않고
+		   * 화면 출력 시 normalize + textContent 처리
+		   */
+
 		  addMessage(row);
 
 		});
 
 
 	  } catch (error) {
+
+		/* 실제 오류 내용은 사용자에게 노출하지 않음 */
 
 		console.error(
 		  "방명록 조회 실패:",
@@ -3537,33 +3596,84 @@
 		event.preventDefault();
 
 
+		/* HTML 기본 validation */
+
 		if (!guestForm.reportValidity()) {
 		  return;
 		}
 
 
+		/* -----------------------------------------------------
+		   입력값 가져오기 + 정리
+		   ----------------------------------------------------- */
+
 		const author =
-		  guestForm.elements
-			.author.value
-			.trim();
+		  normalizeGuestbookText(
+			guestForm.elements.author.value
+		  );
 
 
 		const message =
-		  guestForm.elements
-			.message.value
-			.trim();
+		  normalizeGuestbookText(
+			guestForm.elements.message.value
+		  );
 
+
+		/* -----------------------------------------------------
+		   빈 값 검사
+		   ----------------------------------------------------- */
 
 		if (!author || !message) {
+
+		  toast(
+			"이름과 메시지를 입력해주세요."
+		  );
+
 		  return;
 		}
 
+
+		/* -----------------------------------------------------
+		   길이 검사
+		   
+		   클라이언트 1차 검사
+		   Supabase RLS에서 2차 검사
+		   ----------------------------------------------------- */
+
+		if (author.length > 30) {
+
+		  toast(
+			"작성자는 30자 이내로 작성해주세요."
+		  );
+
+		  return;
+		}
+
+
+		if (message.length > 1000) {
+
+		  toast(
+			"메시지는 1000자 이내로 작성해주세요."
+		  );
+
+		  return;
+		}
+
+
+		/* -----------------------------------------------------
+		   메모지 색상
+		   0 ~ 5
+		   ----------------------------------------------------- */
 
 		const colorIndex =
 		  Math.floor(
 			Math.random() * 6
 		  );
 
+
+		/* -----------------------------------------------------
+		   Supabase INSERT
+		   ----------------------------------------------------- */
 
 		try {
 
@@ -3588,7 +3698,9 @@
 		  }
 
 
-		  /* 화면에 즉시 추가 */
+		  /* ---------------------------------------------------
+			 저장 성공 후에만 화면에 추가
+			 --------------------------------------------------- */
 
 		  addMessage(data);
 
@@ -3598,7 +3710,7 @@
 		  guestForm.reset();
 
 
-		  /* 기존 토스트 사용 */
+		  /* 기존 토스트 */
 
 		  toast(
 			"축하 메시지를 남겼어요."
@@ -3607,6 +3719,11 @@
 
 		} catch (error) {
 
+		  /*
+		   * DB 내부 오류 내용을 사용자에게
+		   * 그대로 보여주지 않음
+		   */
+
 		  console.error(
 			"방명록 작성 실패:",
 			error
@@ -3614,7 +3731,7 @@
 
 
 		  toast(
-			"메시지를 남기지 못했습니다."
+			"메시지를 남기지 못했습니다. 잠시 후 다시 시도해주세요."
 		  );
 
 		}
