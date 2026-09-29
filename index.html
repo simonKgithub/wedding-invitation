@@ -1059,31 +1059,54 @@
 	
 	  display: flex;
 	  flex-direction: column;
-	  align-items: center;
 	  justify-content: center;
 	
+	  /* 중앙이 아니라 살짝 왼쪽 */
+	  align-items: flex-start;
+	
+	  padding-left: 11%;
+	  box-sizing: border-box;
+	
 	  color: var(--primary);
-	  text-align: center;
+	  text-align: left;
 	
 	  pointer-events: none;
 	}
 	
-	.footer-photo-copy .main {
-	  font: 23px / 1.85 var(--font-typewriter);
-	  letter-spacing: 0.04em;
+	/* 작은 장식선 */
+	.footer-photo-copy::before {
+	  content: "";
+	  width: 24px;
+	  height: 1px;
 	
-	  text-shadow:
-	    0 1px 12px oklch(1 0 0 / 55%),
-	    0 0 24px oklch(1 0 0 / 25%);
+	  margin-bottom: 24px;
+	
+	  background: currentColor;
+	  opacity: 0.5;
 	}
 	
+	/* 메인 문구 */
+	.footer-photo-copy .main {
+	  position: relative;
+	
+	  font: 24px / 1.85 var(--font-typewriter);
+	
+	  letter-spacing: 0.025em;
+	
+	  text-shadow:
+	    0 1px 12px oklch(1 0 0 / 65%),
+	    0 0 25px oklch(1 0 0 / 30%);
+	}
+	
+	/* 영문 서브 문구 */
 	.footer-photo-copy .sub {
-	  margin-top: 20px;
+	  margin-top: 22px;
 	
-	  font: 9px / 1.5 var(--font-mono);
-	  letter-spacing: 0.18em;
+	  font: 8px / 1.6 var(--font-mono);
 	
-	  opacity: 0.72;
+	  letter-spacing: 0.25em;
+	
+	  opacity: 0.65;
 	}
 	
 	/* =========================================
@@ -1138,11 +1161,24 @@
 	
 	  .footer-photo-copy {
 	    min-height: 390px;
+	
+	    padding-left: 10%;
+	  }
+	
+	  .footer-photo-copy::before {
+	    width: 20px;
+	    margin-bottom: 20px;
 	  }
 	
 	  .footer-photo-copy .main {
 	    font-size: 20px;
 	    line-height: 1.9;
+	  }
+	
+	  .footer-photo-copy .sub {
+	    margin-top: 18px;
+	    font-size: 7px;
+	    letter-spacing: 0.2em;
 	  }
 	
 	}
