@@ -541,6 +541,13 @@
     }
 
     /* 사진 길게 누르기·드래그 저장 메뉴 제한 */
+    img {
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
     .image-slot > img,
     .lightbox-image {
       -webkit-touch-callout: none;
@@ -1144,7 +1151,7 @@
 	  font-family: "Batang", "바탕", serif;
   	  font-size: 14px;
    	  line-height: 1.5;
-  	  font-weight: 400;
+  	  font-weight: 600;
   
 	  letter-spacing: 0.025em;
 
@@ -1197,7 +1204,7 @@
 	
 	  color: var(--muted-foreground);
 	
-	  font: 9px var(--font-mono);
+	  font: 600 9px var(--font-mono);
 	
 	  letter-spacing: 0.15em;
 	
@@ -1255,7 +1262,7 @@
 	
 	  color: var(--muted-foreground);
 	
-	  font: 9px var(--font-mono);
+	  font: 600 9px var(--font-mono);
 	
 	  text-align: center;
 	
@@ -1289,7 +1296,7 @@
 	    font-family: "Batang", "바탕", serif;
 	  	font-size: 12px;
 	   	line-height: 1.5;
-	  	font-weight: 400;
+	  	font-weight: 600;
 	  }
 	
 	
@@ -2466,11 +2473,15 @@
 
     for (const eventName of ["contextmenu", "dragstart"]) {
       document.addEventListener(eventName, (event) => {
-        if (event.target.matches(".image-slot img, .lightbox-image")) {
+        if (event.target.closest("img, .image-slot, .footer-photo")) {
           event.preventDefault();
         }
       });
     }
+
+    document.querySelectorAll("img").forEach((image) => {
+      image.draggable = false;
+    });
 
     const lightboxClose =
       document.querySelector("#lightbox-close");
@@ -2993,14 +3004,14 @@
       musicButton.setAttribute(
         "aria-label",
         playing
-          ? "배경음악 정지"
+          ? "배경음악 일시정지"
           : "배경음악 재생"
       );
 
-      musicButton.querySelector(
-        "svg"
-      ).style.opacity =
-        playing ? "0.5" : "1";
+      musicButton.querySelector("svg").innerHTML = playing
+        ? '<rect x="6" y="4" width="4" height="16"></rect>' +
+          '<rect x="14" y="4" width="4" height="16"></rect>'
+        : '<path d="M7 4.5 20 12 7 19.5z"></path>';
     }
 
     audio.addEventListener(
