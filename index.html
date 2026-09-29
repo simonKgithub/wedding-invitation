@@ -3336,563 +3336,300 @@
     /* =========================================================
        방명록
        ========================================================= */
-	  /* =========================================================
-   GUESTBOOK - SUPABASE
-   ========================================================= */
+	const guestForm =
+	  document.querySelector("#guest-form");
 
-const guestForm =
-  document.getElementById("guest-form");
+	const guestList =
+	  document.querySelector("#guest-list");
 
-const guestList =
-  document.getElementById("guest-list");
+	let messages = [];
 
-
-/* ---------------------------------------------------------
-   HTML 특수문자 처리
-   --------------------------------------------------------- */
-
-function escapeGuestbookHtml(value) {
-
-  return String(value)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
+	const seenIds = new Set();
 
 
-/* ---------------------------------------------------------
-   날짜 표시
-   --------------------------------------------------------- */
+	/* ---------------------------------------------------------
+	   방명록 화면 출력
+	   기존 디자인 그대로 사용
+	   --------------------------------------------------------- */
 
-function formatGuestbookDate(value) {
+	function renderMessages() {
 
-  const date = new Date(value);
+	  guestList.replaceChildren();
 
-  if (Number.isNaN(date.getTime())) {
-    return "";
-  }
+	  if (!messages.length) {
 
-  return date.toLocaleDateString(
-    "ko-KR",
-    {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit"
-    }
-  );
-}
+		const empty =
+		  document.createElement("div");
 
+		empty.className = "empty";
 
-/* ---------------------------------------------------------
-   방명록 조회
-   --------------------------------------------------------- */
+		empty.textContent =
+		  "첫 번째 축하 메시지를 남겨주세요.";
 
-async function loadGuestbook() {
+		guestList.append(empty);
 
-  const {
-    data,
-    error
-  } = await supabaseClient
-    .from("guestbook")
-    .select(
-      "id, author, message, color_index, created_at"
-    )
-    .order("created_at", {
-      ascending: false
-    })
-    .limit(30);
-
-  if (error) {
-
-    console.error(
-      "방명록 조회 실패:",
-      error
-    );
-
-    return;
-  }
-
-  renderGuestbook(data || []);
-}
+		return;
+	  }
 
 
-/* ---------------------------------------------------------
-   방명록 출력
-   --------------------------------------------------------- */
+	  const grid =
+		document.createElement("div");
 
-function renderGuestbook(items) {
-
-  if (!guestList) {
-    return;
-  }
-
-  guestList.innerHTML = "";
-
-  items.forEach((item) => {
-
-    const article =
-      document.createElement("div");
-
-    article.className =
-      "guestbook-item";
-
-    /*
-     * 기존 디자인을 사용하는 경우
-     * 현재 사용 중인 class가 있다면
-     * 이 부분의 class명은 기존 HTML에 맞춰 유지하면 됨.
-     */
-
-    article.innerHTML = `
-      <div class="guest-author">
-        ${escapeGuestbookHtml(item.author)}
-      </div>
-
-      <div class="guest-message">
-        ${escapeGuestbookHtml(item.message)}
-      </div>
-
-      <div class="guest-date">
-        ${formatGuestbookDate(item.created_at)}
-      </div>
-    `;
-
-    guestList.appendChild(article);
-  });
-}
+	  grid.className = "notes";
 
 
-/* ---------------------------------------------------------
-   방명록 작성
-   --------------------------------------------------------- */
+	  messages
+		.slice(0, 30)
+		.forEach((row, index) => {
 
-	if (guestForm) {
+		  const card =
+			document.createElement("article");
 
-	  guestForm.addEventListener(
-		"submit",
-		async (event) => {
+		  card.className = "note";
 
-		  event.preventDefault();
 
-		  const formData =
-			new FormData(guestForm);
+		  /* 기존 메모지 색상 */
+
+		  card.style.background =
+			`var(--note-${
+			  Math.max(
+				1,
+				Math.min(
+				  6,
+				  Number(row.color_index) + 1
+				)
+			  )
+			})`;
+
+
+		  /* 기존 메모지 회전 */
+
+		  card.style.transform =
+			`rotate(${
+			  [-1, 1, 0][index % 3]
+			}deg)`;
+
+
+		  const body =
+			document.createElement("p");
+
+		  body.textContent =
+			row.message;
+
 
 		  const author =
-			String(
-			  formData.get("author") || ""
-			).trim();
+			document.createElement("small");
 
-		  const message =
-			String(
-			  formData.get("message") || ""
-			).trim();
+		  author.textContent =
+			"— " + row.author;
 
 
-		  /* 입력값 확인 */
+		  card.append(
+			body,
+			author
+		  );
 
-		  if (!author) {
-			alert("이름을 입력해주세요.");
-			return;
-		  }
+		  grid.append(card);
 
-		  if (!message) {
-			alert("메시지를 입력해주세요.");
-			return;
-		  }
+		});
 
 
-		  /* 기존 코드와 동일하게 0~5 */
-
-		  const colorIndex =
-			Math.floor(
-			  Math.random() * 6
-			);
+	  guestList.append(grid);
+	}
 
 
-		  /* Supabase 저장 */
+	/* ---------------------------------------------------------
+	   방명록 하나 추가
+	   --------------------------------------------------------- */
+
+	function addMessage(row) {
+
+	  const id =
+		row.id ||
+		`${row.created_at}:${row.author}:${row.message}`;
+
+
+	  if (seenIds.has(id)) {
+		return;
+	  }
+
+
+	  seenIds.add(id);
+
+	  messages.unshift(row);
+
+
+	  messages.sort(
+		(a, b) =>
+		  new Date(b.created_at) -
+		  new Date(a.created_at)
+	  );
+
+
+	  messages =
+		messages.slice(0, 30);
+
+
+	  renderMessages();
+	}
+
+
+	/* ---------------------------------------------------------
+	   Supabase에서 방명록 가져오기
+	   --------------------------------------------------------- */
+
+	async function loadMessages() {
+
+	  try {
+
+		const {
+		  data,
+		  error
+		} = await supabaseClient
+		  .from("guestbook")
+		  .select(
+			"id, author, message, color_index, created_at"
+		  )
+		  .order("created_at", {
+			ascending: false
+		  })
+		  .limit(30);
+
+
+		if (error) {
+		  throw error;
+		}
+
+
+		messages = [];
+
+		seenIds.clear();
+
+
+		(data || []).forEach((row) => {
+
+		  addMessage(row);
+
+		});
+
+
+	  } catch (error) {
+
+		console.error(
+		  "방명록 조회 실패:",
+		  error
+		);
+
+		renderMessages();
+
+	  }
+	}
+
+
+	/* ---------------------------------------------------------
+	   방명록 작성
+	   --------------------------------------------------------- */
+
+	guestForm.addEventListener(
+	  "submit",
+	  async (event) => {
+
+		event.preventDefault();
+
+
+		if (!guestForm.reportValidity()) {
+		  return;
+		}
+
+
+		const author =
+		  guestForm.elements
+			.author.value
+			.trim();
+
+
+		const message =
+		  guestForm.elements
+			.message.value
+			.trim();
+
+
+		if (!author || !message) {
+		  return;
+		}
+
+
+		const colorIndex =
+		  Math.floor(
+			Math.random() * 6
+		  );
+
+
+		try {
 
 		  const {
+			data,
 			error
 		  } = await supabaseClient
 			.from("guestbook")
 			.insert({
-			  author,
-			  message,
+			  author: author,
+			  message: message,
 			  color_index: colorIndex
-			});
+			})
+			.select(
+			  "id, author, message, color_index, created_at"
+			)
+			.single();
 
 
 		  if (error) {
-
-			console.error(
-			  "방명록 작성 실패:",
-			  error
-			);
-
-			alert(
-			  "방명록 등록에 실패했습니다.\n잠시 후 다시 시도해주세요."
-			);
-
-			return;
+			throw error;
 		  }
 
 
-		  /* 작성 완료 */
+		  /* 화면에 즉시 추가 */
+
+		  addMessage(data);
+
+
+		  /* 입력창 초기화 */
 
 		  guestForm.reset();
 
-		  await loadGuestbook();
+
+		  /* 기존 토스트 사용 */
+
+		  toast(
+			"축하 메시지를 남겼어요."
+		  );
+
+
+		} catch (error) {
+
+		  console.error(
+			"방명록 작성 실패:",
+			error
+		  );
+
+
+		  toast(
+			"메시지를 남기지 못했습니다."
+		  );
 
 		}
-	  );
-	}
+
+	  }
+	);
 
 
 	/* ---------------------------------------------------------
 	   최초 방명록 조회
 	   --------------------------------------------------------- */
 
-	loadGuestbook(); 
-	   
-   /* ---------------------------------------------------------
-	  기존 방명록 조회
-	--------------------------------------------------------- */
-	  
-    const STORAGE_KEY =
-      "wedding-guestbook-2027-01-23";
+	loadMessages();
 
-    let messages = [];
 
-    const seenIds =
-      new Set();
-
-    function renderMessages() {
-
-      const list =
-        document.querySelector(
-          "#guest-list"
-        );
-
-      list.replaceChildren();
-
-      if (!messages.length) {
-
-        const empty =
-          document.createElement(
-            "div"
-          );
-
-        empty.className =
-          "empty";
-
-        empty.textContent =
-          "첫 번째 축하 메시지를 남겨주세요.";
-
-        list.append(empty);
-
-        return;
-      }
-
-      const grid =
-        document.createElement(
-          "div"
-        );
-
-      grid.className =
-        "notes";
-
-      messages
-        .slice(0, 30)
-        .forEach(
-          (row, index) => {
-
-            const card =
-              document.createElement(
-                "article"
-              );
-
-            card.className =
-              "note";
-
-            card.style.background =
-              `var(--note-${
-                Math.max(
-                  1,
-                  Math.min(
-                    6,
-                    Number(
-                      row.color_index
-                    ) + 1
-                  )
-                )
-              })`;
-
-            card.style.transform =
-              `rotate(${
-                [-1, 1, 0][
-                  index % 3
-                ]
-              }deg)`;
-
-            const body =
-              document.createElement(
-                "p"
-              );
-
-            body.textContent =
-              row.message;
-
-            const author =
-              document.createElement(
-                "small"
-              );
-
-            author.textContent =
-              "— " + row.author;
-
-            card.append(
-              body,
-              author
-            );
-
-            grid.append(card);
-
-          }
-        );
-
-      list.append(grid);
-    }
-
-    function addMessage(row) {
-
-      const id =
-        row.id ||
-        `${row.created_at}:${row.author}:${row.message}`;
-
-      if (
-        seenIds.has(id)
-      ) {
-        return;
-      }
-
-      seenIds.add(id);
-
-      messages.unshift(row);
-
-      messages.sort(
-        (a, b) =>
-          new Date(b.created_at) -
-          new Date(a.created_at)
-      );
-
-      messages =
-        messages.slice(0, 30);
-
-      renderMessages();
-    }
-
-    async function loadMessages() {
-
-      try {
-
-        let rows;
-
-        if (GUESTBOOK_API_URL) {
-
-          const response =
-            await fetch(
-              `${GUESTBOOK_API_URL}?limit=30`
-            );
-
-          if (!response.ok) {
-            throw new Error("load");
-          }
-
-          rows =
-            await response.json();
-
-        } else {
-
-          rows =
-            const {data,
-				  error
-				} = await supabaseClient
-				  .from("guestbook")
-				  .select(
-					"id, author, message, color_index, created_at"
-				  )
-				  .order("created_at", {
-					ascending: false
-				  })
-				  .limit(30);
-        }
-
-        rows
-          .sort(
-            (a, b) =>
-              new Date(a.created_at) -
-              new Date(b.created_at)
-          )
-          .forEach(addMessage);
-
-      } catch {
-
-        renderMessages();
-
-      }
-    }
-
-    loadMessages();
-
-    document
-      .querySelector("#guest-form")
-      .addEventListener(
-        "submit",
-        async (event) => {
-
-          event.preventDefault();
-
-          const form =
-            event.currentTarget;
-
-          if (
-            !form.reportValidity()
-          ) {
-            return;
-          }
-
-          const row = {
-
-            id:
-              crypto.randomUUID?.() ||
-              String(Date.now()),
-
-            author:
-              form.elements
-                .author.value.trim(),
-
-            message:
-              form.elements
-                .message.value.trim(),
-
-            color_index:
-              Math.floor(
-                Math.random() * 6
-              ),
-
-            created_at:
-              new Date().toISOString()
-
-          };
-
-          if (
-            !row.author ||
-            !row.message
-          ) {
-            return;
-          }
-
-          try {
-
-            if (GUESTBOOK_API_URL) {
-
-              const response =
-                await fetch(
-                  GUESTBOOK_API_URL,
-                  {
-                    method: "POST",
-
-                    headers: {
-                      "Content-Type":
-                        "application/json"
-                    },
-
-                    body:
-                      JSON.stringify(row)
-                  }
-                );
-
-              if (!response.ok) {
-                throw new Error("save");
-              }
-
-              addMessage(
-                await response.json()
-              );
-
-            } else {
-
-              const rows =
-               const {data,
-					  error
-					} = await supabaseClient
-					  .from("guestbook")
-					  .select(
-						"id, author, message, color_index, created_at"
-					  )
-					  .order("created_at", {
-						ascending: false
-					  })
-					  .limit(30);
-
-              rows.unshift(row);
-
-              localStorage.setItem(
-			  
-				await supabaseClient
-				  .from("guestbook")
-				  .insert({
-					author,
-					message,
-					color_index
-				  });
-				
-              );
-
-              addMessage(row);
-            }
-
-            form.reset();
-
-            toast(
-              "축하 메시지를 남겼어요."
-            );
-
-          } catch {
-
-            toast(
-              "메시지를 남기지 못했습니다."
-            );
-
-          }
-        }
-      );
-
-    if (GUESTBOOK_API_URL) {
-
-      const events =
-        new EventSource(
-          `${GUESTBOOK_API_URL}/events`
-        );
-
-      events.addEventListener(
-        "insert",
-        (event) => {
-
-          try {
-
-            addMessage(
-              JSON.parse(
-                event.data
-              )
-            );
-
-          } catch {}
-
-        }
-      );
-    }
 	/* =========================================================
 	   스크롤 진입 애니메이션
 	   ========================================================= */
