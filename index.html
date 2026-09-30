@@ -230,7 +230,7 @@
 
     .lightbox-inner .image-protect-overlay {
       z-index: 10;
-      pointer-events: none;
+      pointer-events: auto;
     }
 
     .image-slot > img {
@@ -2561,7 +2561,8 @@
     const lightboxInner =
       document.querySelector(".lightbox-inner");
 
-    addPhotoProtection(lightboxInner);
+    const lightboxProtectionOverlay =
+      addPhotoProtection(lightboxInner);
 
     for (const eventName of [
       "contextmenu",
@@ -2801,7 +2802,7 @@
       }
     );
 
-    lightboxImage.addEventListener(
+    lightboxProtectionOverlay.addEventListener(
       "touchstart",
       (event) => {
 
@@ -2820,7 +2821,7 @@
       }
     );
 
-    lightboxImage.addEventListener(
+    lightboxProtectionOverlay.addEventListener(
       "touchend",
       (event) => {
 
